@@ -10,8 +10,9 @@ const isCurrent = (item: { href: string; children?: { href: string }[] }) =>
 
 <header data-theme="kraft">
   <div class="hs-strip">
-    <span class="rv-with-icon"><Icon name="map-pin" />{site.shortAddress}</span>
-    <span class="rv-with-icon"><Icon name="clock" />{site.shortHours}</span>
+    <span class="rv-with-icon rv-strip-wide"><Icon name="map-pin" />{site.shortAddress}</span>
+    <span class="rv-with-icon rv-strip-wide"><Icon name="clock" />{site.shortHours}</span>
+    <span class="rv-with-icon rv-strip-phone"><Icon name="clock" />{site.phoneHours}</span>
     <a class="rv-with-icon" href={site.phoneHref}><Icon name="phone" />{site.phone}</a>
   </div>
   <nav class="hs-nav" aria-label="Main">
@@ -20,7 +21,11 @@ const isCurrent = (item: { href: string; children?: { href: string }[] }) =>
     <ul class="hs-nav__links rv-nav-links">
       {site.nav.map((item) => (
         <li class:list={{ 'rv-has-sub': item.children }}>
-          <a href={item.href} aria-current={isCurrent(item) ? 'page' : undefined}>
+          <a
+            href={item.href}
+            aria-current={isCurrent(item) ? 'page' : undefined}
+            aria-expanded={item.children ? 'false' : undefined}
+          >
             {item.label}{item.children && <span class="rv-caret" aria-hidden="true">▾</span>}
           </a>
           {item.children && (
@@ -35,7 +40,7 @@ const isCurrent = (item: { href: string; children?: { href: string }[] }) =>
     <div class="rv-nav-actions">
       <a class="hs-btn hs-btn--orange rv-nav-book" href="/book-a-tour">Book a tour</a>
       <details class="rv-menu">
-        <summary class="hs-btn">Menu</summary>
+        <summary class="hs-btn"><span class="rv-menu__open">Menu</span><span class="rv-menu__close">Close</span></summary>
         <ul class="rv-menu__panel">
           {site.nav.map((item) => (
             <li>
@@ -52,3 +57,27 @@ const isCurrent = (item: { href: string; children?: { href: string }[] }) =>
     </div>
   </nav>
 </header>
+
+<script>
+  // Dropdowns open on click as well as hover. Without JavaScript the link goes to its page.
+  const items = [...document.querySelectorAll('.rv-has-sub')];
+  const setOpen = (item: Element, open: boolean) => {
+    item.classList.toggle('is-open', open);
+    item.querySelector(':scope > a')?.setAttribute('aria-expanded', String(open));
+  };
+
+  for (const item of items) {
+    item.querySelector(':scope > a')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      const open = !item.classList.contains('is-open');
+      items.forEach((other) => setOpen(other, false));
+      setOpen(item, open);
+    });
+  }
+  document.addEventListener('click', (event) => {
+    if (!(event.target as Element).closest('.rv-has-sub')) items.forEach((item) => setOpen(item, false));
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') items.forEach((item) => setOpen(item, false));
+  });
+</script>

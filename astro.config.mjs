@@ -1,4 +1,7 @@
+import react from '@astrojs/react';
 import { defineConfig } from 'astro/config';
 
-// React and Cloudflare adapters are added with the first island and API route.
-export default defineConfig({});
+// The Cloudflare adapter is added with the first API route.
+export default defineConfig({
+  integrations: [react()],
+});

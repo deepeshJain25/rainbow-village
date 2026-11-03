@@ -1,5 +1,5 @@
 ---
-import Icon from '../components/Icon.astro';
+import ReviewsSlider from '../components/ReviewsSlider.tsx';
 import RoomCard from '../components/RoomCard.astro';
 import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
@@ -8,7 +8,6 @@ const rooms = [
   {
     name: 'Babies room',
     ages: '6 weeks to 2 years',
-    shortAges: '6 weeks to 2',
     text: "Calm, gentle care that follows your baby's own routine.",
     href: '/rooms/babies',
     crayon: 'purple',
@@ -16,7 +15,6 @@ const rooms = [
   {
     name: 'Toddlers room',
     ages: '2 to 3 years',
-    shortAges: '2 to 3',
     text: 'Busy, curious days of play, language and new friendships.',
     href: '/rooms/toddlers',
     crayon: 'yellow',
@@ -24,7 +22,6 @@ const rooms = [
   {
     name: 'Preschool',
     ages: '3 to 6 years',
-    shortAges: '3 to 6',
     text: 'A school-readiness program that builds confidence for big school.',
     href: '/rooms/preschool',
     crayon: 'orange',
@@ -34,20 +31,28 @@ const rooms = [
 const reasons = [
   {
     title: 'Family-run, every day.',
-    text: "We're a family-run, women-owned centre. Our director is here every day and knows every child and family by name.",
+    text: 'We are a family-run, women-owned centre. Our director is here every day and knows every child and family by name.',
   },
   {
-    title: 'Small and personal.',
-    text: 'With places for 40 children, your child is never lost in the crowd. Educators have time for every child.',
+    title: 'Places for 40 children.',
+    text: 'Your child is never lost in the crowd, and educators have time for every child.',
   },
   {
     title: 'Cooked fresh on site.',
     text: 'Our cook prepares nutritious meals in our own kitchen every day, with plenty of variety children actually enjoy.',
   },
-  {
-    title: 'Learning through play.',
-    text: 'Each room has a program built for its age, from first words to getting ready for big school.',
-  },
+];
+
+// The order comes from the room pages in the content draft. The director confirms the times.
+const day = [
+  { time: '7am', activity: 'Arrive and free play' },
+  { time: '9am', activity: 'Group time' },
+  { time: '9:30am', activity: 'Morning tea' },
+  { time: '10am', activity: 'Outdoor play' },
+  { time: '11:30am', activity: 'Lunch', note: true },
+  { time: '12:30pm', activity: 'Rest' },
+  { time: '2:30pm', activity: 'Art, music and messy play' },
+  { time: 'By 6pm', activity: 'Pick-up' },
 ];
 
 const reviews = [
@@ -55,154 +60,154 @@ const reviews = [
   { quote: "I can't find a better place than Rainbow Village for my little one in the area.", source: 'Google review' },
   { quote: 'The carers and teachers are so loving.', source: 'Rachel, Rainbow Village parent' },
 ];
+
+const educators = [
+  { role: 'Director', crayon: 'green' },
+  { role: 'Room leader', crayon: 'blue' },
+  { role: 'Room leader', crayon: 'red' },
+];
 ---
 
 <Layout
   title="Rainbow Village Childcare Harris Park | Family-Run Long Day Care"
   description="Family-run childcare in Harris Park for children from 6 weeks to 6 years. Meals cooked fresh on site, caring educators, 4.8 stars on Google. Book a tour."
 >
-  <!-- Band 1: hero -->
+  <!-- Hero: the one Chalkboard moment. The rating is live from the Places API once that is set up. -->
   <section class="hs-band hs-band--sky hs-band--flat-top hs-hero" data-theme="chalkboard">
     <div class="hs-hero__grid">
       <div class="hs-hero__words">
-        <h1 class="hs-hero__title">Where your little one is known, loved and ready to grow</h1>
+        <h1 class="hs-hero__title">Muddy knees, full tummies, big ideas</h1>
         <p class="hs-hero__lead">Family-run childcare in Harris Park for children from 6 weeks to 6 years.</p>
-        <div class="hs-hero__actions">
+        <div class="hs-hero__actions rv-hero-actions">
           <a class="hs-btn hs-btn--orange" href="/book-a-tour">Book a tour</a>
-          <span>or call <a href={site.phoneHref}>{site.phone}</a></span>
+          <a class="hs-btn hs-btn--yellow" href={site.phoneHref}>Call {site.phone}</a>
         </div>
-        <ul class="rv-trust">
-          <li class="rv-with-icon"><span class="rv-star"><Icon name="star" /></span>4.8 from 35 Google reviews</li>
-          <li class="rv-with-icon"><Icon name="badge-check" />Rated Meeting the National Quality Standard</li>
-          <li class="rv-with-icon"><Icon name="clock" />Open {site.hours}</li>
-        </ul>
+        <p class="rv-rating">{site.rating}</p>
       </div>
-      <div class="hs-hero__line">
-        <ul class="hs-line">
-          {rooms.map((room) => (
-            <li>
-              <RoomCard
-                title={room.name.replace(' room', '')}
-                caption={room.shortAges}
-                href={room.href}
-                crayon={room.crayon === 'yellow' ? undefined : room.crayon}
-              />
-            </li>
-          ))}
+      <div class="hs-hero__line" aria-hidden="true">
+        <!-- Children's real paintings replace these once the centre sends them. -->
+        <ul class="hs-line rv-hero-paintings">
+          <li><div class="hs-painting hs-painting--purple" data-theme="crayon"><div class="hs-painting__art"><i></i><i></i><i></i></div></div></li>
+          <li><div class="hs-painting" data-theme="crayon"><div class="hs-painting__art"><i></i><i></i><i></i></div></div></li>
+          <li><div class="hs-painting hs-painting--orange" data-theme="crayon"><div class="hs-painting__art"><i></i><i></i><i></i></div></div></li>
         </ul>
       </div>
     </div>
     <div class="hs-hero__land" aria-hidden="true"><i></i><i></i><i></i></div>
   </section>
 
-  <!-- Band 2: why families choose us -->
-  <section class="hs-sheet" data-theme="crayon">
-    <div class="rv-wrap rv-sheet-body">
-      <h2>A second home, not just a centre</h2>
-      {reasons.map((reason) => <p><b>{reason.title}</b> {reason.text}</p>)}
-    </div>
-  </section>
-
-  <!-- Band 3: video tour -->
-  <section class="hs-band hs-band--orange" data-theme="kraft">
-    <div class="hs-band__inner rv-split">
-      <div class="rv-stack">
-        <h2 class="hs-title">Take a look inside</h2>
-        <p>See our rooms, our playground and our kitchen in 90 seconds.</p>
-        <div><button class="hs-btn" type="button" disabled>Play the tour</button></div>
+  <!-- Why families choose us: three facts and one taped photo, no icon grid -->
+  <section class="hs-ground rv-section" data-theme="crayon">
+    <div class="rv-wrap rv-split">
+      <div class="rv-stack-lg">
+        <h2 class="hs-title">A second home, not just a centre</h2>
+        {reasons.map((reason) => <p><b>{reason.title}</b> {reason.text}</p>)}
+        <p>
+          <b>Rated Meeting the National Quality Standard.</b>
+          <mark class="rv-todo">[Child Care Subsidy approved: wording from the centre]</mark>
+        </p>
       </div>
-      <ul class="hs-line rv-line-single">
-        <li>
-          <figure class="hs-painting rv-poster" data-theme="crayon">
-            <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
-            <figcaption class="hs-painting__caption">The centre video goes here after filming day.</figcaption>
-          </figure>
-        </li>
-      </ul>
+      <figure class="hs-painting hs-painting--blue rv-taped" data-theme="crayon">
+        <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figcaption class="hs-painting__caption">A real photo of the centre goes here.</figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- Band 4: rooms -->
-  <section class="hs-ground hs-paper-doodles rv-section" data-theme="crayon">
-    <div class="rv-wrap rv-stack-lg">
-      <h2 class="hs-title">A room for every stage</h2>
-      <ul class="rv-rooms">
+  <!-- Our rooms: the main path deeper into the site -->
+  <section class="hs-band hs-band--sky" data-theme="kraft">
+    <div class="hs-band__inner">
+      <div class="rv-stack">
+        <h2 class="hs-title">A room for every stage</h2>
+        <p>Three rooms, grouped by age. Tap a room to see inside.</p>
+      </div>
+      <ul class="hs-line rv-line-stack">
         {rooms.map((room) => (
-          <li class="rv-room">
-            <span class={`hs-tape hs-tape--${room.crayon}`}><span class="hs-tape__dab"></span>{room.name}</span>
-            <div>
-              <p><b>{room.ages}.</b> {room.text}</p>
-            </div>
-            <a class="hs-btn" href={room.href} aria-label={`See the ${room.name}`}>See the room</a>
+          <li>
+            <RoomCard title={room.name} ages={room.ages} text={room.text} href={room.href} crayon={room.crayon} />
           </li>
         ))}
       </ul>
     </div>
   </section>
 
-  <!-- Band 5: featured reviews -->
+  <!-- A day here: the timetable sits on the ruled lines -->
+  <section class="hs-sheet" data-theme="crayon">
+    <div class="rv-wrap rv-sheet-body">
+      <h2>A day here</h2>
+      <p>Each room keeps its own rhythm, but most days follow this shape.</p>
+      <dl class="rv-day">
+        {day.map((item) => (
+          <div>
+            <dt><mark class="rv-todo">[{item.time}]</mark></dt>
+            <dd>
+              {item.note && <a class="hs-sheet__note" href="/weekly-menu" aria-label="This week's menu">Menu</a>}
+              {item.activity}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <p><a href="/weekly-menu">See what's for lunch this week</a></p>
+    </div>
+  </section>
+
+  <!-- Featured reviews: label, overall rating and a link to all of them (ACCC guidance) -->
   <section class="hs-band hs-band--purple" data-theme="kraft">
     <div class="hs-band__inner rv-stack-lg">
       <div class="rv-stack">
         <h2 class="hs-title">Loved by Harris Park families</h2>
-        <p>Featured reviews. We have 4.8 stars overall from 35 Google reviews.</p>
+        <p>Featured reviews. We have {site.rating} overall.</p>
       </div>
-      <div class="rv-reviews">
-        {reviews.map((review) => (
-          <figure class="rv-review">
-            <blockquote>"{review.quote}"</blockquote>
-            <figcaption>{review.source}</figcaption>
-          </figure>
-        ))}
-      </div>
-      <p><a href={site.reviewsUrl}>Read all 35 reviews on Google</a></p>
+      <ReviewsSlider client:visible reviews={reviews} />
+      <p><a href={site.reviewsUrl}>Read all reviews on Google</a></p>
     </div>
   </section>
 
-  <!-- Band 6: included in the fee. Bracketed items wait on the director's answers. -->
+  <!-- See inside: the video, then the people. Portraits fall back to initials if a staff member prefers. -->
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-stack-lg">
-      <h2 class="hs-title">Included in your daily fee</h2>
-      <ul class="rv-included">
-        <li class="rv-with-icon"><Icon name="utensils" /><span><mark class="rv-todo">[Breakfast,]</mark> lunch and snacks cooked on site</span></li>
-        <li class="rv-with-icon"><Icon name="baby" /><span><mark class="rv-todo">[Nappies and wipes]</mark></span></li>
-        <li class="rv-with-icon"><Icon name="sun" /><span><mark class="rv-todo">[Sunscreen and hats]</mark></span></li>
-        <li class="rv-with-icon"><Icon name="trees" /><span><mark class="rv-todo">[Incursions and excursions]</mark></span></li>
-        <li class="rv-with-icon"><Icon name="smartphone" /><span>Daily updates through <mark class="rv-todo">[parent app]</mark></span></li>
-      </ul>
-      <p><a href="/fees">See our fees and the Child Care Subsidy</a></p>
-    </div>
-  </section>
-
-  <!-- Band 7: weekly menu -->
-  <section class="hs-ground rv-section" data-theme="kraft">
-    <div class="rv-wrap rv-split">
-      <ul class="hs-line rv-line-single">
-        <li>
-          <figure class="hs-painting hs-painting--red rv-poster" data-theme="crayon">
-            <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
-            <figcaption class="hs-painting__caption">A photo of our kitchen goes here.</figcaption>
-          </figure>
-        </li>
-      </ul>
       <div class="rv-stack">
-        <h2 class="hs-title">What's for lunch this week?</h2>
-        <p>Fresh, home-style meals made in our own kitchen, with allergies and dietary needs carefully managed.</p>
-        <div><a class="hs-btn hs-btn--yellow" href="/weekly-menu">See this week's menu</a></div>
+        <h2 class="hs-title">Take a look inside</h2>
+        <p>See our rooms, our playground and our kitchen in 90 seconds.</p>
+      </div>
+      <div class="rv-split rv-inside">
+        <ul class="hs-line rv-line-single">
+          <li>
+            <figure class="hs-painting rv-poster">
+              <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
+              <figcaption class="hs-painting__caption">The centre video goes here after filming day.</figcaption>
+            </figure>
+          </li>
+        </ul>
+        <div class="rv-stack-lg">
+          <h3>Meet some of our educators</h3>
+          <ul class="hs-line rv-line-stack rv-line-stack--straight rv-portraits">
+            {educators.map((educator) => (
+              <li>
+                <a class={`hs-painting hs-painting--${educator.crayon}`} href="/our-team" aria-label={`Meet our team: ${educator.role}`}>
+                  <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
+                  <span class="hs-tape"><mark class="rv-todo">[Name]</mark></span>
+                  <p class="hs-painting__caption">{educator.role}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p><a href="/our-team">Meet the whole team</a></p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Band 8: closing call to action -->
+  <!-- Book a tour -->
   <section class="hs-band hs-band--green" data-theme="kraft">
     <div class="hs-band__inner rv-closing">
       <div class="rv-stack">
-        <h2 class="hs-title">Come and see why families stay with us for years</h2>
-        <p>The best way to know if we're right for your family is to visit. Tours take about 30 minutes.</p>
+        <h2 class="hs-title">Come and see us</h2>
+        <p>Tours take about 30 minutes.</p>
       </div>
       <div class="rv-closing__actions">
-        <a class="hs-btn" href="/book-a-tour">Book a tour</a>
-        <a href="/enrol">Join the waitlist</a>
+        <a class="hs-btn hs-btn--orange" href="/book-a-tour">Book a tour</a>
+        <span>or call <a href={site.phoneHref}>{site.phone}</a></span>
       </div>
     </div>
   </section>
