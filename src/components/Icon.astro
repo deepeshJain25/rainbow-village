@@ -1,0 +1,34 @@
+---
+// Lucide line icons: 24px, 2px stroke, round ends, in the text colour of their surface.
+import awardCheck from 'lucide-static/icons/badge-check.svg?raw';
+import baby from 'lucide-static/icons/baby.svg?raw';
+import clock from 'lucide-static/icons/clock.svg?raw';
+import mapPin from 'lucide-static/icons/map-pin.svg?raw';
+import phone from 'lucide-static/icons/phone.svg?raw';
+import smartphone from 'lucide-static/icons/smartphone.svg?raw';
+import star from 'lucide-static/icons/star.svg?raw';
+import sun from 'lucide-static/icons/sun.svg?raw';
+import trees from 'lucide-static/icons/trees.svg?raw';
+import utensils from 'lucide-static/icons/utensils.svg?raw';
+
+const icons = {
+  'badge-check': awardCheck,
+  baby,
+  clock,
+  'map-pin': mapPin,
+  phone,
+  smartphone,
+  star,
+  sun,
+  trees,
+  utensils,
+};
+
+interface Props {
+  name: keyof typeof icons;
+}
+
+const { name } = Astro.props;
+---
+
+<span class="rv-icon" aria-hidden="true" set:html={icons[name]} />

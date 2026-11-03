@@ -1,0 +1,10 @@
+---
+// The centre's name in rainbow crayon letters, until the client supplies a logo.
+import site from '../content/site.json';
+
+const letters = [...site.name];
+---
+
+<span class="hs-crayons hs-crayons--sm" data-theme="crayon" role="img" aria-label={site.name}>
+  {letters.map((letter) => <span aria-hidden="true">{letter === ' ' ? ' ' : letter}</span>)}
+</span>

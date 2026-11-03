@@ -1,0 +1,17 @@
+---
+// A room as a child's painting pegged to the washing line. The whole painting is the link.
+interface Props {
+  title: string;
+  caption: string;
+  href: string;
+  crayon?: 'purple' | 'orange';
+}
+
+const { title, caption, href, crayon } = Astro.props;
+---
+
+<a class:list={['hs-painting', crayon && `hs-painting--${crayon}`]} data-theme="crayon" href={href}>
+  <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
+  <p class="hs-painting__title">{title}</p>
+  <p class="hs-painting__caption">{caption}</p>
+</a>

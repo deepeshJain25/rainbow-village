@@ -1,0 +1,54 @@
+---
+import site from '../content/site.json';
+import CrayonWord from './CrayonWord.astro';
+import Icon from './Icon.astro';
+
+const path = Astro.url.pathname;
+const isCurrent = (item: { href: string; children?: { href: string }[] }) =>
+  item.href === path || item.children?.some((child) => child.href === path);
+---
+
+<header data-theme="kraft">
+  <div class="hs-strip">
+    <span class="rv-with-icon"><Icon name="map-pin" />{site.shortAddress}</span>
+    <span class="rv-with-icon"><Icon name="clock" />{site.shortHours}</span>
+    <a class="rv-with-icon" href={site.phoneHref}><Icon name="phone" />{site.phone}</a>
+  </div>
+  <nav class="hs-nav" aria-label="Main">
+    <a class="hs-nav__home" href="/" aria-label={`${site.name} home`}><CrayonWord /></a>
+
+    <ul class="hs-nav__links rv-nav-links">
+      {site.nav.map((item) => (
+        <li class:list={{ 'rv-has-sub': item.children }}>
+          <a href={item.href} aria-current={isCurrent(item) ? 'page' : undefined}>
+            {item.label}{item.children && <span class="rv-caret" aria-hidden="true">▾</span>}
+          </a>
+          {item.children && (
+            <ul class="rv-sub">
+              {item.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    <div class="rv-nav-actions">
+      <a class="hs-btn hs-btn--orange rv-nav-book" href="/book-a-tour">Book a tour</a>
+      <details class="rv-menu">
+        <summary class="hs-btn">Menu</summary>
+        <ul class="rv-menu__panel">
+          {site.nav.map((item) => (
+            <li>
+              <a class="rv-menu__top" href={item.href}>{item.label}</a>
+              {item.children && (
+                <ul>
+                  {item.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </details>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,32 @@
+---
+import site from '../content/site.json';
+import CrayonWord from './CrayonWord.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="hs-ground rv-footer" data-theme="chalkboard">
+  <div class="rv-wrap rv-footer__grid">
+    <div class="rv-footer__about">
+      <CrayonWord />
+      <p>{site.address}</p>
+      <p><a href={site.phoneHref}>{site.phone}</a></p>
+      <p><mark class="rv-todo">[email]</mark></p>
+      <p>{site.hours}</p>
+    </div>
+    {site.footer.map((group) => (
+      <div>
+        <p class="rv-footer__heading">{group.heading}</p>
+        <ul class="rv-footer__links">
+          {group.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+  <p class="rv-wrap rv-footer__legal">© {year} {site.legalName}</p>
+</footer>
+
+<div class="rv-mobile-bar" data-theme="kraft">
+  <a class="hs-btn hs-btn--orange" href="/book-a-tour">Book a tour</a>
+  <a class="hs-btn" href={site.phoneHref}>Call</a>
+</div>
