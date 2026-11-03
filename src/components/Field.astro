@@ -1,0 +1,23 @@
+---
+// One labelled form field. Forms post nowhere until the enquiry API route is added.
+interface Props {
+  label: string;
+  name: string;
+  type?: string;
+  autocomplete?: string;
+  optional?: boolean;
+  rows?: number;
+}
+
+const { label, name, type = 'text', autocomplete, optional = false, rows } = Astro.props;
+const id = `field-${name}`;
+---
+
+<div class="hs-field">
+  <label class="hs-field__label" for={id}>
+    {label}{optional && <span class="hs-field__opt"> (optional)</span>}
+  </label>
+  {rows
+    ? <textarea class="hs-field__input" id={id} name={name} rows={rows} required={!optional}></textarea>
+    : <input class="hs-field__input" id={id} name={name} type={type} autocomplete={autocomplete} required={!optional} />}
+</div>

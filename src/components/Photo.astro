@@ -1,0 +1,15 @@
+---
+// A placeholder for a real photo or video, hung as a painting. It is swapped for Astro's <Image> once files arrive.
+interface Props {
+  label: string;
+  crayon?: 'purple' | 'orange' | 'blue' | 'red';
+  taped?: boolean;
+}
+
+const { label, crayon, taped = false } = Astro.props;
+---
+
+<figure class:list={['hs-painting', 'rv-photo', crayon && `hs-painting--${crayon}`, { 'rv-taped': taped }]} data-theme="crayon">
+  <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
+  <figcaption class="hs-painting__caption"><mark class="rv-todo">[{label}]</mark></figcaption>
+</figure>

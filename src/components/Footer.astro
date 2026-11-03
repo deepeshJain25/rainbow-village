@@ -4,7 +4,7 @@ import CrayonWord from './CrayonWord.astro';
 
 const year = new Date().getFullYear();
 // These two pages already have the action on screen.
-const showBar = !['/book-a-tour', '/contact'].includes(Astro.url.pathname);
+const showBar = !['/book-a-tour', '/contact'].includes(Astro.url.pathname.replace(/\/$/, ''));
 ---
 
 <footer class="hs-ground rv-footer" data-theme="chalkboard">

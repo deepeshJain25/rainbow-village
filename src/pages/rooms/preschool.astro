@@ -1,0 +1,53 @@
+---
+import RoomPage from '../../components/RoomPage.astro';
+import Todo from '../../components/Todo.astro';
+import rooms from '../../content/rooms.json';
+
+const room = rooms[2];
+const day = [
+  { time: '7am', activity: 'Arrival and free play' },
+  { time: '9am', activity: 'Group time: letters, sounds and counting' },
+  { time: '9:30am', activity: 'Morning tea' },
+  { time: '10am', activity: 'Outdoor play' },
+  { time: '11am', activity: 'Projects your child chooses' },
+  { time: '12pm', activity: 'Lunch' },
+  { time: '1pm', activity: 'Rest or quiet time' },
+  { time: '2:30pm', activity: 'Art, music and science play' },
+  { time: 'By 6pm', activity: 'Pick-up' },
+];
+---
+
+<RoomPage
+  room={room}
+  seo={{
+    title: 'Preschool Program Harris Park | School Readiness | Rainbow Village',
+    description: 'A preschool program in long day care hours for 3 to 6 year olds in Harris Park. Building confidence, early literacy and numeracy for big school.',
+  }}
+  heading="Preschool in Harris Park"
+  lead="Our preschool program gives your child the confidence, independence and early skills to start school happy and ready, all within long day care hours."
+  glance={{ ratio: '[1 educator to 10 children]', places: '[X] places', leader: '[Name]' }}
+  photos={['Photo: the Preschool room', 'Photo: a project or writing corner', 'Photo: the garden preschoolers use']}
+  dayNote="The program runs inside long day care hours, so it works around your job."
+  day={day}
+  learnHeading="Ready for big school, ready for anything"
+  learnLead="Learning through play, with more challenge as your child grows."
+  learn={[
+    { title: 'Early literacy and numeracy.', text: 'Letters, sounds, counting and problem-solving, taught through play and projects your child chooses.' },
+    { title: 'Confidence and independence.', text: 'Managing belongings, following routines, speaking up in a group and making friends: the skills teachers say matter most.' },
+    { title: 'Curiosity.', text: 'Questions, experiments and long projects teach children how to find things out for themselves.' },
+  ]}
+  leader={{ name: '[Name]', qualification: '[qualification]', quote: '[One line in their own words about getting children ready for school.]' }}
+  packLead="Label everything with your child's name."
+  pack={['A spare change of clothes', 'A hat', '[Sheet and comforter for rest time]']}
+  next={{ label: 'Back to all our rooms', href: '/rooms' }}
+  closing={{ title: 'See the Preschool in person', band: 'green' }}
+>
+  <section slot="after-learning" class="hs-sheet" data-theme="crayon">
+    <div class="rv-wrap rv-sheet-body">
+      <h2>Ready for big school</h2>
+      <p><b>Transition to school.</b> <Todo text="[Program led by a degree-qualified early childhood teacher] with a school-readiness focus in the final year, and [visits to local schools]." /></p>
+      <p><b>Preschool fee relief.</b> <Todo text="[If eligible: NSW Start Strong funding can reduce your preschool fees. Ask us how much you could save.]" /></p>
+      <p><a href="/fees">See fees and the Child Care Subsidy</a></p>
+    </div>
+  </section>
+</RoomPage>

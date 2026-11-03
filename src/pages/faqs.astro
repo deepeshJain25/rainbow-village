@@ -1,0 +1,57 @@
+---
+import Closing from '../components/Closing.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Todo from '../components/Todo.astro';
+import faqs from '../content/faqs.json';
+import site from '../content/site.json';
+import Layout from '../layouts/Layout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.flatMap((group) => group.items).map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a.replace(/[\[\]]/g, '') },
+  })),
+};
+---
+
+<Layout
+  title="Childcare FAQs | Rainbow Village Harris Park"
+  description="Answers to the questions parents ask most: ages, hours, fees, meals, nappies, settling in and safety at Rainbow Village Childcare."
+  schema={schema}
+>
+  <PageHeader
+    title="Questions parents ask us"
+    lead="Straight answers about childcare at Rainbow Village in Harris Park, from ages and fees to meals and settling in."
+    crumbs={[{ label: 'Parents', href: '/for-parents' }]}
+  />
+
+  <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
+    <div class="rv-wrap rv-stack-lg">
+      <ul class="rv-tapes">
+        {faqs.map((group) => <li><a class="hs-tape" href={`#${group.slug}`}>{group.topic}</a></li>)}
+      </ul>
+      {faqs.map((group) => (
+        <div class="rv-details-list" id={group.slug}>
+          <h2>{group.topic}</h2>
+          {group.items.map((item) => (
+            <details class="rv-details">
+              <summary>{item.q}</summary>
+              <div class="rv-details__body">
+                <p><Todo text={item.a} /></p>
+                {item.link && <p><a href={item.link.href}>{item.link.label}</a></p>}
+              </div>
+            </details>
+          ))}
+        </div>
+      ))}
+      <div class="rv-panel rv-copy-panel">
+        <p>Didn't find it? Call <a href={site.phoneHref}>{site.phone}</a> or ask on your tour.</p>
+      </div>
+    </div>
+  </section>
+
+  <Closing title="See the answers in person" text="Tours take about 30 minutes." band="orange" />
+</Layout>

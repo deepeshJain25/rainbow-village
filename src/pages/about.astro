@@ -1,0 +1,88 @@
+---
+import Closing from '../components/Closing.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Photo from '../components/Photo.astro';
+import Todo from '../components/Todo.astro';
+import Layout from '../layouts/Layout.astro';
+
+const beliefs = [
+  {
+    title: 'Children learn best when they feel safe and loved.',
+    text: 'Educators greet every child and family by name, and new children settle in at their own pace.',
+  },
+  {
+    title: 'Play is serious work.',
+    text: 'Each room builds its day around play, curiosity and kindness, with a program made for that age.',
+  },
+  {
+    title: 'Good food matters.',
+    text: 'Our cook prepares meals in our own kitchen every day, so children eat fresh food with plenty of variety.',
+  },
+  {
+    title: 'Families are part of the team.',
+    text: 'We follow the routines you use at home and talk with you about how your child is going.',
+  },
+];
+---
+
+<Layout
+  title="About Rainbow Village | Family-Run Childcare in Harris Park"
+  description="A family-run, women-owned childcare centre in Harris Park where every child is known by name. Meet the people and values behind Rainbow Village."
+>
+  <PageHeader
+    title="About Rainbow Village"
+    lead="Rainbow Village is a family-run, women-owned childcare centre in Harris Park, caring for local children [since 20XX]."
+  />
+
+  <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
+    <div class="rv-wrap rv-split">
+      <div class="rv-copy">
+        <h2 class="hs-title">Our story</h2>
+        <p><Todo text="[Two or three sentences from the director on why she started Rainbow Village and what she wanted it to be for families.]" /></p>
+        <p>
+          We have stayed deliberately small, so every child gets the attention they deserve. With places for 40 children,
+          our director and educators know each child, their routines and their family.
+        </p>
+        <p><b>A welcome from our director:</b> <Todo text="[A short personal welcome, 25 to 35 words, with the director's name.]" /></p>
+      </div>
+      <Photo label="Photo: the building or garden, with a name tape caption" crayon="blue" taped />
+    </div>
+  </section>
+
+  <section class="hs-sheet" data-theme="crayon">
+    <div class="rv-wrap rv-sheet-body">
+      <h2>What we believe</h2>
+      <p class="hs-sheet__note">EYLF</p>
+      {beliefs.map((belief) => <p><b>{belief.title}</b> {belief.text}</p>)}
+      <p>Our programs follow the Early Years Learning Framework, Australia's national guide for children's learning from birth to 5.</p>
+    </div>
+  </section>
+
+  <section class="hs-ground hs-paper-doodles rv-section rv-chalk" data-theme="chalkboard">
+    <div class="rv-wrap rv-split">
+      <div class="rv-stack">
+        <h2 class="hs-title">Look inside our centre</h2>
+        <p>Walk through our rooms, our playground and our kitchen in about 90 seconds.</p>
+      </div>
+      <ul class="hs-line rv-line-single">
+        <li><Photo label="Video: 90 seconds inside our rooms, with a poster image and click to play" /></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="hs-ground rv-section" data-theme="crayon">
+    <div class="rv-wrap rv-copy">
+      <h2 class="hs-title">Childcare in Harris Park, at a glance</h2>
+      <p>
+        We are licensed for <b>40 children</b>, from <b>6 weeks to 6 years</b>, and open
+        <b>Monday to Friday, 7am to 6pm</b>. We are rated <b>Meeting the National Quality Standard</b>, and you can find
+        us at 42 Weston Street, Harris Park.
+      </p>
+      <p>
+        <a href="/rooms">See our rooms</a> or <a href="/our-team">meet our team</a>.
+      </p>
+    </div>
+  </section>
+
+  <Closing title="Come and see it for yourself" text="Tours take about 30 minutes." band="green" />
+</Layout>

@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "babies",
+    "name": "Babies room",
+    "ages": "6 weeks to 2 years",
+    "crayon": "purple",
+    "text": "Calm, gentle care that follows your baby's own routine.",
+    "overview": "Gentle, responsive care that follows your baby's own sleep and feeding routine.",
+    "href": "/rooms/babies"
+  },
+  {
+    "slug": "toddlers",
+    "name": "Toddlers room",
+    "ages": "2 to 3 years",
+    "crayon": "yellow",
+    "text": "Busy, curious days of play, language and new friendships.",
+    "overview": "Busy, curious days of play, language, music and making friends.",
+    "href": "/rooms/toddlers"
+  },
+  {
+    "slug": "preschool",
+    "name": "Preschool",
+    "ages": "3 to 6 years",
+    "crayon": "orange",
+    "text": "A school-readiness program that builds confidence for big school.",
+    "overview": "A school-readiness program that builds confidence, independence and early literacy and numeracy.",
+    "href": "/rooms/preschool"
+  }
+]

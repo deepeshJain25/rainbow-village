@@ -1,0 +1,53 @@
+---
+import RoomPage from '../../components/RoomPage.astro';
+import Todo from '../../components/Todo.astro';
+import rooms from '../../content/rooms.json';
+
+const room = rooms[0];
+const day = [
+  { time: '7am', activity: 'Arrival and cuddles' },
+  { time: '8:30am', activity: 'Sensory play and songs' },
+  { time: '9:30am', activity: 'Morning tea' },
+  { time: '10am', activity: 'Outdoor time' },
+  { time: '11am', activity: 'Lunch' },
+  { time: '12pm', activity: 'Sleep, following your baby\'s routine' },
+  { time: '2:30pm', activity: 'Afternoon play' },
+  { time: 'By 6pm', activity: 'Pick-up and a chat about the day' },
+];
+---
+
+<RoomPage
+  room={room}
+  seo={{
+    title: 'Babies Room | Infant Childcare Harris Park | Rainbow Village',
+    description: "Gentle care for babies from 6 weeks in Harris Park. Your baby's own sleep and feeding routine, loving educators and daily updates for you.",
+  }}
+  heading="Babies room in Harris Park"
+  lead="Leaving your baby for the first time is a big step. Our Babies room is calm, warm and built around your baby's own routine, not ours."
+  glance={{ ratio: '[1 educator to 4 babies]', places: '[X] places', leader: '[Name]' }}
+  photos={['Photo: the Babies room', 'Photo: the sleep room or a quiet corner', 'Photo: the garden babies use']}
+  dayNote="Times are a guide. Babies eat and sleep when they need to, so your baby's own routine comes first."
+  day={day}
+  learnHeading="Gentle care that follows your baby's lead"
+  learnLead="In the first two years, babies learn through close relationships, movement and sound."
+  learn={[
+    { title: 'Secure bonds.', text: 'Familiar faces every day help your baby feel safe enough to explore.' },
+    { title: 'First words.', text: 'Songs, stories and everyday conversation build early language.' },
+    { title: 'Moving and exploring.', text: 'Floor time, sensory play and outdoor time help babies roll, crawl, pull up and walk.' },
+    { title: 'Learning through care.', text: 'Nappy changes, meals and settling are unhurried moments of connection and learning.' },
+  ]}
+  leader={{ name: '[Name]', qualification: '[qualification]', quote: '[One line in their own words about caring for babies.]' }}
+  packFirst
+  packLead="Label everything with your baby's name."
+  pack={['A spare change of clothes', 'A hat', '[Sheet and comforter for sleep time]', '[Bottles and formula or expressed milk, with feeding notes]']}
+  next={{ label: 'Next: Toddlers room, 2 to 3 years', href: '/rooms/toddlers' }}
+  closing={{ title: 'See the Babies room in person', band: 'green' }}
+>
+  <Fragment slot="routine">
+    <h2>Sleep, feeding and nappies</h2>
+    <p><b>Your routine, our routine.</b> We follow the sleep, feeding and settling routine you use at home, and talk with you every day about how it's going.</p>
+    <p><b>Daily updates.</b> <Todo text="See your baby's meals, sleeps, nappy changes and photos through [parent app], then chat with an educator at pick-up." /></p>
+    <blockquote class="rv-quote">"The educators helped my baby quickly settle into a sleep and eating routine."</blockquote>
+    <p>Rachel, Rainbow Village parent</p>
+  </Fragment>
+</RoomPage>

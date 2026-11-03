@@ -1,0 +1,60 @@
+---
+import Closing from '../components/Closing.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Photo from '../components/Photo.astro';
+import Layout from '../layouts/Layout.astro';
+
+const filters = [
+  { id: 'all', label: 'All' },
+  { id: 'rooms', label: 'Rooms' },
+  { id: 'garden', label: 'Garden' },
+  { id: 'food', label: 'Food' },
+  { id: 'art', label: 'Art' },
+];
+
+// Up to 25 photos and artworks at launch.
+const photos = [
+  { cat: 'rooms', label: 'Photo: reading corner in the Toddlers room', crayon: 'purple' },
+  { cat: 'garden', label: 'Photo: the playground', crayon: 'blue' },
+  { cat: 'food', label: 'Photo: lunch being cooked in our kitchen', crayon: 'red' },
+  { cat: 'art', label: "Photo: children's paintings", crayon: 'orange' },
+  { cat: 'rooms', label: 'Photo: the Babies room', crayon: 'purple' },
+  { cat: 'garden', label: 'Photo: hands at work in the garden', crayon: 'blue' },
+  { cat: 'art', label: 'Photo: a child-made collage', crayon: 'red' },
+  { cat: 'food', label: 'Photo: a plate of morning tea', crayon: 'orange' },
+  { cat: 'rooms', label: 'Photo: the Preschool room', crayon: 'purple' },
+  { cat: 'garden', label: 'Photo: outdoor play equipment', crayon: 'blue' },
+  { cat: 'art', label: 'Photo: drawings on the wall', crayon: 'red' },
+  { cat: 'food', label: 'Photo: the kitchen', crayon: 'orange' },
+] as const;
+---
+
+<Layout
+  title="Gallery | Inside Rainbow Village Childcare Harris Park"
+  description="Take a look inside Rainbow Village: our rooms, playground, kitchen and everyday moments, in real photos from our Harris Park childcare centre."
+>
+  <PageHeader
+    title="A look inside"
+    lead="Real photos of our Harris Park childcare centre: the rooms, the playground, the kitchen and the art children make here."
+    crumbs={[{ label: 'About', href: '/about' }]}
+  />
+
+  <section class="hs-ground hs-paper-doodles rv-section rv-section--flush" data-theme="crayon">
+    <div class="rv-wrap rv-gallery">
+      {filters.map((filter, index) => (
+        <input class="rv-filter" type="radio" name="gallery-filter" id={`g-${filter.id}`} checked={index === 0} aria-label={`Show ${filter.label}`} />
+      ))}
+      <div class="rv-tapes rv-filter-tapes" aria-hidden="true">
+        {filters.map((filter) => <label class="hs-tape" for={`g-${filter.id}`}>{filter.label}</label>)}
+      </div>
+      <div class="rv-wall">
+        {photos.map((photo) => (
+          <div data-cat={photo.cat}><Photo label={photo.label} crayon={photo.crayon} /></div>
+        ))}
+      </div>
+      <p>We publish photos of children only with written parental consent, and remove them on request.</p>
+    </div>
+  </section>
+
+  <Closing title="Like what you see?" text="Photos only show so much. Come and see the rooms for yourself." band="orange" />
+</Layout>

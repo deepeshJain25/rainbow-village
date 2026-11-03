@@ -1,0 +1,43 @@
+---
+import RoomPage from '../../components/RoomPage.astro';
+import rooms from '../../content/rooms.json';
+
+const room = rooms[1];
+const day = [
+  { time: '7am', activity: 'Arrival and free play' },
+  { time: '9am', activity: 'Group time' },
+  { time: '9:30am', activity: 'Morning tea' },
+  { time: '10am', activity: 'Outdoor play' },
+  { time: '11:30am', activity: 'Lunch' },
+  { time: '12:30pm', activity: 'Rest' },
+  { time: '2:30pm', activity: 'Art, music and messy play' },
+  { time: 'By 6pm', activity: 'Pick-up' },
+];
+---
+
+<RoomPage
+  room={room}
+  seo={{
+    title: 'Toddlers Room | Toddler Childcare Harris Park | Rainbow Village',
+    description: 'Play-based learning for 2 to 3 year olds in Harris Park: language, music, outdoor play and new friendships, with caring educators who know your child.',
+  }}
+  heading="Toddlers room in Harris Park"
+  lead="Toddlers learn by doing. Our Toddlers room is full of things to explore, with educators who turn every &quot;why?&quot; into a chance to learn."
+  glance={{ ratio: '[1 educator to 5 toddlers]', places: '[X] places', leader: '[Name]' }}
+  photos={['Photo: the Toddlers room', 'Photo: the reading or art corner', 'Photo: the garden toddlers use']}
+  dayNote="Here is the shape of a typical day. Rest time follows what each toddler needs."
+  day={day}
+  learnHeading="Curious, busy and growing every day"
+  learnLead="Between 2 and 3, children are finding their words, their friends and their independence."
+  learn={[
+    { title: 'Words and confidence.', text: 'Stories, songs and conversation every day build language and help your toddler express themselves.' },
+    { title: 'Friends and feelings.', text: 'Gentle guidance with sharing, taking turns and naming feelings as your toddler learns to play with others.' },
+    { title: 'Growing independence.', text: "Toilet learning, feeding themselves and packing away, at your child's pace and in step with home." },
+    { title: 'Outdoor play.', text: 'Running, climbing and digging build strong bodies and burn off big energy.' },
+  ]}
+  leader={{ name: '[Name]', qualification: '[qualification]', quote: '[One line in their own words about working with toddlers.]' }}
+  packLead="Label everything with your child's name."
+  pack={['A spare change of clothes, with extras during toilet learning', 'A hat', '[Sheet and comforter for rest time]']}
+  next={{ label: 'Next: Preschool, 3 to 6 years', href: '/rooms/preschool' }}
+  closing={{ title: 'See the Toddlers room in person', band: 'orange' }}
+/>

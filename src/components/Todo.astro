@@ -1,0 +1,10 @@
+---
+// Plain text with [square brackets] marked up: each bracket is a fact the centre still has to confirm.
+interface Props {
+  text: string;
+}
+
+const parts = Astro.props.text.split(/(\[[^\]]*\])/);
+---
+
+{parts.map((part) => (part.startsWith('[') ? <mark class="rv-todo">{part}</mark> : part))}

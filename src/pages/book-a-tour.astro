@@ -1,0 +1,41 @@
+---
+import PageHeader from '../components/PageHeader.astro';
+import site from '../content/site.json';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Book a Childcare Tour in Harris Park | Rainbow Village"
+  description="See Rainbow Village for yourself. Choose a time online, meet our educators and see the rooms, playground and kitchen. Tours take about 30 minutes."
+>
+  <PageHeader
+    compact
+    title="Book a tour"
+    lead="Tours of our Harris Park childcare centre take about 30 minutes. Bring your child if you like."
+    crumbs={[{ label: 'Enrolment', href: '/fees' }]}
+    action={null}
+  />
+
+  <div class="rv-page-split rv-page-split--band-first">
+    <div class="hs-ground rv-page-split__copy" data-theme="crayon">
+      <h2 class="hs-title">What you'll see</h2>
+      <ul class="rv-list">
+        <li>Every room, the playground and the kitchen</li>
+        <li>The director and educators who would care for your child</li>
+        <li>Plenty of time to ask questions about fees, days and places</li>
+      </ul>
+      <p>
+        <b>Find us:</b> {site.address}.
+        <a href={site.mapUrl}>Get directions</a>
+      </p>
+      <p><b>Parking:</b> free street parking on Weston Street.</p>
+    </div>
+    <div class="hs-band hs-band--sky rv-page-split__band" data-theme="kraft">
+      <div class="hs-formsheet rv-booking" data-theme="crayon">
+        <h2>Choose a time</h2>
+        <p><mark class="rv-todo">[The Cal.com booking calendar goes here.]</mark></p>
+        <p>Can't find a time? Call <a href={site.phoneHref}>{site.phone}</a> and we'll find one that suits you.</p>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,46 @@
+---
+import Field from '../components/Field.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { childCare } from '../content/schema';
+import site from '../content/site.json';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Contact Rainbow Village Childcare | 42 Weston Street, Harris Park"
+  description="Call (02) 9637 4433 or visit us at 42 Weston Street, Harris Park. Open Monday to Friday, 7am to 6pm. Free street parking."
+  schema={childCare}
+>
+  <PageHeader
+    compact
+    title="Contact us"
+    lead="We answer the phone at our Harris Park childcare centre from 7am to 6pm, Monday to Friday. [Confirm.]"
+    action={{ label: 'Call us', href: site.phoneHref }}
+  />
+
+  <div class="rv-page-split">
+    <div class="hs-ground rv-page-split__copy" data-theme="crayon">
+      <p class="rv-contact-phone"><a href={site.phoneHref}>{site.phone}</a></p>
+      <p><a href={site.mapUrl}>Get directions</a></p>
+      <p><b>Address:</b> {site.address}</p>
+      <p><b>Hours:</b> {site.hours}</p>
+      <p><b>Email:</b> <mark class="rv-todo">[email]</mark></p>
+      <p><b>Parking:</b> free street parking on Weston Street.</p>
+      <p><b>Public transport:</b> <mark class="rv-todo">[A short walk from Harris Park station.]</mark></p>
+    </div>
+    <div class="hs-band hs-band--sky rv-page-split__band" data-theme="kraft">
+      <form class="hs-formsheet rv-form rv-form--compact" data-theme="crayon" method="post" action="#">
+        <Field label="Name" name="name" autocomplete="name" />
+        <Field label="Phone" name="phone" type="tel" autocomplete="tel" />
+        <div class="rv-form__full"><Field label="Email" name="email" type="email" autocomplete="email" /></div>
+        <div class="rv-form__full"><Field label="Message" name="message" rows={3} /></div>
+        <button class="hs-btn hs-btn--orange rv-form__full" type="submit">Send message</button>
+        <p class="rv-form-note rv-form__full"><mark class="rv-todo">[This form starts sending once the enquiry system is connected.]</mark></p>
+      </form>
+    </div>
+  </div>
+
+  <div class="rv-map" data-theme="crayon">
+    <p><mark class="rv-todo">[Static map image of 42 Weston Street, linking to Google Maps]</mark></p>
+  </div>
+</Layout>

@@ -1,0 +1,38 @@
+---
+import PageHeader from '../../components/PageHeader.astro';
+import RoomCard from '../../components/RoomCard.astro';
+import rooms from '../../content/rooms.json';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Our Rooms | Babies, Toddlers and Preschool | Rainbow Village Harris Park"
+  description="Three rooms for three stages: babies from 6 weeks, toddlers from 2 years and preschool from 3 to 6 years. See what a day looks like in each."
+>
+  <PageHeader
+    compact
+    title="Our rooms"
+    lead="Three childcare rooms in Harris Park, grouped by age, each with its own educators and garden time."
+    action={null}
+  />
+
+  <section class="hs-ground hs-paper-doodles rv-section rv-chalk rv-rooms-line" data-theme="chalkboard">
+    <ul class="rv-wrap hs-line rv-line-stack">
+      {rooms.map((room) => (
+        <li>
+          <RoomCard title={room.name} ages={room.ages} text={room.overview} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="hs-ground rv-section rv-rooms-note" data-theme="crayon">
+    <div class="rv-wrap rv-stack rv-stack--wide">
+      <p>
+        <b>Not sure which room?</b> We'll place your child by age and readiness. Ask us on your
+        <a href="/book-a-tour">tour</a>, or read our <a href="/faqs">FAQs</a>.
+      </p>
+      <p><mark class="rv-todo">[Current vacancies: Babies, Toddlers, Preschool]</mark></p>
+    </div>
+  </section>
+</Layout>

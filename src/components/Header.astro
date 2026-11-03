@@ -3,7 +3,7 @@ import site from '../content/site.json';
 import CrayonWord from './CrayonWord.astro';
 import Icon from './Icon.astro';
 
-const path = Astro.url.pathname;
+const path = Astro.url.pathname.replace(/(.)\/$/, '$1');
 const isCurrent = (item: { href: string; children?: { href: string }[] }) =>
   item.href === path || item.children?.some((child) => child.href === path);
 ---

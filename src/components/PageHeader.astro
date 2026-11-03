@@ -1,0 +1,31 @@
+---
+// The opening of every inner page: breadcrumbs, a short h1, one plain lead and, usually, the main action.
+import Todo from './Todo.astro';
+
+interface Props {
+  title: string;
+  lead: string;
+  crumbs?: { label: string; href?: string }[];
+  action?: { label: string; href: string } | null;
+  compact?: boolean;
+}
+
+const { title, lead, crumbs = [], action = { label: 'Book a tour', href: '/book-a-tour' }, compact = false } = Astro.props;
+const trail = [{ label: 'Home', href: '/' }, ...crumbs, { label: title }];
+---
+
+<div class:list={['hs-ground', 'rv-page-head', { 'rv-page-head--compact': compact }]} data-theme="crayon">
+  <div class="rv-wrap rv-stack-head">
+    <nav aria-label="Breadcrumb">
+      <ol class="rv-crumbs">
+        {trail.map((crumb) => (
+          <li>{crumb.href ? <a href={crumb.href}>{crumb.label}</a> : <span aria-current="page">{crumb.label}</span>}</li>
+        ))}
+      </ol>
+    </nav>
+    <slot name="tape" />
+    <h1>{title}</h1>
+    <p class="rv-lead"><Todo text={lead} /></p>
+    {action && <div><a class="hs-btn hs-btn--orange" href={action.href}>{action.label}</a></div>}
+  </div>
+</div>

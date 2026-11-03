@@ -1,0 +1,13 @@
+{
+  "weekOf": null,
+  "weekEnding": null,
+  "cook": null,
+  "meals": ["Morning tea", "Lunch", "Afternoon tea", "Late snack"],
+  "days": [
+    { "day": "Monday", "items": [null, null, null, null] },
+    { "day": "Tuesday", "items": [null, null, null, null] },
+    { "day": "Wednesday", "items": [null, null, null, null] },
+    { "day": "Thursday", "items": [null, null, null, null] },
+    { "day": "Friday", "items": [null, null, null, null] }
+  ]
+}

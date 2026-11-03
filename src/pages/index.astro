@@ -1,32 +1,12 @@
 ---
+import Closing from '../components/Closing.astro';
 import ReviewsSlider from '../components/ReviewsSlider.tsx';
 import RoomCard from '../components/RoomCard.astro';
+import reviews from '../content/reviews.json';
+import rooms from '../content/rooms.json';
+import { childCare } from '../content/schema';
 import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
-
-const rooms = [
-  {
-    name: 'Babies room',
-    ages: '6 weeks to 2 years',
-    text: "Calm, gentle care that follows your baby's own routine.",
-    href: '/rooms/babies',
-    crayon: 'purple',
-  },
-  {
-    name: 'Toddlers room',
-    ages: '2 to 3 years',
-    text: 'Busy, curious days of play, language and new friendships.',
-    href: '/rooms/toddlers',
-    crayon: 'yellow',
-  },
-  {
-    name: 'Preschool',
-    ages: '3 to 6 years',
-    text: 'A school-readiness program that builds confidence for big school.',
-    href: '/rooms/preschool',
-    crayon: 'orange',
-  },
-] as const;
 
 const reasons = [
   {
@@ -55,12 +35,6 @@ const day = [
   { time: 'By 6pm', activity: 'Pick-up' },
 ];
 
-const reviews = [
-  { quote: 'Best staff, management and environment for the kids.', source: 'Google review' },
-  { quote: "I can't find a better place than Rainbow Village for my little one in the area.", source: 'Google review' },
-  { quote: 'The carers and teachers are so loving.', source: 'Rachel, Rainbow Village parent' },
-];
-
 const educators = [
   { role: 'Director', crayon: 'green' },
   { role: 'Room leader', crayon: 'blue' },
@@ -71,6 +45,7 @@ const educators = [
 <Layout
   title="Rainbow Village Childcare Harris Park | Family-Run Long Day Care"
   description="Family-run childcare in Harris Park for children from 6 weeks to 6 years. Meals cooked fresh on site, caring educators, 4.8 stars on Google. Book a tour."
+  schema={childCare}
 >
   <!-- Hero: the one Chalkboard moment. The rating is live from the Places API once that is set up. -->
   <section class="hs-band hs-band--sky hs-band--flat-top hs-hero" data-theme="chalkboard">
@@ -124,7 +99,7 @@ const educators = [
       <ul class="hs-line rv-line-stack">
         {rooms.map((room) => (
           <li>
-            <RoomCard title={room.name} ages={room.ages} text={room.text} href={room.href} crayon={room.crayon} />
+            <RoomCard title={room.name} ages={room.ages} text={room.text} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
           </li>
         ))}
       </ul>
@@ -198,17 +173,5 @@ const educators = [
     </div>
   </section>
 
-  <!-- Book a tour -->
-  <section class="hs-band hs-band--green" data-theme="kraft">
-    <div class="hs-band__inner rv-closing">
-      <div class="rv-stack">
-        <h2 class="hs-title">Come and see us</h2>
-        <p>Tours take about 30 minutes.</p>
-      </div>
-      <div class="rv-closing__actions">
-        <a class="hs-btn hs-btn--orange" href="/book-a-tour">Book a tour</a>
-        <span>or call <a href={site.phoneHref}>{site.phone}</a></span>
-      </div>
-    </div>
-  </section>
+  <Closing title="Come and see us" text="Tours take about 30 minutes." band="green" />
 </Layout>
