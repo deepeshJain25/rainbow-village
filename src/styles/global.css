@@ -522,7 +522,12 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 .hs-hero { --hero-ground: #58c23c; }
 .rv-hero-title { font-size: min(76px, calc(8vw - 10px)); line-height: 1.05; }
 .rv-hero-title span { display: block; white-space: nowrap; }
-.rv-rating { font-size: 15px; line-height: 24px; font-weight: 700; }
+.rv-trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); font-size: 15px; line-height: 24px; font-weight: 700; }
+.rv-trust li { display: grid; gap: var(--space-1); align-content: start; justify-items: start; }
+.rv-star svg { fill: currentColor; }
+/* room names stay on the paintings as the hero's columns narrow */
+.rv-hero-paintings .hs-painting { padding-inline: var(--space-2); }
+.hs .rv-hero-paintings .hs-painting__title { font-size: min(26px, 2.3vw); }
 .rv-strip-phone { display: none; }
 
 /* ruled sheet: keep copy to about 60 characters so it stays on the lines */
@@ -742,7 +747,10 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
   .rv-hero-actions { display: grid; }
   .hs .rv-hero-paintings { overflow: visible; padding-bottom: 0; }
   .hs .rv-hero-paintings > * { flex: 1 1 0; }
-  .rv-hero-paintings > :nth-child(3) { display: none; }
+  .hs .rv-hero-paintings { gap: var(--space-2); }
+  .rv-hero-paintings .hs-painting { padding: var(--space-2) var(--space-2) var(--space-4); }
+  .rv-hero-paintings .hs-painting__art { height: 72px; }
+  .hs .rv-hero-paintings .hs-painting__title { font-size: 20px; line-height: 24px; }
   .hs .rv-line-stack { flex-direction: column; overflow: visible; gap: var(--space-16); padding-bottom: 0; }
   .hs .rv-line-stack > * { flex: none; }
   .rv-line-stack::before { left: 0; right: 0; }
@@ -770,5 +778,6 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 }
 
 @media (max-width: 360px) {
+  .hs .rv-hero-paintings .hs-painting__title { font-size: 18px; }
   .hs-nav .hs-crayons--sm { font-size: 24px; }
 }

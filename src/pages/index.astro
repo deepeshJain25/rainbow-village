@@ -1,5 +1,6 @@
 ---
 import Closing from '../components/Closing.astro';
+import Icon from '../components/Icon.astro';
 import ReviewsSlider from '../components/ReviewsSlider.tsx';
 import RoomCard from '../components/RoomCard.astro';
 import reviews from '../content/reviews.json';
@@ -57,14 +58,23 @@ const educators = [
           <a class="hs-btn hs-btn--orange" href="/book-a-tour">Book a tour</a>
           <a class="hs-btn hs-btn--yellow" href={site.phoneHref}>Call {site.phone}</a>
         </div>
-        <p class="rv-rating">{site.rating}</p>
+        <ul class="rv-trust">
+          <li><span class="rv-star"><Icon name="star" /></span>{site.rating}</li>
+          <li><Icon name="badge-check" />Rated Meeting the National Quality Standard</li>
+          <li><Icon name="clock" />Open {site.hours}</li>
+        </ul>
       </div>
-      <div class="hs-hero__line" aria-hidden="true">
-        <!-- Children's real paintings replace these once the centre sends them. -->
+      <div class="hs-hero__line">
         <ul class="hs-line rv-hero-paintings">
-          <li><div class="hs-painting hs-painting--purple" data-theme="crayon"><div class="hs-painting__art"><i></i><i></i><i></i></div></div></li>
-          <li><div class="hs-painting" data-theme="crayon"><div class="hs-painting__art"><i></i><i></i><i></i></div></div></li>
-          <li><div class="hs-painting hs-painting--orange" data-theme="crayon"><div class="hs-painting__art"><i></i><i></i><i></i></div></div></li>
+          {rooms.map((room) => (
+            <li>
+              <a class:list={['hs-painting', room.crayon !== 'yellow' && `hs-painting--${room.crayon}`]} data-theme="crayon" href={room.href}>
+                <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
+                <p class="hs-painting__title">{room.name.replace(' room', '')}</p>
+                <p class="hs-painting__caption">{room.shortAges}</p>
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
