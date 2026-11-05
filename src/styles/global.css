@@ -537,6 +537,12 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 
 /* a single painting hung on its own line */
 .hs .rv-line-single > li { flex: 1 1 auto; }
+/* paintings on a line swing from their peg: src/scripts/swing.ts sets --swing as the cursor passes */
+main { overflow-x: clip; }
+.hs .hs-line .hs-painting, .hs .hs-line a.hs-painting:hover, .hs .hs-line a.hs-painting:focus-visible {
+  transform: rotate(var(--swing, 0deg)); transition: none;
+}
+
 .rv-poster { margin: 0; }
 .rv-poster .hs-painting__art { height: 260px; }
 
