@@ -3,7 +3,7 @@
     "topic": "Enrolment",
     "slug": "enrolment",
     "items": [
-      { "q": "What ages do you care for?", "a": "Children from 6 weeks to 6 years, across our Babies room, Toddlers room and Preschool.", "link": { "label": "See our rooms", "href": "/rooms" } },
+      { "q": "What ages do you care for?", "a": "Children from 6 months to 6 years, across our Babies room, Toddlers room and Preschool.", "link": { "label": "See our rooms", "href": "/rooms" } },
       { "q": "How do I enrol my child?", "a": "Book a tour, join the waitlist, and we will contact you when a place comes up. We then send your enrolment pack and arrange orientation visits.", "link": { "label": "See how enrolment works", "href": "/enrol" } },
       { "q": "Can I visit before I decide?", "a": "Yes, and we recommend it. Tours take about 30 minutes, and you are welcome to bring your child.", "link": { "label": "Book a tour", "href": "/book-a-tour" } }
     ]

@@ -45,7 +45,7 @@ const educators = [
 
 <Layout
   title="Rainbow Village Childcare Harris Park | Family-Run Long Day Care"
-  description="Family-run childcare in Harris Park for children from 6 weeks to 6 years. Meals cooked fresh on site, caring educators, 4.8 stars on Google. Book a tour."
+  description="Family-run childcare in Harris Park for children from 6 months to 6 years. Meals cooked fresh on site, caring educators, 4.8 stars on Google. Book a tour."
   schema={childCare}
 >
   <!-- Hero: bright green, the page's one big colour moment. The rating is live from the Places API once that is set up. -->
@@ -53,7 +53,7 @@ const educators = [
     <div class="hs-hero__grid">
       <div class="hs-hero__words">
         <h1 class="hs-hero__title rv-hero-title"><span>Muddy knees,</span> <span>full tummies,</span> <span>big ideas</span></h1>
-        <p class="hs-hero__lead">Family-run childcare in Harris Park for children from 6 weeks to 6 years.</p>
+        <p class="hs-hero__lead">Family-run childcare in Harris Park for children from 6 months to 6 years.</p>
         <div class="hs-hero__actions rv-hero-actions">
           <a class="hs-btn hs-btn--orange" href="/book-a-tour">Book a tour</a>
           <a class="hs-btn hs-btn--yellow" href={site.phoneHref}>Call {site.phone}</a>
@@ -71,7 +71,7 @@ const educators = [
               <a class:list={['hs-painting', room.crayon !== 'yellow' && `hs-painting--${room.crayon}`]} data-theme="crayon" href={room.href}>
                 <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
                 <p class="hs-painting__title">{room.name.replace(' room', '')}</p>
-                <p class="hs-painting__caption">{room.shortAges}</p>
+                <p class="hs-painting__caption">{room.ages}</p>
               </a>
             </li>
           ))}

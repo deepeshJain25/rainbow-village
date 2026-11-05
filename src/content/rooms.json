@@ -2,8 +2,7 @@
   {
     "slug": "babies",
     "name": "Babies room",
-    "ages": "6 weeks to 2 years",
-    "shortAges": "6 weeks to 2",
+    "ages": "6 months to 2 years",
     "crayon": "purple",
     "text": "Calm, gentle care that follows your baby's own routine.",
     "overview": "Gentle, responsive care that follows your baby's own sleep and feeding routine.",
@@ -12,8 +11,7 @@
   {
     "slug": "toddlers",
     "name": "Toddlers room",
-    "ages": "2 to 3 years",
-    "shortAges": "2 to 3",
+    "ages": "2 years to 3 years",
     "crayon": "yellow",
     "text": "Busy, curious days of play, language and new friendships.",
     "overview": "Busy, curious days of play, language, music and making friends.",
@@ -22,8 +20,7 @@
   {
     "slug": "preschool",
     "name": "Preschool",
-    "ages": "3 to 6 years",
-    "shortAges": "3 to 6",
+    "ages": "3 years to 6 years",
     "crayon": "orange",
     "text": "A school-readiness program that builds confidence for big school.",
     "overview": "A school-readiness program that builds confidence, independence and early literacy and numeracy.",
