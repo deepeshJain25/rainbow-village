@@ -464,7 +464,7 @@ body { margin: 0; }
 .rv-wrap { max-width: 1120px; margin-inline: auto; }
 .rv-section { padding: var(--space-24) var(--space-8); }
 .rv-stack { display: grid; gap: var(--space-4); max-width: 36em; }
-.rv-stack-lg { display: grid; gap: var(--space-8); }
+.rv-stack-lg { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
 .rv-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-16); align-items: center; }
 
 .rv-icon { display: inline-flex; flex: none; }
@@ -518,7 +518,10 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 /* a band's zigzag edge sits over the section after it */
 .hs-band { z-index: 1; }
 
-/* hero */
+/* hero: bright green ground, and a title that always sits on three rows */
+.hs-hero { --hero-ground: #58c23c; }
+.rv-hero-title { font-size: min(76px, calc(8vw - 10px)); line-height: 1.05; }
+.rv-hero-title span { display: block; white-space: nowrap; }
 .rv-rating { font-size: 15px; line-height: 24px; font-weight: 700; }
 .rv-strip-phone { display: none; }
 
@@ -567,6 +570,7 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 .rv-inside { align-items: start; }
 .rv-portraits .hs-painting__art { height: 96px; }
 .rv-portraits .hs-painting { padding: var(--space-2) var(--space-2) var(--space-4); }
+.rv-portraits .hs-tape { padding-inline: var(--space-2); }
 
 /* inner pages */
 .rv-page-head { padding: var(--space-16) var(--space-8) var(--space-16); }
@@ -711,6 +715,7 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
   .rv-section { padding: var(--space-16) var(--space-4); }
   .hs-sheet { padding-right: var(--space-4); }
   .rv-split { grid-template-columns: minmax(0, 1fr); gap: var(--space-8); }
+  .rv-hero-title { font-size: min(52px, 14vw); }
   .rv-page-head { padding: var(--space-8) var(--space-4); }
   .rv-form--compact { grid-template-columns: minmax(0, 1fr); }
   .rv-team::before { left: 0; right: 0; }
@@ -762,4 +767,8 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 
 @media (max-width: 480px) {
   .hs-nav .hs-crayons--sm { font-size: 30px; line-height: 32px; }
+}
+
+@media (max-width: 360px) {
+  .hs-nav .hs-crayons--sm { font-size: 24px; }
 }
