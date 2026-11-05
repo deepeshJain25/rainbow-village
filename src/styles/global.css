@@ -31,7 +31,7 @@
   --crayon-red: #e8423f;
   --crayon-orange: #fb6b47;
   --crayon-yellow: #ffd23f;
-  --crayon-green: #abcd52;
+  --crayon-green: #58c23c;
   --crayon-grass: #79b13a;
   --crayon-sky: #5cc6d6;
   --crayon-blue: #2f8fd8;
@@ -71,7 +71,7 @@
   --crayon-red: #f07a74;
   --crayon-orange: #f99a6b;
   --crayon-yellow: #f7dc6f;
-  --crayon-green: #b5d86a;
+  --crayon-green: #58c23c;
   --crayon-grass: #8dbb57;
   --crayon-sky: #8fd3df;
   --crayon-blue: #79aee8;
@@ -111,7 +111,7 @@
   --crayon-red: #d64a3b;
   --crayon-orange: #ef8a3c;
   --crayon-yellow: #f2c14e;
-  --crayon-green: #8db842;
+  --crayon-green: #58c23c;
   --crayon-grass: #5f8f2f;
   --crayon-sky: #6cb9cf;
   --crayon-blue: #3f6fb5;
@@ -519,7 +519,9 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 .hs-band { z-index: 1; }
 
 /* hero: bright green ground, and a title that always sits on three rows */
-.hs-hero { --hero-ground: #58c23c; }
+.hs-hero { --hero-ground: var(--crayon-green); }
+/* the hills and the rainbow stripe sit on the same green, so they take a lighter and a deeper shade of it */
+.hs-hero__land { --crayon-green: #8fe070; --crayon-grass: #3fa62b; }
 .rv-hero-title { font-size: min(76px, calc(8vw - 10px)); line-height: 1.05; }
 .rv-hero-title span { display: block; white-space: nowrap; }
 .rv-trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); font-size: 15px; line-height: 24px; font-weight: 700; }
@@ -535,14 +537,14 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 .rv-sheet-body { display: grid; gap: var(--space-8); width: 100%; }
 .rv-sheet-body p { max-width: 60ch; }
 
-/* a single painting hung on its own line */
-.hs .rv-line-single > li { flex: 1 1 auto; }
 /* paintings on a line swing from their peg: src/scripts/swing.ts sets --swing as the cursor passes */
 main { overflow-x: clip; }
 .hs .hs-line .hs-painting, .hs .hs-line a.hs-painting:hover, .hs .hs-line a.hs-painting:focus-visible {
   transform: rotate(var(--swing, 0deg)); transition: none;
 }
 
+/* a single painting hung on its own line */
+.hs .rv-line-single > li { flex: 1 1 auto; }
 .rv-poster { margin: 0; }
 .rv-poster .hs-painting__art { height: 260px; }
 
