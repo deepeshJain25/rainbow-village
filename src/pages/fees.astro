@@ -1,4 +1,5 @@
 ---
+import Icon from '../components/Icon.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Todo from '../components/Todo.astro';
 import rooms from '../content/rooms.json';
@@ -91,7 +92,7 @@ const questions = [
         <h2 class="hs-title">Fee questions</h2>
         {questions.map((item) => (
           <details class="rv-details">
-            <summary>{item.q}</summary>
+            <summary>{item.q}<Icon name="chevron-down" /></summary>
             <div class="rv-details__body"><p><Todo text={item.a} /></p></div>
           </details>
         ))}

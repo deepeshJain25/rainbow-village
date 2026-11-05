@@ -450,7 +450,7 @@ textarea.hs-field__input {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hs-btn, .hs-painting { transition: none; }
+  .hs-btn, .hs-painting, .rv-details summary .rv-icon { transition: none; }
 }
 
 /* ==========================================================================
@@ -648,7 +648,10 @@ main { overflow-x: clip; }
 /* the weekly menu: a table on desktop, days that open and close on phones */
 .rv-menu-days { display: none; }
 .rv-details { border-bottom: 2px solid var(--rule); padding: var(--space-2) 0; }
-.rv-details summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; }
+.rv-details summary { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); cursor: pointer; font-weight: 700; }
+.rv-details summary::-webkit-details-marker { display: none; }
+.rv-details summary .rv-icon { transition: transform 90ms ease-out; }
+.rv-details[open] summary .rv-icon { transform: rotate(180deg); }
 .rv-menu-days summary { font-family: var(--font-display); font-weight: 400; font-size: 24px; }
 .rv-details__body { padding: var(--space-2) 0 var(--space-4); display: grid; gap: var(--space-2); }
 .rv-details-list { max-width: 720px; }

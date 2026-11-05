@@ -1,5 +1,6 @@
 ---
 import Closing from '../components/Closing.astro';
+import Icon from '../components/Icon.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Photo from '../components/Photo.astro';
 import Todo from '../components/Todo.astro';
@@ -50,7 +51,7 @@ const isStale = menu.weekEnding ? new Date(menu.weekEnding) < new Date() : false
             <div class="rv-menu-days">
               {menu.days.map((day, dayIndex) => (
                 <details class="rv-details" open={dayIndex === 0}>
-                  <summary>{day.day}</summary>
+                  <summary>{day.day}<Icon name="chevron-down" /></summary>
                   <div class="rv-details__body">
                     {menu.meals.map((meal, mealIndex) => (
                       <p><b>{meal}:</b> {day.items[mealIndex] ?? <mark class="rv-todo">[Meal]</mark>}</p>
