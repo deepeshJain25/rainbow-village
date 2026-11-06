@@ -1,5 +1,6 @@
 ---
-// The shared room page: only the colour, photos and words change, so parents can compare rooms.
+// The shared room page frame: header, at a glance, photos and the closing band. Each room page writes
+// its own sections in between, in the order its copy sets.
 import Layout from '../layouts/Layout.astro';
 import Closing from './Closing.astro';
 import PageHeader from './PageHeader.astro';
@@ -11,27 +12,17 @@ interface Props {
   seo: { title: string; description: string };
   heading: string;
   lead: string;
-  glance: { ratio: string; places: string; leader: string };
+  // Each fact in the at-a-glance row. Bold facts are the headline numbers.
+  glance: { text: string; bold?: boolean; link?: { label: string; href: string } }[];
   photos: string[];
-  dayNote: string;
-  day: { time: string; activity: string }[];
-  learnHeading: string;
-  learnLead: string;
-  learn: { title: string; text: string }[];
-  leader: { name: string; qualification: string; quote: string };
-  packLead?: string;
-  pack: string[];
-  packFirst?: boolean;
-  next: { label: string; href: string };
-  closing: { title: string; band: 'green' | 'orange' };
+  closing: { title: string; band: 'green' | 'orange' | 'yellow' };
 }
 
-const { room, seo, heading, lead, glance, photos, dayNote, day, learnHeading, learnLead, learn, leader, packLead, pack, packFirst = false, next, closing } = Astro.props;
-const bandClass = room.crayon === 'purple' ? 'hs-band--purple' : `hs-band--${room.crayon}`;
+const { room, seo, heading, lead, glance, photos, closing } = Astro.props;
 ---
 
 <Layout title={seo.title} description={seo.description}>
-  <PageHeader title={heading} lead={lead} crumbs={[{ label: 'Our rooms', href: '/rooms' }]}>
+  <PageHeader title={heading} current={room.name} lead={lead} crumbs={[{ label: 'Our rooms', href: '/rooms' }]}>
     <span slot="tape" class={`hs-tape hs-tape--${room.crayon}`}><span class="hs-tape__dab"></span>{room.ages}</span>
   </PageHeader>
 
@@ -39,88 +30,22 @@ const bandClass = room.crayon === 'purple' ? 'hs-band--purple' : `hs-band--${roo
     <div class="rv-wrap rv-stack-lg">
       <h2 class="rv-visually-hidden">{room.name} at a glance</h2>
       <ul class="rv-glance">
-        <li><b>Ages:</b> {room.ages}</li>
-        <li><b>Ratio:</b> <Todo text={glance.ratio} /></li>
-        <li><b>Places:</b> <Todo text={glance.places} /></li>
-        <li><b>Room leader:</b> <Todo text={glance.leader} /></li>
+        {glance.map((item) => (
+          <li>
+            {item.bold ? <b><Todo text={item.text} /></b> : <Todo text={item.text} />}
+            {item.link && <> (<a href={item.link.href}>{item.link.label}</a>)</>}
+          </li>
+        ))}
       </ul>
       <ul class="hs-line rv-line-stack rv-photo-line">
         {photos.map((photo, index) => (
-          <li><Photo label={photo} crayon={index === 1 ? 'blue' : undefined} /></li>
+          <li><Photo caption={photo} crayon={index === 1 ? 'blue' : undefined} /></li>
         ))}
       </ul>
     </div>
   </section>
 
-  {packFirst && (
-    <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
-      <div class="rv-wrap rv-panel rv-panel-split" id="pack">
-        <div class="rv-stack">
-          <slot name="routine" />
-        </div>
-        <div class="rv-stack">
-          <h2>What to pack for your baby</h2>
-          {packLead && <p>{packLead}</p>}
-          <ul class="rv-list">{pack.map((item) => <li><Todo text={item} /></li>)}</ul>
-        </div>
-      </div>
-    </section>
-  )}
+  <slot />
 
-  <section class="hs-sheet" data-theme="crayon">
-    <div class="rv-wrap rv-sheet-body">
-      <h2>A day in the {room.name.toLowerCase()}</h2>
-      <p>{dayNote}</p>
-      <dl class="rv-day">
-        {day.map((item) => (
-          <div>
-            <dt><mark class="rv-todo">[{item.time}]</mark></dt>
-            <dd>{item.activity}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  </section>
-
-  <section class:list={['hs-band', bandClass]} data-theme="kraft">
-    <div class="hs-band__inner rv-stack-lg">
-      <div class="rv-stack">
-        <h2 class="hs-title">{learnHeading}</h2>
-        <p>{learnLead}</p>
-      </div>
-      <div class="rv-text-grid">
-        {learn.map((item) => <p><b>{item.title}</b> <Todo text={item.text} /></p>)}
-      </div>
-    </div>
-  </section>
-
-  <slot name="after-learning" />
-
-  <section class="hs-ground rv-section" data-theme="crayon">
-    <div class="rv-wrap rv-stack-lg">
-      <div class="rv-split rv-leader">
-        <ul class="hs-line rv-line-single">
-          <li><Photo label={`Photo: ${room.name.toLowerCase()} leader`} crayon="orange" /></li>
-        </ul>
-        <div class="rv-stack">
-          <h2>Meet the room leader</h2>
-          <p><b><Todo text={leader.name} /></b>, <Todo text={leader.qualification} /></p>
-          <blockquote class="rv-quote">"<Todo text={leader.quote} />"</blockquote>
-          <p><a href="/our-team">Meet the whole team</a></p>
-        </div>
-      </div>
-
-      {!packFirst && (
-        <div class="rv-panel rv-stack" id="pack">
-          <h2>What to pack</h2>
-          {packLead && <p>{packLead}</p>}
-          <ul class="rv-list">{pack.map((item) => <li><Todo text={item} /></li>)}</ul>
-        </div>
-      )}
-
-      <p><a href={next.href}>{next.label} →</a></p>
-    </div>
-  </section>
-
-  <Closing title={closing.title} text="Tours take about 30 minutes, and you are welcome to bring your child." band={closing.band} />
+  <Closing title={closing.title} band={closing.band} />
 </Layout>

@@ -1,10 +1,17 @@
 ---
-// Plain text with [square brackets] marked up: each bracket is a fact the centre still has to confirm.
+// Copy text with two kinds of markup: [square brackets] are facts the centre still has to confirm,
+// and {link text}(/path) is a link.
 interface Props {
   text: string;
 }
 
-const parts = Astro.props.text.split(/(\[[^\]]*\])/);
+const parts = Astro.props.text.split(/(\[[^\]]*\]|\{[^}]+\}\([^)]+\))/);
+const link = (part: string) => part.match(/^\{([^}]+)\}\(([^)]+)\)$/);
 ---
 
-{parts.map((part) => (part.startsWith('[') ? <mark class="rv-todo">{part}</mark> : part))}
+{parts.map((part) => {
+  if (part.startsWith('[')) return <mark class="rv-todo">{part}</mark>;
+  const match = link(part);
+  if (match) return <a href={match[2]}>{match[1]}</a>;
+  return part;
+})}

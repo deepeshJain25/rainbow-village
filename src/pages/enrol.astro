@@ -1,25 +1,27 @@
 ---
 import Field from '../components/Field.astro';
 import PageHeader from '../components/PageHeader.astro';
+import Todo from '../components/Todo.astro';
 import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
 
 const steps = [
-  { title: 'Tour', text: 'Book a tour to meet us and see the centre.' },
-  { title: 'Waitlist', text: 'Join the waitlist with your preferred days and start date.' },
-  { title: 'Offer', text: 'We offer you a place, send your enrolment pack and help you claim the Child Care Subsidy.' },
-  { title: 'Orientation', text: 'Short visits, so your child starts feeling at home.' },
+  { title: 'Visit us.', text: 'Book a tour on a Tuesday or Thursday, between 10am and 2pm.' },
+  { title: 'Send your details.', text: 'Fill in the form below to join our list.' },
+  { title: 'Get your offer.', text: "We'll call you to confirm your days and start date." },
+  { title: 'Settle in.', text: "We plan your child's first days with you, at their pace." },
 ];
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 ---
 
 <Layout
-  title="Enrol at Rainbow Village Childcare | Join the Waitlist | Harris Park"
-  description="Enrolling at Rainbow Village is simple. Join the waitlist online, book a tour, and we'll guide you through every step to your child's first day."
+  title="Childcare Vacancies Harris Park | Enrol at Rainbow Village"
+  description="Childcare vacancies in Harris Park in every room, every day. Join the waitlist for babies, toddlers or preschool at Rainbow Village."
 >
   <PageHeader
-    title="Enrol or join the waitlist"
-    lead="Enrolling at our Harris Park childcare centre takes four simple steps, and we guide you through each one."
+    title="Enrol or join our childcare waitlist"
+    current="Enrol and waitlist"
+    lead="We have childcare vacancies in Harris Park in every room, on every day of the week. [Confirm before launch and keep it updated.]"
     crumbs={[{ label: 'Enrolment', href: '/fees' }]}
     action={{ label: 'Join the waitlist', href: '#waitlist' }}
   />
@@ -35,7 +37,6 @@ const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
           </li>
         ))}
       </ol>
-      <p><mark class="rv-todo">[Current vacancies: Babies, Toddlers, Preschool]</mark></p>
     </div>
   </section>
 
@@ -43,23 +44,31 @@ const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     <div class="hs-band__inner rv-form-grid">
       <div class="rv-stack">
         <h2 class="hs-title">Join the waitlist</h2>
-        <p>Tell us about your child, and we'll be in touch within <mark class="rv-todo">[1 business day]</mark>.</p>
-        <p>Prefer to talk? Call <a href={site.phoneHref}>{site.phone}</a>.</p>
+        <p>Prefer to talk? Call <a href={site.phoneHref}><Todo text={site.phone} /></a> or email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
       </div>
-      <form class="hs-formsheet rv-form" data-theme="crayon" method="post" action="#">
-        <Field label="Parent name" name="name" autocomplete="name" />
+      <!-- The success message is shown by the enquiry route once it is connected. -->
+      <form
+        class="hs-formsheet rv-form"
+        data-theme="crayon"
+        method="post"
+        action="#"
+        data-success="Thanks, [first name]. We've got your details and will be in touch within [2 business days, to confirm]."
+      >
+        <Field label="Your name" name="name" autocomplete="name" />
         <Field label="Phone" name="phone" type="tel" autocomplete="tel" />
         <Field label="Email" name="email" type="email" autocomplete="email" />
         <Field label="Child's date of birth" name="dob" type="date" />
         <Field label="Preferred start date" name="start" type="date" />
-        <fieldset>
-          <legend>Preferred days</legend>
+        <fieldset aria-describedby="days-help">
+          <legend>Preferred days (Mon to Fri, choose at least 2)</legend>
           <div class="rv-days">
             {days.map((day) => <label><input type="checkbox" name="days" value={day} />{day}</label>)}
           </div>
+          <p class="rv-form-note" id="days-help">Minimum 2 days a week. <a href="/fees">See daily fees</a>.</p>
         </fieldset>
-        <Field label="Message" name="message" optional rows={3} />
+        <Field label="Anything else we should know" name="message" optional rows={3} />
         <button class="hs-btn hs-btn--orange" type="submit">Join the waitlist</button>
+        <p class="rv-form-note">We'll only use your details to contact you about enrolment.</p>
         <p class="rv-form-note"><mark class="rv-todo">[This form starts sending once the enquiry system is connected.]</mark></p>
       </form>
     </div>

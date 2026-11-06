@@ -11,48 +11,48 @@ import Layout from '../layouts/Layout.astro';
 
 const suburbs = [
   {
-    name: 'Childcare for Parramatta families',
-    text: '[X minutes\' drive from Parramatta CBD, with the route.] We are a smaller, family-run alternative to the large centres in the city, with educators who know your child by name.',
+    name: 'Childcare near Parramatta',
+    text: 'Harris Park station is one stop from Parramatta on the T1 and T2 lines, and [distance] from our door. By car, we\'re [drive time] from Parramatta CBD via [main road]. Many families who work in Parramatta drop off on the way.',
   },
   {
-    name: 'Childcare for Rosehill families',
-    text: 'We are just next door in Harris Park, [X minutes away, with the route], and free street parking makes drop-offs easy.',
+    name: 'Childcare near Rosehill',
+    text: 'From Rosehill, we\'re about [drive time] by car via [route, for example James Ruse Drive]. [Add a local landmark families will know.]',
   },
   {
-    name: 'Childcare for Granville families',
-    text: '[X minutes\' drive, with the route.] Families make the trip for personal care, fresh meals cooked on site and a strong preschool program.',
+    name: 'Childcare near Granville',
+    text: 'Granville is one stop away on the other side of Harris Park station. By car, it\'s about [drive time] via [route].',
   },
 ];
 
 const reasons = [
-  { title: 'Family-run, every day.', text: 'Our director is here every day and knows every child and family by name.' },
-  { title: 'Places for 40 children.', text: 'Your child is never lost in the crowd.' },
-  { title: 'Cooked fresh on site.', text: 'Our cook prepares meals in our own kitchen every day.' },
-  { title: 'Rated Meeting the National Quality Standard.', text: 'Open 7am to 6pm for children from 6 months to 6 years.' },
+  { title: 'Small and family-run.', text: "40 places, and an owner who greets you every morning. We're not a large chain. {Our story}(/about)." },
+  { title: 'Food that suits local families.', text: 'Halal and vegetarian meals, cooked fresh on site, with no beef or pork.' },
+  { title: 'Educators who speak your language.', text: 'English, Urdu, Punjabi, Hindi, Nepali and Telugu.' },
+  { title: 'Part of the community since 2007.', text: "Parramatta Council incursions, links with local primary schools, and around 25 families who've returned with younger children." },
 ];
 ---
 
 <Layout
-  title="Childcare near Parramatta, Rosehill and Granville | Rainbow Village"
-  description="Looking for childcare near Parramatta, Rosehill or Granville? Rainbow Village in Harris Park is a short trip away: family-run, meals cooked on site, 4.8 stars."
+  title="Childcare near Parramatta, Rosehill & Granville | Harris Park"
+  description="Family-run childcare in Harris Park, one train stop from Parramatta and Granville. Small groups, halal meals, vacancies on all days."
   schema={childCare}
 >
   <PageHeader
     title="Childcare near Parramatta, Rosehill and Granville"
-    lead="Rainbow Village is a family-run childcare centre in the heart of Harris Park, a short trip from Parramatta, Rosehill and Granville."
+    current="Childcare near Parramatta"
+    lead="Rainbow Village is a family-run childcare centre in Harris Park, right between Parramatta, Rosehill and Granville. It's an easy drop-off on the way to work or the train. [Add real travel times.]"
   />
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
     <div class="rv-wrap rv-split rv-leader">
       <div class="rv-copy">
-        <h2 class="hs-title">Getting here</h2>
         {suburbs.map((suburb) => (
           <div class="rv-stack">
-            <h3>{suburb.name}</h3>
+            <h2 class="hs-title">{suburb.name}</h2>
             <p><Todo text={suburb.text} /></p>
           </div>
         ))}
-        <p><b>Find us:</b> {site.address}. <a href={site.mapUrl}>Get directions</a></p>
+        <p><b>Parking:</b> <mark class="rv-todo">[parking note]</mark></p>
       </div>
       <div class="rv-map" data-theme="crayon">
         <p><mark class="rv-todo">[Static map image showing the centre and the three suburbs]</mark></p>
@@ -62,21 +62,21 @@ const reasons = [
 
   <section class="hs-sheet" data-theme="crayon">
     <div class="rv-wrap rv-sheet-body">
-      <h2>Why families from nearby choose us</h2>
-      {reasons.map((reason) => <p><b>{reason.title}</b> {reason.text}</p>)}
+      <h2>Why Parramatta families choose Rainbow Village</h2>
+      {reasons.map((reason) => <p><b>{reason.title}</b> <Todo text={reason.text} /></p>)}
     </div>
   </section>
 
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-stack-lg">
-      <h2 class="hs-title">A room for every stage</h2>
       <ul class="hs-line rv-line-stack">
         {rooms.map((room) => (
           <li>
-            <RoomCard title={room.name} ages={room.ages} text={room.text} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
+            <RoomCard title={room.short} ages={room.shortAges} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
           </li>
         ))}
       </ul>
+      <p>All rooms have vacancies.</p>
     </div>
   </section>
 
@@ -84,7 +84,7 @@ const reasons = [
     <div class="hs-band__inner rv-stack-lg">
       <div class="rv-stack">
         <h2 class="hs-title">Featured reviews</h2>
-        <p>We have {site.rating} overall. <mark class="rv-todo">[Swap in reviews from families in these suburbs, if any mention it.]</mark></p>
+        <p><mark class="rv-todo">[Reviews from families in these suburbs, if any mention them.]</mark></p>
       </div>
       <div class="rv-text-grid">
         {reviews.slice(0, 2).map((review) => (
@@ -94,9 +94,9 @@ const reasons = [
           </figure>
         ))}
       </div>
-      <p><a href={site.reviewsUrl}>Read all reviews on Google</a></p>
+      <p><Todo text={site.rating} /> · <a href={site.reviewsUrl}>Read all reviews on Google</a></p>
     </div>
   </section>
 
-  <Closing title="It's a short trip to come and see us" text="Tours take about 30 minutes." band="green" />
+  <Closing title="Visit our Harris Park centre" band="green" secondary={{ label: 'Get directions', href: site.mapUrl }} />
 </Layout>

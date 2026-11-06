@@ -1,0 +1,65 @@
+---
+import Closing from '../components/Closing.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Photo from '../components/Photo.astro';
+import Todo from '../components/Todo.astro';
+import Layout from '../layouts/Layout.astro';
+
+const dietary = [
+  { title: 'Halal.', text: 'Our meals are halal. [Confirm the wording, for example whether meat is halal-certified.]' },
+  { title: 'Vegetarian.', text: 'Vegetarian meals are available every day.' },
+  { title: 'No beef or pork.', text: 'Neither is served at the centre.' },
+  { title: 'Nut-aware.', text: "We don't serve nuts in any of our meals. Tell us about any allergy and we'll plan around it with you. [Add the client's allergy policy wording.]" },
+  { title: 'Milk included.', text: 'Full cream milk is part of every day.' },
+];
+---
+
+<Layout
+  title="Halal Childcare Harris Park | Meals Cooked On Site"
+  description="Halal childcare meals in Harris Park, cooked fresh in our own kitchen. Vegetarian options, no beef or pork, nut-aware, Munch & Move."
+>
+  <PageHeader
+    title="Meals and nutrition at Rainbow Village"
+    current="Meals and nutrition"
+    lead="Every meal at our Harris Park childcare centre is cooked fresh in our own kitchen each day. We use no catering company and no frozen meals. Our food is halal and vegetarian-friendly."
+  />
+
+  <section class="hs-sheet" data-theme="crayon">
+    <div class="rv-wrap rv-sheet-body">
+      <h2>Home-style childcare meals, made here</h2>
+      <p>Your child gets three meals a day, included in your fee. They're prepared in-house from a two-week rotating menu that follows the NSW Munch & Move healthy eating guidelines.</p>
+      <p>Our menu reflects the families we care for. Children try a wide range of flavours and build healthy eating habits along the way, sitting and eating together with their friends and educators.</p>
+      <p><b>Children's favourites:</b> biryani, pasta, grilled chicken with vegetables, and rice with lamb and mixed beans.</p>
+      <p>Ask us for this fortnight's menu on your tour.</p>
+    </div>
+  </section>
+
+  <section class="hs-band hs-band--green" data-theme="kraft">
+    <div class="hs-band__inner rv-stack-lg">
+      <h2 class="hs-title">Halal, vegetarian and nut-aware childcare</h2>
+      <div class="rv-text-grid">
+        {dietary.map((item) => <p><b>{item.title}</b> <Todo text={item.text} /></p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="hs-ground rv-section" data-theme="crayon">
+    <div class="rv-wrap rv-stack-lg">
+      <div class="rv-copy">
+        <h2 class="hs-title">Meals for babies, toddlers and preschoolers</h2>
+        <p>For <a href="/rooms/babies">babies</a>, we follow your feeding plan, then introduce our meals as they start solids. <a href="/rooms/toddlers">Toddlers</a> practise serving themselves and trying new tastes. <a href="/rooms/preschool">Preschoolers</a> help in the garden, growing vegetables and learning where food comes from.</p>
+      </div>
+      <ul class="hs-line rv-line-stack rv-photo-line">
+        <li><Photo caption="Lunch, fresh from our kitchen" crayon="red" /></li>
+        <li><Photo caption="Biryani day" /></li>
+        <li><Photo caption="Vegetables from our garden" crayon="orange" /></li>
+      </ul>
+    </div>
+  </section>
+
+  <Closing
+    title="Come for a tour around lunchtime"
+    text="Tours run Tuesday and Thursday, 10am to 2pm, so you can see lunch being served. Have a question about food? {Read our FAQs}(/faqs)."
+    band="orange"
+  />
+</Layout>

@@ -1,17 +1,18 @@
 ---
 import PageHeader from '../components/PageHeader.astro';
+import Todo from '../components/Todo.astro';
 import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
 
 const sections = [
-  { id: 'collect', title: 'What we collect' },
-  { id: 'why', title: 'Why we collect it' },
+  { id: 'who', title: 'Who we are' },
+  { id: 'collect', title: 'What we collect through this website' },
+  { id: 'use', title: 'How we use it' },
   { id: 'share', title: 'Who we share it with' },
-  { id: 'website', title: 'Analytics and bot protection' },
+  { id: 'cookies', title: 'Cookies and analytics' },
   { id: 'photos', title: 'Photos of children' },
-  { id: 'storage', title: 'How we keep it safe' },
-  { id: 'rights', title: 'Your rights' },
-  { id: 'contact', title: 'Questions and complaints' },
+  { id: 'access', title: 'How to access or correct your information' },
+  { id: 'contact', title: 'Contact us' },
 ];
 ---
 
@@ -19,46 +20,40 @@ const sections = [
   title="Privacy Policy | Rainbow Village Childcare Centre"
   description="How Rainbow Village Childcare Centre collects, uses and protects your personal information."
 >
-  <PageHeader
-    title="Privacy policy"
-    lead="Your privacy matters to us. This page explains what personal information this website collects, and how we look after it."
-    action={null}
-  />
+  <PageHeader title="Privacy policy" lead="Last updated [date]" action={null} />
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
     <div class="rv-wrap rv-copy">
-      <p><b>Last updated:</b> <mark class="rv-todo">[date]</mark></p>
+      <p><mark class="rv-todo">[Use the client's existing privacy policy if they have one. Otherwise this draft needs the client's review against the Australian Privacy Principles.]</mark></p>
       <nav aria-label="On this page">
         <ul class="rv-list">
           {sections.map((section) => <li><a href={`#${section.id}`}>{section.title}</a></li>)}
         </ul>
       </nav>
 
-      <h2 id="collect">What we collect</h2>
-      <p>We collect the contact details you give us in our forms: your name, phone number and email, your child's first name or date of birth, your preferred days and start date, and anything you write in a message.</p>
+      <h2 id="who">Who we are</h2>
+      <p>This website is run by {site.legalName}, ABN {site.abn}, at <Todo text={site.address} />.</p>
 
-      <h2 id="why">Why we collect it</h2>
+      <h2 id="collect">What we collect through this website</h2>
+      <p>We collect the details you give us in our enquiry, waitlist and contact forms, and when you book a tour: your name, phone number and email, your child's date of birth, your preferred days and start date, and anything you write in a message.</p>
+
+      <h2 id="use">How we use it</h2>
       <p>We use these details only to respond to your enquiry, arrange tours and manage our waitlist. Enrolment and medical details are kept in our secure childcare system, not on this website.</p>
 
       <h2 id="share">Who we share it with</h2>
-      <p>We never sell or share your information for marketing. We use a small number of service providers to run this website, including email delivery and tour booking services. They handle your details only so we can reply to you, and some may store information outside Australia. <mark class="rv-todo">[List providers before launch: Resend, Cal.com, Cloudflare, Google.]</mark></p>
+      <p>We never sell or share your information for marketing. We use our email provider, booking provider and analytics to run this website. They handle your details only so we can reply to you, and some may store information outside Australia. <mark class="rv-todo">[List providers before launch: Resend, Cal.com, Cloudflare, Google.]</mark></p>
 
-      <h2 id="website">Analytics and bot protection</h2>
+      <h2 id="cookies">Cookies and analytics</h2>
       <p>We use Google Analytics to understand how people use this website, such as which pages are visited and how many tours are booked. We use Cloudflare to protect the site and our forms from spam and attacks. These services may set cookies or process technical details such as your IP address and browser type.</p>
 
       <h2 id="photos">Photos of children</h2>
       <p>We publish photos of children only with written parental consent, and we remove them on request.</p>
 
-      <h2 id="storage">How we keep it safe</h2>
-      <p>Form enquiries are sent to the centre's inbox and are not stored on this website. We keep enquiries only for as long as we need them. <mark class="rv-todo">[Confirm how long the centre keeps enquiries.]</mark></p>
-
-      <h2 id="rights">Your rights</h2>
+      <h2 id="access">How to access or correct your information</h2>
       <p>You can ask to see, correct or delete your information at any time. We handle personal information in line with the Australian Privacy Principles.</p>
 
-      <h2 id="contact">Questions and complaints</h2>
-      <p>Contact us at <mark class="rv-todo">[email]</mark> or on <a href={site.phoneHref}>{site.phone}</a>, or write to {site.legalName}, {site.address}. If you are not happy with our response, you can contact the <a href="https://www.oaic.gov.au/privacy/privacy-complaints" target="_blank" rel="noopener">Office of the Australian Information Commissioner (opens in a new tab)</a>.</p>
-
-      <p><mark class="rv-todo">[Draft for review by the centre before launch.]</mark></p>
+      <h2 id="contact">Contact us</h2>
+      <p>Email <a href={`mailto:${site.email}`}>{site.email}</a> or call <a href={site.phoneHref}><Todo text={site.phone} /></a>. If you are not happy with our response, you can contact the <a href="https://www.oaic.gov.au/privacy/privacy-complaints" target="_blank" rel="noopener">Office of the Australian Information Commissioner (opens in a new tab)</a>.</p>
     </div>
   </section>
 </Layout>

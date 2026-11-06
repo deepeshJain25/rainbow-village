@@ -1,0 +1,24 @@
+---
+// What to pack, what we provide, and the links on to the next room.
+import Todo from './Todo.astro';
+
+interface Props {
+  title: string;
+  items: string[];
+  provide: string;
+  links: string;
+}
+
+const { title, items, provide, links } = Astro.props;
+---
+
+<section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
+  <div class="rv-wrap rv-stack-lg">
+    <div class="rv-panel rv-stack" id="pack">
+      <h2>{title}</h2>
+      <ul class="rv-list">{items.map((item) => <li><Todo text={item} /></li>)}</ul>
+      <p><b>We provide:</b> {provide}</p>
+    </div>
+    <p class="rv-room-links"><Todo text={links} /></p>
+  </div>
+</section>

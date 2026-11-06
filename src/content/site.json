@@ -1,72 +1,153 @@
 {
   "name": "Rainbow Village",
-  "legalName": "Rainbow Village Childcare Centre",
-  "address": "42 Weston Street, Harris Park NSW 2150",
-  "shortAddress": "42 Weston Street, Harris Park",
-  "phone": "(02) 9637 4433",
-  "phoneHref": "tel:+61296374433",
-  "hours": "Monday to Friday, 7am to 6pm",
-  "shortHours": "Mon to Fri, 7am to 6pm",
-  "phoneHours": "Open 7am to 6pm",
-  "rating": "4.8 stars from 35 Google reviews",
-  "mapUrl": "https://www.google.com/maps/search/?api=1&query=Rainbow+Village+Childcare+Centre+42+Weston+Street+Harris+Park",
-  "reviewsUrl": "https://www.google.com/maps/search/?api=1&query=Rainbow+Village+Childcare+Centre+42+Weston+Street+Harris+Park",
+  "legalName": "Rainbow Village Childcare Centre Pty Ltd",
+  "tradingName": "Rainbow Village Childcare Centre",
+  "abn": "92 121 749 200",
+  "address": "[street address], Harris Park NSW 2150",
+  "shortAddress": "[street address], Harris Park",
+  "phone": "[phone]",
+  "phoneHref": "/contact",
+  "email": "rainbowvillage.childcare@gmail.com",
+  "hours": "Monday to Friday, [opening hours]",
+  "shortHours": "Mon to Fri, [opening hours]",
+  "phoneHours": "Open [opening hours]",
+  "rating": "[rating] stars from [count] Google reviews",
+  "mapUrl": "https://www.google.com/maps/search/?api=1&query=Rainbow+Village+Childcare+Centre+Harris+Park",
+  "reviewsUrl": "https://www.google.com/maps/search/?api=1&query=Rainbow+Village+Childcare+Centre+Harris+Park",
   "nav": [
     {
       "label": "About",
       "href": "/about",
       "children": [
-        { "label": "About us", "href": "/about" },
-        { "label": "Our team", "href": "/our-team" },
-        { "label": "Gallery", "href": "/gallery" }
+        { "label": "About us",
+          "href": "/about"
+        },
+        { "label": "Our team",
+          "href": "/our-team"
+        },
+        { "label": "Gallery",
+          "href": "/gallery"
+        }
       ]
     },
     {
       "label": "Our rooms",
       "href": "/rooms",
       "children": [
-        { "label": "All rooms", "href": "/rooms" },
-        { "label": "Babies room", "href": "/rooms/babies" },
-        { "label": "Toddlers room", "href": "/rooms/toddlers" },
-        { "label": "Preschool", "href": "/rooms/preschool" }
+        { "label": "All rooms",
+          "href": "/rooms"
+        },
+        { "label": "Babies room",
+          "href": "/rooms/babies"
+        },
+        { "label": "Toddlers room",
+          "href": "/rooms/toddlers"
+        },
+        { "label": "Preschool",
+          "href": "/rooms/preschool"
+        }
       ]
     },
-    { "label": "Weekly menu", "href": "/weekly-menu" },
+    {
+      "label": "Meals",
+      "href": "/meals"
+    },
     {
       "label": "Enrolment",
       "href": "/fees",
       "children": [
-        { "label": "Fees and subsidy", "href": "/fees" },
-        { "label": "Enrol and waitlist", "href": "/enrol" },
-        { "label": "Book a tour", "href": "/book-a-tour" }
+        { "label": "Fees and subsidy",
+          "href": "/fees"
+        },
+        { "label": "Enrol and waitlist",
+          "href": "/enrol"
+        },
+        { "label": "Book a tour",
+          "href": "/book-a-tour"
+        }
       ]
     },
     {
       "label": "Parents",
       "href": "/for-parents",
       "children": [
-        { "label": "For parents", "href": "/for-parents" },
-        { "label": "FAQs", "href": "/faqs" }
+        { "label": "For parents",
+          "href": "/for-parents"
+        },
+        { "label": "FAQs",
+          "href": "/faqs"
+        }
       ]
     },
-    { "label": "Contact", "href": "/contact" }
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
   ],
   "pages": [
-    { "label": "Home", "href": "/" },
-    { "label": "About us", "href": "/about" },
-    { "label": "Our team", "href": "/our-team" },
-    { "label": "Gallery", "href": "/gallery" },
-    { "label": "Our rooms", "href": "/rooms" },
-    { "label": "Babies room", "href": "/rooms/babies" },
-    { "label": "Toddlers room", "href": "/rooms/toddlers" },
-    { "label": "Preschool", "href": "/rooms/preschool" },
-    { "label": "Weekly menu", "href": "/weekly-menu" },
-    { "label": "Fees and subsidy", "href": "/fees" },
-    { "label": "Enrol and waitlist", "href": "/enrol" },
-    { "label": "Book a tour", "href": "/book-a-tour" },
-    { "label": "For parents", "href": "/for-parents" },
-    { "label": "FAQs", "href": "/faqs" },
-    { "label": "Contact", "href": "/contact" },
-    { "label": "Childcare near Parramatta", "href": "/childcare-near-parramatta" }
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "About us",
+      "href": "/about"
+    },
+    {
+      "label": "Our team",
+      "href": "/our-team"
+    },
+    {
+      "label": "Gallery",
+      "href": "/gallery"
+    },
+    {
+      "label": "Our rooms",
+      "href": "/rooms"
+    },
+    {
+      "label": "Babies room",
+      "href": "/rooms/babies"
+    },
+    {
+      "label": "Toddlers room",
+      "href": "/rooms/toddlers"
+    },
+    {
+      "label": "Preschool",
+      "href": "/rooms/preschool"
+    },
+    {
+      "label": "Meals and nutrition",
+      "href": "/meals"
+    },
+    {
+      "label": "Fees and subsidy",
+      "href": "/fees"
+    },
+    {
+      "label": "Enrol and waitlist",
+      "href": "/enrol"
+    },
+    {
+      "label": "Book a tour",
+      "href": "/book-a-tour"
+    },
+    {
+      "label": "For parents",
+      "href": "/for-parents"
+    },
+    {
+      "label": "FAQs",
+      "href": "/faqs"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    },
+    {
+      "label": "Childcare near Parramatta",
+      "href": "/childcare-near-parramatta"
+    }
   ]
 }

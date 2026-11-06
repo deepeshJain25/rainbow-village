@@ -1,50 +1,51 @@
 ---
 import Closing from '../components/Closing.astro';
 import PageHeader from '../components/PageHeader.astro';
+import Todo from '../components/Todo.astro';
 import Layout from '../layouts/Layout.astro';
 
 interface Member {
   order: number;
+  name: string;
   role: string;
-  group: 'leadership' | 'educators';
-  qualification?: string;
-  years?: string;
+  qualification: string;
+  bio: string;
   quote?: string;
   // Set for anyone who prefers no photo: their initials appear in crayon letters instead.
   initials?: string;
 }
 
-const team = Object.values(import.meta.glob<Member>('../content/team/*.json', { eager: true, import: 'default' }))
+const leaders = Object.values(import.meta.glob<Member>('../content/team/*.json', { eager: true, import: 'default' }))
   .sort((a, b) => a.order - b.order);
-const leadership = team.filter((member) => member.group === 'leadership');
-const educators = team.filter((member) => member.group === 'educators');
 ---
 
 <Layout
-  title="Meet Our Educators | Rainbow Village Childcare Harris Park"
-  description="Meet the director and educators who care for your child at Rainbow Village. Qualified, caring and part of a close-knit family team."
+  title="Our Team | Early Childhood Educators in Harris Park"
+  description="Meet the family-run team at Rainbow Village Childcare, Harris Park. Qualified educators who speak Urdu, Hindi, Punjabi, Nepali and Telugu."
 >
   <PageHeader
-    title="Our team"
-    lead="Meet the [X] educators behind Rainbow Village Childcare in Harris Park, with [X] years of combined experience. They are why families stay with us for years."
+    title="Our early childhood educators"
+    current="Our team"
+    lead="The people your child will know by name at our Harris Park centre: qualified educators, familiar faces, and a family who's here every day."
     crumbs={[{ label: 'About', href: '/about' }]}
   />
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
     <div class="rv-wrap rv-stack-lg">
-      <h2 class="hs-title">The people leading each room</h2>
+      <h2 class="hs-title">Meet our leaders</h2>
       <ul class="hs-line rv-team">
-        {leadership.map((member) => (
+        {leaders.map((member) => (
           <li>
             <figure class="hs-painting rv-photo" data-theme="crayon">
               {member.initials
                 ? <div class="rv-initials">{member.initials}</div>
                 : <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>}
               <figcaption>
-                <span class="hs-tape"><mark class="rv-todo">[Name]</mark></span>
-                <p class="hs-painting__caption">{member.role}</p>
-                <p class="hs-painting__caption"><mark class="rv-todo">{member.qualification}</mark> · <mark class="rv-todo">{member.years}</mark></p>
-                <p class="rv-team-quote"><mark class="rv-todo">"{member.quote}"</mark></p>
+                <span class="hs-tape"><Todo text={member.name} /></span>
+                <p class="hs-painting__caption"><b>{member.role}</b></p>
+                <p class="hs-painting__caption"><Todo text={member.qualification} /></p>
+                <p class="rv-team-quote"><Todo text={member.bio} /></p>
+                {member.quote && <p class="rv-team-quote">"<Todo text={member.quote} />"</p>}
               </figcaption>
             </figure>
           </li>
@@ -54,42 +55,30 @@ const educators = team.filter((member) => member.group === 'educators');
   </section>
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
-    <div class="rv-wrap rv-stack-lg">
-      <h2 class="hs-title">Our educators and cook</h2>
-      <ul class="hs-line rv-team">
-        {educators.map((member) => (
-          <li>
-            <figure class="hs-painting rv-photo" data-theme="crayon">
-              {member.initials
-                ? <div class="rv-initials">{member.initials}</div>
-                : <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>}
-              <figcaption>
-                <span class="hs-tape"><mark class="rv-todo">[Name]</mark></span>
-                <p class="hs-painting__caption">{member.role}</p>
-              </figcaption>
-            </figure>
-          </li>
-        ))}
-      </ul>
+    <div class="rv-wrap rv-copy">
+      <h2 class="hs-title">Our educators</h2>
+      <p><mark class="rv-todo">[Add each educator who is happy to appear: name, role and room, linking to the babies, toddlers or preschool page.]</mark></p>
     </div>
   </section>
 
-  <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
+  <section class="hs-sheet" data-theme="crayon">
+    <div class="rv-wrap rv-sheet-body">
+      <h2>Educators who speak your language</h2>
+      <p>Between us we speak English, Urdu, Punjabi, Hindi, Nepali and Telugu. Wherever we can, we talk with children in their home language, especially while they're settling in.</p>
+      <p>We bring families' languages and cultures into the room through books, posters, songs and celebrations. Children learn to count and sing in many languages, including Dharug, the local Aboriginal language. A child's culture and language are part of who they are, and we want every family to see themselves here.</p>
+    </div>
+  </section>
+
+  <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-panel rv-copy-panel">
       <div class="rv-copy">
-        <h2>How we look after your child</h2>
-        <p>
-          All our educators hold current <b>Working With Children Checks</b>, <b>first aid</b>, and
-          <b>anaphylaxis and asthma training</b>. <mark class="rv-todo">[Confirm with the centre.]</mark>
-        </p>
-        <p>
-          Each room has its own educators and ratio, so your child sees familiar faces every day.
-          <mark class="rv-todo">[Add low staff turnover, if true.]</mark>
-        </p>
-        <p><a href="/rooms">See the ratio in each room</a></p>
+        <h2>Qualified, checked and here for the long term</h2>
+        <p><b>Small groups, the right ratios.</b> 1 educator to 4 babies, 1 to 5 toddlers and 1 to 10 preschoolers.</p>
+        <p><b>Qualified and checked.</b> Our team holds early childhood qualifications, current Working with Children Checks and first aid training. <mark class="rv-todo">[Confirm the first aid and CPR wording.]</mark></p>
+        <p><b>People who stay.</b> Some of our educators were with us for more than 10 years before retiring. That continuity is why children settle and families stay.</p>
       </div>
     </div>
   </section>
 
-  <Closing title="Meet us in person" text="Tours take about 30 minutes, and you will meet the people who would care for your child." band="yellow" />
+  <Closing title="Meet our team in person" text="Tours run Tuesday and Thursday, 10am to 2pm. {Read our story}(/about)." band="yellow" />
 </Layout>

@@ -6,13 +6,14 @@ import Layout from '../../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Our Rooms | Babies, Toddlers and Preschool | Rainbow Village Harris Park"
-  description="Three rooms for three stages: babies from 6 months, toddlers from 2 years and preschool from 3 years to 6 years. See what a day looks like in each."
+  title="Childcare Rooms in Harris Park | Babies, Toddlers, Preschool"
+  description="Three age-based childcare rooms in Harris Park: babies from 6 weeks, toddlers 2 to 3 and preschool 3 to 6. Small groups, vacancies on all days."
 >
   <PageHeader
     compact
-    title="Our rooms"
-    lead="Three childcare rooms in Harris Park, grouped by age, each with its own educators and garden time."
+    title="Our childcare rooms"
+    current="Our rooms"
+    lead="Rainbow Village has three rooms, grouped by age, each with its own familiar educators. There are vacancies in every room on every day. [Confirm before launch.]"
     action={null}
   />
 
@@ -20,19 +21,26 @@ import Layout from '../../layouts/Layout.astro';
     <ul class="rv-wrap hs-line rv-line-stack">
       {rooms.map((room) => (
         <li>
-          <RoomCard title={room.name} ages={room.ages} text={room.overview} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
+          <RoomCard title={room.short} ages={room.shortAges} text={room.lineText} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
         </li>
       ))}
     </ul>
   </section>
 
-  <section class="hs-ground rv-section rv-rooms-note" data-theme="crayon">
-    <div class="rv-wrap rv-stack rv-stack--wide">
-      <p>
-        <b>Not sure which room?</b> We'll place your child by age and readiness. Ask us on your
-        <a href="/book-a-tour">tour</a>, or read our <a href="/faqs">FAQs</a>.
-      </p>
-      <p><mark class="rv-todo">[Current vacancies: Babies, Toddlers, Preschool]</mark></p>
+  <section class="hs-ground rv-section" data-theme="crayon">
+    <div class="rv-wrap rv-stack-lg">
+      <div class="rv-copy">
+        <h2 class="hs-title">Small rooms, familiar educators</h2>
+        <p>With 40 places in total, our rooms stay small. Every child is known by name. Children keep the same educators day to day, so they settle faster and feel safe enough to explore.</p>
+        <p>Every room has three meals a day cooked in our kitchen, time outdoors and in the garden, and songs and stories in many languages. You'll get daily photos and updates on the OWNA app. All rooms follow the Early Years Learning Framework.</p>
+      </div>
+      <div class="rv-panel rv-copy-panel">
+        <div class="rv-copy">
+          <h2>Which room is right for my child?</h2>
+          <p>We place children by age and readiness, and talk it through with you on your tour. When your child is ready to move up, we plan the change with you and their educators. <mark class="rv-todo">[Confirm the transition process.]</mark></p>
+          <p><a href="/faqs">Read our FAQs</a> · <a href="/fees">See daily fees</a></p>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>

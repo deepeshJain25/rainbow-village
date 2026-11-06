@@ -2,28 +2,37 @@
   {
     "slug": "babies",
     "name": "Babies room",
-    "ages": "6 months to 2 years",
+    "short": "Babies",
+    "ages": "6 weeks to 2 years",
+    "shortAges": "6 weeks to 2",
+    "fee": "$135",
     "crayon": "purple",
-    "text": "Calm, gentle care that follows your baby's own routine.",
-    "overview": "Gentle, responsive care that follows your baby's own sleep and feeding routine.",
-    "href": "/rooms/babies"
+    "href": "/rooms/babies",
+    "homeText": "Gentle routines that follow your baby's own sleep and feeds, with 1 educator for every 4 babies.",
+    "lineText": "8 places · 1 educator to 4 babies"
   },
   {
     "slug": "toddlers",
     "name": "Toddlers room",
-    "ages": "2 years to 3 years",
+    "short": "Toddlers",
+    "ages": "2 to 3 years",
+    "shortAges": "2 to 3",
+    "fee": "$130",
     "crayon": "yellow",
-    "text": "Busy, curious days of play, language and new friendships.",
-    "overview": "Busy, curious days of play, language, music and making friends.",
-    "href": "/rooms/toddlers"
+    "href": "/rooms/toddlers",
+    "homeText": "Play, new words and growing independence, with 1 educator for every 5 toddlers.",
+    "lineText": "12 places · 1 educator to 5 toddlers"
   },
   {
     "slug": "preschool",
     "name": "Preschool",
-    "ages": "3 years to 6 years",
+    "short": "Preschool",
+    "ages": "3 to 6 years",
+    "shortAges": "3 to 6",
+    "fee": "$135",
     "crayon": "orange",
-    "text": "A school-readiness program that builds confidence for big school.",
-    "overview": "A school-readiness program that builds confidence, independence and early literacy and numeracy.",
-    "href": "/rooms/preschool"
+    "href": "/rooms/preschool",
+    "homeText": "School readiness led by a degree-qualified early childhood teacher, with NSW Start Strong fee relief.",
+    "lineText": "20 places · 1 educator to 10 children, led by an early childhood teacher"
   }
 ]

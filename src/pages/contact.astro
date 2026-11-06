@@ -1,46 +1,60 @@
 ---
 import Field from '../components/Field.astro';
 import PageHeader from '../components/PageHeader.astro';
+import Todo from '../components/Todo.astro';
 import { childCare } from '../content/schema';
 import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Contact Rainbow Village Childcare | 42 Weston Street, Harris Park"
-  description="Call (02) 9637 4433 or visit us at 42 Weston Street, Harris Park. Open Monday to Friday, 7am to 6pm. Free street parking."
+  title="Contact Rainbow Village Childcare Centre | Harris Park NSW"
+  description="Call, email or visit Rainbow Village Childcare Centre in Harris Park NSW 2150. Open Monday to Friday. Tours Tuesday and Thursday, 10am to 2pm."
   schema={childCare}
 >
   <PageHeader
     compact
-    title="Contact us"
-    lead="We answer the phone at our Harris Park childcare centre from 7am to 6pm, Monday to Friday. [Confirm.]"
-    action={{ label: 'Call us', href: site.phoneHref }}
+    title="Contact Rainbow Village Childcare Centre"
+    current="Contact"
+    lead="Call, email or drop in to our Harris Park centre. Our owner, Nighat, or her daughter is here every day."
+    action={null}
   />
 
   <div class="rv-page-split">
     <div class="hs-ground rv-page-split__copy" data-theme="crayon">
-      <p class="rv-contact-phone"><a href={site.phoneHref}>{site.phone}</a></p>
-      <p><a href={site.mapUrl}>Get directions</a></p>
-      <p><b>Address:</b> {site.address}</p>
-      <p><b>Hours:</b> {site.hours}</p>
-      <p><b>Email:</b> <mark class="rv-todo">[email]</mark></p>
-      <p><b>Parking:</b> free street parking on Weston Street.</p>
-      <p><b>Public transport:</b> <mark class="rv-todo">[A short walk from Harris Park station.]</mark></p>
+      <p><b>Phone:</b> <a href={site.phoneHref}><Todo text={site.phone} /></a></p>
+      <p><b>Email:</b> <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p><b>Address:</b> <Todo text={site.address} /> · <a href={site.mapUrl}>Get directions</a></p>
+      <p><b>Hours:</b> Monday to Friday, <mark class="rv-todo">[opening hours]</mark>. Closed weekends and NSW public holidays.</p>
+      <p>
+        <b>Getting here:</b> <mark class="rv-todo">[Walking time from Harris Park station]</mark> · <mark class="rv-todo">[Parking note]</mark> ·
+        Coming from nearby? <a href="/childcare-near-parramatta">Directions from Parramatta, Rosehill and Granville</a>
+      </p>
     </div>
     <div class="hs-band hs-band--sky rv-page-split__band" data-theme="kraft">
-      <form class="hs-formsheet rv-form rv-form--compact" data-theme="crayon" method="post" action="#">
-        <Field label="Name" name="name" autocomplete="name" />
+      <!-- The success message is shown by the enquiry route once it is connected. -->
+      <form
+        class="hs-formsheet rv-form rv-form--compact"
+        data-theme="crayon"
+        method="post"
+        action="#"
+        data-success="Thanks, we've got your message and will reply soon."
+      >
+        <h2 class="rv-form__full">Send us a message</h2>
+        <Field label="Your name" name="name" autocomplete="name" />
         <Field label="Phone" name="phone" type="tel" autocomplete="tel" />
         <div class="rv-form__full"><Field label="Email" name="email" type="email" autocomplete="email" /></div>
         <div class="rv-form__full"><Field label="Message" name="message" rows={3} /></div>
         <button class="hs-btn hs-btn--orange rv-form__full" type="submit">Send message</button>
+        <p class="rv-form-note rv-form__full">Prefer to visit? <a href="/book-a-tour">Book a tour</a> on a Tuesday or Thursday.</p>
         <p class="rv-form-note rv-form__full"><mark class="rv-todo">[This form starts sending once the enquiry system is connected.]</mark></p>
       </form>
     </div>
   </div>
 
   <div class="rv-map" data-theme="crayon">
-    <p><mark class="rv-todo">[Static map image of 42 Weston Street, linking to Google Maps]</mark></p>
+    <p><mark class="rv-todo">[Static map image of the centre, linking to Google Maps]</mark></p>
   </div>
+
+  <p class="rv-wrap rv-business">{site.legalName} · ABN {site.abn}</p>
 </Layout>

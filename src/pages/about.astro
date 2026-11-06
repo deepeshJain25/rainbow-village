@@ -7,82 +7,84 @@ import Layout from '../layouts/Layout.astro';
 
 const beliefs = [
   {
-    title: 'Children learn best when they feel safe and loved.',
-    text: 'Educators greet every child and family by name, and new children settle in at their own pace.',
+    title: 'Relationships come first.',
+    text: 'Children learn best when they feel secure. We practise continuity of care, so each child keeps the same familiar educators and those bonds have time to grow.',
   },
   {
-    title: 'Play is serious work.',
-    text: 'Each room builds its day around play, curiosity and kindness, with a program made for that age.',
+    title: 'Every child settles at their own pace.',
+    text: "We never rush settling in. We work with each family on a plan that suits their child, whether that's shorter days at first or an educator sitting quietly beside them. {Read about settling in}(/for-parents#settling).",
   },
   {
-    title: 'Good food matters.',
-    text: 'Our cook prepares meals in our own kitchen every day, so children eat fresh food with plenty of variety.',
+    title: 'Families are part of the day.',
+    text: "We have an open-door policy, so you're welcome to visit any time.",
   },
   {
-    title: 'Families are part of the team.',
-    text: 'We follow the routines you use at home and talk with you about how your child is going.',
+    title: 'Children lead their play.',
+    text: 'Rather than directing everything, we let children explore, make choices and follow what interests them.',
+  },
+  {
+    title: 'Every culture belongs.',
+    text: "We bring children's home languages and cultures into the room through books, songs and celebrations.",
+  },
+  {
+    title: 'Care for the planet.',
+    text: 'Children grow vegetables in our garden and learn about recycling through Parramatta Council incursions.',
   },
 ];
 ---
 
 <Layout
-  title="About Rainbow Village | Family-Run Childcare in Harris Park"
-  description="A family-run, women-owned childcare centre in Harris Park where every child is known by name. Meet the people and values behind Rainbow Village."
+  title="About Us | Family-Run Childcare in Harris Park Since 2007"
+  description="Rainbow Village has cared for Harris Park families since 2007. A small, family-run child care centre with an open door and educators who stay."
 >
   <PageHeader
-    title="About Rainbow Village"
-    lead="Rainbow Village is a family-run, women-owned childcare centre in Harris Park, caring for local children [since 20XX]."
+    title="About Rainbow Village Childcare Centre"
+    current="About us"
+    lead="A small, family-run childcare centre in Harris Park, caring for local children and families since 2007."
   />
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
     <div class="rv-wrap rv-split">
       <div class="rv-copy">
-        <h2 class="hs-title">Our story</h2>
-        <p><Todo text="[Two or three sentences from the director on why she started Rainbow Village and what she wanted it to be for families.]" /></p>
-        <p>
-          We have stayed deliberately small, so every child gets the attention they deserve. With places for 40 children,
-          our director and educators know each child, their routines and their family.
-        </p>
-        <p><b>A welcome from our director:</b> <Todo text="[A short personal welcome, 25 to 35 words, with the director's name.]" /></p>
+        <h2 class="hs-title">Our story: family-run childcare since 2007</h2>
+        <p>Rainbow Village opened in 2007 with a simple aim: quality early childhood education and care for families in our local community. We wanted a centre where children feel safe, loved and supported, and where families feel welcomed and valued.</p>
+        <p>From the start, we set out to create more than a childcare centre. We wanted a place that feels like a second home. Nearly two decades on, that's what Harris Park and Parramatta families still tell us they find here.</p>
+        <p>Our owner and director, Nighat Saeed, or her daughter is at the centre every day. They greet families in the morning, know every child, and are always there to talk. Families know there is always someone they can speak to.</p>
       </div>
-      <Photo label="Photo: the building or garden, with a name tape caption" crayon="blue" taped />
+      <Photo caption="Our garden, where the children grow vegetables" crayon="blue" taped />
     </div>
   </section>
 
   <section class="hs-sheet" data-theme="crayon">
     <div class="rv-wrap rv-sheet-body">
-      <h2>What we believe</h2>
-      <p class="hs-sheet__note">EYLF</p>
-      {beliefs.map((belief) => <p><b>{belief.title}</b> {belief.text}</p>)}
-      <p>Our programs follow the Early Years Learning Framework, Australia's national guide for children's learning from birth to 5.</p>
+      <h2>How we care for children at Rainbow Village</h2>
+      {beliefs.map((belief) => <p><b>{belief.title}</b> <Todo text={belief.text} /></p>)}
+      <p>Our program follows Australia's Early Years Learning Framework.</p>
     </div>
   </section>
 
   <section class="hs-ground hs-paper-doodles rv-section rv-chalk" data-theme="chalkboard">
     <div class="rv-wrap rv-split">
       <div class="rv-stack">
-        <h2 class="hs-title">Look inside our centre</h2>
-        <p>Walk through our rooms, our playground and our kitchen in about 90 seconds.</p>
+        <h2 class="hs-title">See a day at Rainbow Village</h2>
       </div>
       <ul class="hs-line rv-line-single">
-        <li><Photo label="Video: 90 seconds inside our rooms, with a poster image and click to play" /></li>
+        <li><Photo caption="90 seconds inside our Harris Park rooms and garden" /></li>
       </ul>
     </div>
   </section>
 
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-copy">
-      <h2 class="hs-title">Childcare in Harris Park, at a glance</h2>
+      <h2 class="hs-title">Rainbow Village at a glance</h2>
       <p>
-        We are licensed for <b>40 children</b>, from <b>6 months to 6 years</b>, and open
-        <b>Monday to Friday, 7am to 6pm</b>. We are rated <b>Meeting the National Quality Standard</b>, and you can find
-        us at 42 Weston Street, Harris Park.
-      </p>
-      <p>
-        <a href="/rooms">See our rooms</a> or <a href="/our-team">meet our team</a>.
+        <b>Open since 2007.</b> <b>40 places</b> across three rooms for children from <b>6 weeks to 6 years</b>. Open
+        <b>Monday to Friday, <mark class="rv-todo">[opening hours]</mark></b>, and closed on weekends and NSW public holidays.
+        <b>Meals cooked on site</b> every day. The preschool program is led by a <b>degree-qualified early childhood teacher</b>.
+        <mark class="rv-todo">[NQS rating, if the client wants it shown]</mark>
       </p>
     </div>
   </section>
 
-  <Closing title="Come and see it for yourself" text="Tours take about 30 minutes." band="green" />
+  <Closing title="Come and see our centre for yourself" band="green" secondary={{ label: 'Meet our team', href: '/our-team' }} />
 </Layout>

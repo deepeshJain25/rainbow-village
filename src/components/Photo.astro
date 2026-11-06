@@ -1,15 +1,19 @@
 ---
+import Todo from './Todo.astro';
+
 // A placeholder for a real photo or video, hung as a painting. It is swapped for Astro's <Image> once files arrive.
+// A caption is the final copy shown under the photo; a label is a note about a photo still to come.
 interface Props {
-  label: string;
+  label?: string;
+  caption?: string;
   crayon?: 'purple' | 'orange' | 'blue' | 'red';
   taped?: boolean;
 }
 
-const { label, crayon, taped = false } = Astro.props;
+const { label, caption, crayon, taped = false } = Astro.props;
 ---
 
 <figure class:list={['hs-painting', 'rv-photo', crayon && `hs-painting--${crayon}`, { 'rv-taped': taped }]} data-theme="crayon">
   <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
-  <figcaption class="hs-painting__caption"><mark class="rv-todo">[{label}]</mark></figcaption>
+  <figcaption class="hs-painting__caption">{caption ? <Todo text={caption} /> : <mark class="rv-todo">[{label}]</mark>}</figcaption>
 </figure>

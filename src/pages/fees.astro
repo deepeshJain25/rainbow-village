@@ -1,4 +1,5 @@
 ---
+import Closing from '../components/Closing.astro';
 import Icon from '../components/Icon.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Todo from '../components/Todo.astro';
@@ -7,66 +8,64 @@ import Layout from '../layouts/Layout.astro';
 
 const estimatorUrl = 'https://www.servicesaustralia.gov.au/how-much-child-care-subsidy-you-can-get';
 
+const steps = [
+  { title: "Check if you're eligible.", text: 'Apply for the Child Care Subsidy through your myGov account linked to Centrelink.' },
+  { title: 'Give us your details.', text: "Once approved, give us your and your child's CRNs, and we confirm your enrolment." },
+  { title: 'Pay only the gap.', text: 'The government pays your subsidy straight to us, and you pay the difference. The subsidy can cover up to 90% of the fee, depending on your family income.' },
+];
+
 const questions = [
-  { q: 'Do I pay when my child is away?', a: '[Confirm the centre\'s absence fee rule.] The Child Care Subsidy can cover up to 42 absence days per child each financial year.' },
-  { q: 'Do I pay on public holidays?', a: '[Confirm the centre\'s public holiday fee rule.]' },
-  { q: 'Is there a bond or enrolment fee?', a: '[Confirm whether the centre charges a bond or enrolment fee, and how much.]' },
-  { q: 'How does payment work?', a: '[Confirm how and when families pay, such as direct debit each fortnight.]' },
+  { q: 'Do I pay for public holidays?', a: "We're closed on NSW public holidays. [Confirm whether fees are charged.]" },
+  { q: 'Do I pay when my child is sick or away?', a: '[Confirm the absence policy.] The subsidy covers a set number of absence days each year.' },
+  { q: 'How do I pay?', a: '[Confirm the method, for example direct debit through OWNA.]' },
+  { q: 'Is the bond refundable?', a: "Yes. It's refunded when you give one month's notice." },
 ];
 ---
 
 <Layout
-  title="Childcare Fees Harris Park | Child Care Subsidy | Rainbow Village"
-  description="Clear daily fees for every room at Rainbow Village, with meals and more included. See how the Child Care Subsidy reduces what you pay."
+  title="Childcare Fees Harris Park | Child Care Subsidy (CCS)"
+  description="Childcare fees in Harris Park from $130 a day, with 3 meals, nappies and sunscreen included. CCS approved, plus NSW Start Strong fee relief."
 >
   <PageHeader
-    title="Fees and Child Care Subsidy"
-    lead="Clear childcare fees in Harris Park. We're CCS approved, so most families pay much less than the daily fee."
+    title="Childcare fees and the Child Care Subsidy"
+    current="Fees and subsidy"
+    lead="Our childcare fees in Harris Park are clear, with meals, nappies and more included. We're approved for the Child Care Subsidy, so most families pay much less than the daily fee. [Confirm the CCS-approved wording.]"
     crumbs={[{ label: 'Enrolment', href: '/enrol' }]}
   />
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
     <div class="rv-wrap rv-stack-lg">
-      <h2 class="hs-title">Daily fees</h2>
-      <p>One daily fee per room, for hours between 7am and 6pm, Monday to Friday.</p>
+      <h2 class="hs-title">Our daily fees</h2>
       <div class="rv-table-wrap">
         <table class="rv-table">
           <thead>
-            <tr><th scope="col">Room</th><th scope="col">Ages</th><th scope="col">Fee per day</th></tr>
+            <tr><th scope="col">Room</th><th scope="col">Ages</th><th scope="col">Daily fee (before subsidy)</th></tr>
           </thead>
           <tbody>
             {rooms.map((room) => (
               <tr>
-                <th scope="row"><a href={room.href}>{room.name}</a></th>
-                <td>{room.ages}</td>
-                <td><b><mark class="rv-todo">[fee per day]</mark></b></td>
+                <th scope="row"><a href={room.href}>{room.short}</a></th>
+                <td>{room.shortAges}</td>
+                <td><b>{room.fee}</b></td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div class="rv-copy">
-        <h3>Included in every day</h3>
-        <ul class="rv-list">
-          <li><Todo text="[Breakfast,] lunch and snacks cooked on site" /></li>
-          <li><Todo text="[Nappies and wipes]" /></li>
-          <li><Todo text="[Sunscreen and hats]" /></li>
-          <li><Todo text="[Incursions and excursions]" /></li>
-        </ul>
-        <p><mark class="rv-todo">[Rated Meeting the National Quality Standard. Child Care Subsidy approved: wording from the centre.]</mark></p>
+        <p><b>Included in every fee:</b> three meals cooked on site, nappies and wipes, full cream milk, sunscreen and incursions.</p>
+        <p><b>Enrolment:</b> a minimum of 2 days a week. There's a one-week bond, refunded when you give one month's notice, and a $50 admin fee (non-refundable).</p>
       </div>
     </div>
   </section>
 
   <section class="hs-sheet" data-theme="crayon">
     <div class="rv-wrap rv-sheet-body">
-      <h2>How the Child Care Subsidy works</h2>
-      <p>The Australian Government pays part of your fee straight to us, so you only pay the gap. The amount depends on your family income. Since January 2026, eligible families receive at least 3 days of subsidised care a week.</p>
+      <h2>How the Child Care Subsidy (CCS) works</h2>
       <ol class="rv-numbered">
-        <li><b>Check you are eligible.</b> Apply through your Centrelink online account in myGov.</li>
-        <li><b>Give us your details.</b> Share your CRN and your child's CRN and date of birth when you enrol.</li>
-        <li><b>The subsidy comes off your fee.</b> We apply it to each invoice, and you pay the rest.</li>
+        {steps.map((step) => <li><b>{step.title}</b> {step.text}</li>)}
       </ol>
+      <p><b>3 Day Guarantee:</b> since 5 January 2026, most families get at least 72 hours of subsidised care per fortnight (about 3 days a week).</p>
       <p>
         <a href={estimatorUrl} target="_blank" rel="noopener">Estimate your subsidy on the Services Australia website (opens in a new tab)</a>
       </p>
@@ -77,39 +76,25 @@ const questions = [
     <div class="rv-wrap rv-stack-lg">
       <div class="rv-panel rv-copy-panel">
         <div class="rv-copy">
-          <h2>A worked example (example only)</h2>
-          <p><mark class="rv-todo">[The centre approves these numbers, and we check them against current subsidy rates before launch.]</mark></p>
-          <ol class="rv-numbered">
-            <li>A family uses <Todo text="[X]" /> days a week in the Toddlers room, at <Todo text="[fee per day]" /> a day.</li>
-            <li>Their weekly fee is <Todo text="[$X]" />.</li>
-            <li>Their subsidy percentage is <Todo text="[X%]" />, which takes <Todo text="[$X]" /> off the fee, up to the government's hourly cap.</li>
-            <li>They pay a gap of <Todo text="[$X]" /> a week.</li>
-          </ol>
+          <h2>NSW Start Strong fee relief for 3 to 5 year olds</h2>
+          <p>Rainbow Village receives NSW Start Strong funding. Eligible children aged 3 and over get extra fee relief from the NSW Government, applied after your Child Care Subsidy. The amount depends on your child's age, and we take it off your fees for you. You just complete a short declaration form with us. <a href="/rooms/preschool">Learn about our preschool program</a>.</p>
         </div>
       </div>
 
+      <p><b>A worked example:</b> <mark class="rv-todo">[Optional. Add it only after the client approves it and we check it against current CCS rates.]</mark></p>
+
       <div class="rv-details-list">
-        <h2 class="hs-title">Fee questions</h2>
+        <h2 class="hs-title">Childcare fee questions</h2>
         {questions.map((item) => (
           <details class="rv-details">
             <summary>{item.q}<Icon name="chevron-down" /></summary>
             <div class="rv-details__body"><p><Todo text={item.a} /></p></div>
           </details>
         ))}
+        <p class="rv-details-more"><b>More questions?</b> <a href="/faqs">Read all FAQs</a></p>
       </div>
     </div>
   </section>
 
-  <section class="hs-band hs-band--green" data-theme="kraft">
-    <div class="hs-band__inner rv-closing">
-      <div class="rv-stack">
-        <h2 class="hs-title">Questions about fees?</h2>
-        <p>Ask us on your tour, and we'll talk you through what you would pay.</p>
-      </div>
-      <div class="rv-closing__actions">
-        <a class="hs-btn hs-btn--orange" href="/book-a-tour">Book a tour</a>
-        <a class="hs-btn hs-btn--yellow" href="/enrol">Join the waitlist</a>
-      </div>
-    </div>
-  </section>
+  <Closing title="Questions about fees? Ask us on your tour" band="green" secondary={{ label: 'Join the waitlist', href: '/enrol' }} />
 </Layout>

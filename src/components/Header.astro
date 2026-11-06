@@ -2,6 +2,7 @@
 import site from '../content/site.json';
 import CrayonWord from './CrayonWord.astro';
 import Icon from './Icon.astro';
+import Todo from './Todo.astro';
 
 const path = Astro.url.pathname.replace(/(.)\/$/, '$1');
 const isCurrent = (item: { href: string; children?: { href: string }[] }) =>
@@ -10,10 +11,10 @@ const isCurrent = (item: { href: string; children?: { href: string }[] }) =>
 
 <header data-theme="kraft">
   <div class="hs-strip">
-    <span class="rv-with-icon rv-strip-wide"><Icon name="map-pin" />{site.shortAddress}</span>
-    <span class="rv-with-icon rv-strip-wide"><Icon name="clock" />{site.shortHours}</span>
-    <span class="rv-with-icon rv-strip-phone"><Icon name="clock" />{site.phoneHours}</span>
-    <a class="rv-with-icon" href={site.phoneHref}><Icon name="phone" />{site.phone}</a>
+    <span class="rv-with-icon rv-strip-wide"><Icon name="map-pin" /><Todo text={site.shortAddress} /></span>
+    <span class="rv-with-icon rv-strip-wide"><Icon name="clock" /><Todo text={site.shortHours} /></span>
+    <span class="rv-with-icon rv-strip-phone"><Icon name="clock" /><Todo text={site.phoneHours} /></span>
+    <a class="rv-with-icon" href={site.phoneHref}><Icon name="phone" /><Todo text={site.phone} /></a>
   </div>
   <nav class="hs-nav" aria-label="Main">
     <a class="hs-nav__home" href="/" aria-label={`${site.name} home`}><CrayonWord /></a>

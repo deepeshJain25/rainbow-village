@@ -3,6 +3,7 @@ import Closing from '../components/Closing.astro';
 import Icon from '../components/Icon.astro';
 import ReviewsSlider from '../components/ReviewsSlider.tsx';
 import RoomCard from '../components/RoomCard.astro';
+import Todo from '../components/Todo.astro';
 import reviews from '../content/reviews.json';
 import rooms from '../content/rooms.json';
 import { childCare } from '../content/schema';
@@ -12,28 +13,32 @@ import Layout from '../layouts/Layout.astro';
 const reasons = [
   {
     title: 'Family-run, every day.',
-    text: 'We are a family-run, women-owned centre. Our director is here every day and knows every child and family by name.',
+    text: "Our owner, Nighat, or her daughter is here each morning to greet you. There's always someone who knows your child by name and is there to talk. {Read our story}(/about).",
   },
   {
-    title: 'Places for 40 children.',
-    text: 'Your child is never lost in the crowd, and educators have time for every child.',
+    title: 'Small groups, familiar faces.',
+    text: 'We have just 40 places across three rooms. Your child stays with the same educators, so trust builds quickly and lasts. Our ratios are 1 educator to 4 babies, 1 to 5 toddlers and 1 to 10 preschoolers.',
   },
   {
-    title: 'Cooked fresh on site.',
-    text: 'Our cook prepares nutritious meals in our own kitchen every day, with plenty of variety children actually enjoy.',
+    title: 'Families come back.',
+    text: 'About 25 families have returned to us with their second or third child. Some of our educators stayed more than 10 years. We think that says more than we could.',
+  },
+  {
+    title: 'Your culture belongs here.',
+    text: 'Our educators speak English, Urdu, Punjabi, Hindi, Nepali and Telugu. Children sing and count in their home languages, and in Dharug, the local Aboriginal language. {Meet our team}(/our-team).',
   },
 ];
 
-// The order comes from the room pages in the content draft. The director confirms the times.
+// Times are still to confirm with the centre.
 const day = [
-  { time: '7am', activity: 'Arrive and free play' },
-  { time: '9am', activity: 'Group time' },
-  { time: '9:30am', activity: 'Morning tea' },
-  { time: '10am', activity: 'Outdoor play' },
-  { time: '11:30am', activity: 'Lunch', note: true },
-  { time: '12:30pm', activity: 'Rest' },
-  { time: '2:30pm', activity: 'Art, music and messy play' },
-  { time: 'By 6pm', activity: 'Pick-up' },
+  'Arrive, settle and free play',
+  'Morning tea',
+  'Group time: stories, songs and counting in different languages',
+  'Garden and outdoor play',
+  'Lunch, cooked here',
+  'Rest and quiet time',
+  'Afternoon tea',
+  'Play and home time',
 ];
 
 const educators = [
@@ -44,24 +49,27 @@ const educators = [
 ---
 
 <Layout
-  title="Rainbow Village Childcare Harris Park | Family-Run Long Day Care"
-  description="Family-run childcare in Harris Park for children from 6 months to 6 years. Meals cooked fresh on site, caring educators, 4.8 stars on Google. Book a tour."
+  title="Childcare Harris Park | Rainbow Village Childcare Centre"
+  description="Family-run childcare centre in Harris Park since 2007. Babies from 6 weeks, toddlers and preschool. Halal meals cooked on site. Book a tour."
   schema={childCare}
 >
   <!-- Hero: bright green, the page's one big colour moment. The rating is live from the Places API once that is set up. -->
   <section class="hs-band hs-band--sky hs-band--flat-top hs-hero" data-theme="crayon">
     <div class="hs-hero__grid">
       <div class="hs-hero__words">
-        <h1 class="hs-hero__title rv-hero-title"><span>Muddy knees,</span> <span>full tummies,</span> <span>big ideas</span></h1>
-        <p class="hs-hero__lead">Family-run childcare in Harris Park for children from 6 months to 6 years.</p>
+        <div class="rv-stack">
+          <h1 class="rv-hero-eyebrow">Family-run childcare in Harris Park</h1>
+          <p class="hs-hero__title rv-hero-title"><span>A second home</span> <span>for your child</span></p>
+        </div>
+        <p class="hs-hero__lead">Rainbow Village is a small, family-run child care centre in Harris Park, caring for children from 6 weeks to 6 years since 2007. You'll find familiar educators, small groups and home-style meals cooked here every day.</p>
         <div class="hs-hero__actions rv-hero-actions">
           <a class="hs-btn hs-btn--orange" href="/book-a-tour">Book a tour</a>
-          <a class="hs-btn hs-btn--yellow" href={site.phoneHref}>Call {site.phone}</a>
+          <a class="hs-btn hs-btn--yellow" href={site.phoneHref}>Call <Todo text={site.phone} /></a>
         </div>
         <ul class="rv-trust">
-          <li><span class="rv-star"><Icon name="star" /></span>{site.rating}</li>
-          <li><Icon name="badge-check" />Rated Meeting the National Quality Standard</li>
-          <li><Icon name="clock" />Open {site.hours}</li>
+          <li><span class="rv-star"><Icon name="star" /></span><Todo text={site.rating} /></li>
+          <li><Icon name="house" />Family-run since 2007</li>
+          <li><Icon name="clock" />Open <Todo text={site.hours} /></li>
         </ul>
       </div>
       <div class="hs-hero__line">
@@ -70,8 +78,8 @@ const educators = [
             <li>
               <a class:list={['hs-painting', room.crayon !== 'yellow' && `hs-painting--${room.crayon}`]} data-theme="crayon" href={room.href}>
                 <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
-                <p class="hs-painting__title">{room.name.replace(' room', '')}</p>
-                <p class="hs-painting__caption">{room.ages}</p>
+                <p class="hs-painting__title">{room.short}</p>
+                <p class="hs-painting__caption">{room.shortAges}</p>
               </a>
             </li>
           ))}
@@ -81,20 +89,17 @@ const educators = [
     <div class="hs-hero__land" aria-hidden="true"><i></i><i></i><i></i></div>
   </section>
 
-  <!-- Why families choose us: three facts and one taped photo, no icon grid -->
+  <!-- Why families choose us: four reasons and one taped photo, no icon grid -->
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-split">
       <div class="rv-stack-lg">
-        <h2 class="hs-title">A second home, not just a centre</h2>
-        {reasons.map((reason) => <p><b>{reason.title}</b> {reason.text}</p>)}
-        <p>
-          <b>Rated Meeting the National Quality Standard.</b>
-          <mark class="rv-todo">[Child Care Subsidy approved: wording from the centre]</mark>
-        </p>
+        <h2 class="hs-title">Why families choose Rainbow Village Childcare</h2>
+        <p>Rainbow Village isn't just childcare. It's a place where children are known, families feel welcome, and every child gets the time and attention to flourish.</p>
+        {reasons.map((reason) => <p><b>{reason.title}</b> <Todo text={reason.text} /></p>)}
       </div>
       <figure class="hs-painting hs-painting--blue rv-taped" data-theme="crayon">
         <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
-        <figcaption class="hs-painting__caption">A real photo of the centre goes here.</figcaption>
+        <figcaption class="hs-painting__caption"><mark class="rv-todo">[Photo of the centre]</mark></figcaption>
       </figure>
     </div>
   </section>
@@ -103,13 +108,13 @@ const educators = [
   <section class="hs-band hs-band--sky" data-theme="kraft">
     <div class="hs-band__inner">
       <div class="rv-stack">
-        <h2 class="hs-title">A room for every stage</h2>
-        <p>Three rooms, grouped by age. Tap a room to see inside.</p>
+        <h2 class="hs-title">Childcare rooms for every age, from 6 weeks to 6 years</h2>
+        <p>Three rooms, grouped by age, each with its own educators. There are vacancies in every room on every day.</p>
       </div>
       <ul class="hs-line rv-line-stack">
         {rooms.map((room) => (
           <li>
-            <RoomCard title={room.name} ages={room.ages} text={room.text} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
+            <RoomCard title={room.short} ages={room.shortAges} text={room.homeText} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
           </li>
         ))}
       </ul>
@@ -119,20 +124,17 @@ const educators = [
   <!-- A day here: the timetable sits on the ruled lines -->
   <section class="hs-sheet" data-theme="crayon">
     <div class="rv-wrap rv-sheet-body">
-      <h2>A day here</h2>
-      <p>Each room keeps its own rhythm, but most days follow this shape.</p>
+      <h2>A day at our Harris Park centre</h2>
+      <p>Every day mixes play, learning, fresh air and good food, at a pace that suits your child.</p>
       <dl class="rv-day">
-        {day.map((item) => (
+        {day.map((activity) => (
           <div>
-            <dt><mark class="rv-todo">[{item.time}]</mark></dt>
-            <dd>
-              {item.note && <a class="hs-sheet__note" href="/weekly-menu" aria-label="This week's menu">Menu</a>}
-              {item.activity}
-            </dd>
+            <dt><mark class="rv-todo">[time]</mark></dt>
+            <dd>{activity}</dd>
           </div>
         ))}
       </dl>
-      <p><a href="/weekly-menu">See what's for lunch this week</a></p>
+      <p>All meals are cooked fresh in our own kitchen. They're halal, vegetarian-friendly and nut-aware. <a href="/meals">See our meals</a>.</p>
     </div>
   </section>
 
@@ -140,11 +142,11 @@ const educators = [
   <section class="hs-band hs-band--purple" data-theme="kraft">
     <div class="hs-band__inner rv-stack-lg">
       <div class="rv-stack">
-        <h2 class="hs-title">Loved by Harris Park families</h2>
-        <p>Featured reviews. We have {site.rating} overall.</p>
+        <h2 class="hs-title">What Harris Park families say</h2>
+        <p>Featured reviews</p>
       </div>
       <ReviewsSlider client:visible reviews={reviews} />
-      <p><a href={site.reviewsUrl}>Read all reviews on Google</a></p>
+      <p><Todo text={site.rating} /> · <a href={site.reviewsUrl}>Read all reviews on Google</a></p>
     </div>
   </section>
 
@@ -152,20 +154,20 @@ const educators = [
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-stack-lg">
       <div class="rv-stack">
-        <h2 class="hs-title">Take a look inside</h2>
-        <p>See our rooms, our playground and our kitchen in 90 seconds.</p>
+        <h2 class="hs-title">Take a look inside Rainbow Village</h2>
+        <p>Ninety seconds in our rooms and garden, and the people your child will spend their day with.</p>
       </div>
       <div class="rv-split rv-inside">
         <ul class="hs-line rv-line-single">
           <li>
             <figure class="hs-painting rv-poster">
               <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
-              <figcaption class="hs-painting__caption">The centre video goes here after filming day.</figcaption>
+              <figcaption class="hs-painting__caption">A morning at Rainbow Village Childcare, Harris Park</figcaption>
             </figure>
           </li>
         </ul>
         <div class="rv-stack-lg">
-          <h3>Meet some of our educators</h3>
+          <p>Meet our educators: qualified, caring and here for the long term. <a href="/our-team">Meet our team</a></p>
           <ul class="hs-line rv-line-stack rv-line-stack--straight rv-portraits">
             {educators.map((educator) => (
               <li>
@@ -177,11 +179,15 @@ const educators = [
               </li>
             ))}
           </ul>
-          <p><a href="/our-team">Meet the whole team</a></p>
         </div>
       </div>
     </div>
   </section>
 
-  <Closing title="Come and see us" text="Tours take about 30 minutes." band="green" />
+  <!-- Fees teaser: one line above the closing band -->
+  <section class="hs-ground rv-section rv-fees-teaser" data-theme="crayon">
+    <p class="rv-wrap">Daily fees from $130, with three meals, nappies and sunscreen included. We're approved for the Child Care Subsidy. <a href="/fees">See fees and subsidy</a></p>
+  </section>
+
+  <Closing title="Visit our Harris Park childcare centre" text="Tours run Tuesday and Thursday, 10am to 2pm. Bring your child if you like." band="green" />
 </Layout>

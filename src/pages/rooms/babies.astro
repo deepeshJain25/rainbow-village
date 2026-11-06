@@ -1,53 +1,74 @@
 ---
+import PackList from '../../components/PackList.astro';
+import RoomLeader from '../../components/RoomLeader.astro';
 import RoomPage from '../../components/RoomPage.astro';
+import Timetable from '../../components/Timetable.astro';
 import Todo from '../../components/Todo.astro';
 import rooms from '../../content/rooms.json';
 
 const room = rooms[0];
-const day = [
-  { time: '7am', activity: 'Arrival and cuddles' },
-  { time: '8:30am', activity: 'Sensory play and songs' },
-  { time: '9:30am', activity: 'Morning tea' },
-  { time: '10am', activity: 'Outdoor time' },
-  { time: '11am', activity: 'Lunch' },
-  { time: '12pm', activity: 'Sleep, following your baby\'s routine' },
-  { time: '2:30pm', activity: 'Afternoon play' },
-  { time: 'By 6pm', activity: 'Pick-up and a chat about the day' },
+const routines = [
+  { title: 'Sleep.', text: 'Babies sleep when they need to, following the routine you use at home.' },
+  { title: 'Feeding.', text: 'We follow your feeding plan. Nappies, wipes and full cream milk are included in your fee, and once your baby is on solids, meals are cooked fresh in our kitchen. [Confirm whether families supply formula and bottles.]' },
+  { title: 'Updates.', text: "You'll get photos and notes through the OWNA app, so you know how they slept, ate and played." },
+  { title: 'Settling in.', text: "We go at your baby's pace. Start with shorter days if that helps, and visit any time with our open-door policy. {Read about settling in}(/for-parents#settling)." },
 ];
 ---
 
 <RoomPage
   room={room}
   seo={{
-    title: 'Babies Room | Infant Childcare Harris Park | Rainbow Village',
-    description: "Gentle care for babies from 6 months in Harris Park. Your baby's own sleep and feeding routine, loving educators and daily updates for you.",
+    title: 'Baby Daycare Harris Park | Babies Room, 6 Weeks to 2',
+    description: 'Baby daycare in Harris Park from 6 weeks. 1 educator to 4 babies, your baby\'s own sleep and feeding routine, and daily photos on OWNA.',
   }}
-  heading="Babies room in Harris Park"
-  lead="Leaving your baby for the first time is a big step. Our Babies room is calm, warm and built around your baby's own routine, not ours."
-  glance={{ ratio: '[1 educator to 4 babies]', places: '[X] places', leader: '[Name]' }}
-  photos={['Photo: the Babies room', 'Photo: the sleep room or a quiet corner', 'Photo: the garden babies use']}
-  dayNote="Times are a guide. Babies eat and sleep when they need to, so your baby's own routine comes first."
-  day={day}
-  learnHeading="Gentle care that follows your baby's lead"
-  learnLead="In the first two years, babies learn through close relationships, movement and sound."
-  learn={[
-    { title: 'Secure bonds.', text: 'Familiar faces every day help your baby feel safe enough to explore.' },
-    { title: 'First words.', text: 'Songs, stories and everyday conversation build early language.' },
-    { title: 'Moving and exploring.', text: 'Floor time, sensory play and outdoor time help babies roll, crawl, pull up and walk.' },
-    { title: 'Learning through care.', text: 'Nappy changes, meals and settling are unhurried moments of connection and learning.' },
+  heading="Babies room: baby daycare in Harris Park"
+  lead="Our babies room is a calm, small space for babies from 6 weeks to 2 years. Your baby follows their own routine, with the same caring educators every day and just 8 babies in the room."
+  glance={[
+    { text: 'Ages 6 weeks to 2 years', bold: true },
+    { text: '8 places', bold: true },
+    { text: '1 educator to 4 babies', bold: true },
+    { text: '$135 a day before subsidy', bold: true, link: { label: 'see fees', href: '/fees' } },
+    { text: 'Room leader: [name]' },
   ]}
-  leader={{ name: '[Name]', qualification: '[qualification]', quote: '[One line in their own words about caring for babies.]' }}
-  packFirst
-  packLead="Label everything with your baby's name."
-  pack={['A spare change of clothes', 'A hat', '[Sheet and comforter for sleep time]', '[Bottles and formula or expressed milk, with feeding notes]']}
-  next={{ label: 'Next: Toddlers room, 2 years to 3 years', href: '/rooms/toddlers' }}
-  closing={{ title: 'See the Babies room in person', band: 'green' }}
+  photos={['The babies room at Rainbow Village', 'Soft play and tummy time', 'Our sleep room [confirm]']}
+  closing={{ title: 'See our babies room in person', band: 'green' }}
 >
-  <Fragment slot="routine">
-    <h2>Sleep, feeding and nappies</h2>
-    <p><b>Your routine, our routine.</b> We follow the sleep, feeding and settling routine you use at home, and talk with you every day about how it's going.</p>
-    <p><b>Daily updates.</b> <Todo text="See your baby's meals, sleeps, nappy changes and photos through [parent app], then chat with an educator at pick-up." /></p>
-    <blockquote class="rv-quote">"The educators helped my baby quickly settle into a sleep and eating routine."</blockquote>
-    <p>Rachel, Rainbow Village parent</p>
-  </Fragment>
+  <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
+    <div class="rv-wrap rv-panel rv-copy-panel">
+      <div class="rv-copy">
+        <h2>Infant care that follows your baby's routine</h2>
+        {routines.map((item) => <p><b>{item.title}</b> <Todo text={item.text} /></p>)}
+      </div>
+    </div>
+  </section>
+
+  <Timetable
+    title="A day in the babies room"
+    lead="Babies' days are built around their own sleep and feeds. Between them there's sensory play, music and songs (often in home languages), story time, and time outdoors in the fresh air."
+  />
+
+  <section class="hs-band hs-band--purple" data-theme="kraft">
+    <div class="hs-band__inner rv-stack-lg">
+      <h2 class="hs-title">How babies learn and grow with us</h2>
+      <div class="rv-text-grid">
+        <p>In the first two years, learning happens through trust and touch. Our educators talk, sing and respond to every coo and gesture, which builds early language and confidence.</p>
+        <p>Babies explore textures, sounds and movement, from tummy time to first steps. Each milestone is shared with you on OWNA.</p>
+        <p>Most of all, your baby learns that this is a safe place with people they know. With continuity of care, the same educators are there each day. That bond is what makes everything else possible.</p>
+      </div>
+    </div>
+  </section>
+
+  <RoomLeader
+    title="Meet [name], our babies room leader"
+    qualification="[Qualification]"
+    quote="[A sentence in their own words about caring for babies.]"
+    photo="Photo: babies room leader"
+  />
+
+  <PackList
+    title="What to pack for daycare"
+    items={['Spare clothes (two full sets)', 'Comforter or dummy, if used', 'Bottles and formula or expressed milk [confirm]', 'A hat', "Everything labelled with your baby's name"]}
+    provide="nappies, wipes, full cream milk, sunscreen and three meals once your baby is on solids."
+    links="{Next: Toddlers room, 2 to 3 →}(/rooms/toddlers) · Questions? {Read our FAQs}(/faqs)"
+  />
 </RoomPage>

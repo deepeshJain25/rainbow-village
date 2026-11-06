@@ -1,26 +1,31 @@
 ---
-// The last band before the footer: one line, one orange stamp and the phone number.
+// The last band before the footer: a heading, an optional line, the orange stamp and either a second
+// action or the phone number.
 import site from '../content/site.json';
+import Todo from './Todo.astro';
 
 interface Props {
   title: string;
   text?: string;
   band: 'green' | 'yellow' | 'orange';
   action?: { label: string; href: string };
+  secondary?: { label: string; href: string };
 }
 
-const { title, text, band, action = { label: 'Book a tour', href: '/book-a-tour' } } = Astro.props;
+const { title, text, band, action = { label: 'Book a tour', href: '/book-a-tour' }, secondary } = Astro.props;
 ---
 
 <section class={`hs-band hs-band--${band}`} data-theme="kraft">
   <div class="hs-band__inner rv-closing">
     <div class="rv-stack">
       <h2 class="hs-title">{title}</h2>
-      {text && <p>{text}</p>}
+      {text && <p><Todo text={text} /></p>}
     </div>
     <div class="rv-closing__actions">
       <a class="hs-btn hs-btn--orange" href={action.href}>{action.label}</a>
-      <span>or call <a href={site.phoneHref}>{site.phone}</a></span>
+      {secondary
+        ? <a class="hs-btn hs-btn--yellow" href={secondary.href}>{secondary.label}</a>
+        : <span>or call <a href={site.phoneHref}><Todo text={site.phone} /></a></span>}
     </div>
   </div>
 </section>

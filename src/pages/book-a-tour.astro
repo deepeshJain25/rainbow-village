@@ -1,40 +1,40 @@
 ---
 import PageHeader from '../components/PageHeader.astro';
+import Todo from '../components/Todo.astro';
 import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
   title="Book a Childcare Tour in Harris Park | Rainbow Village"
-  description="See Rainbow Village for yourself. Choose a time online, meet our educators and see the rooms, playground and kitchen. Tours take about 30 minutes."
+  description="Visit our Harris Park childcare centre. Tours run Tuesday and Thursday, 10am to 2pm. See the rooms, garden and kitchen. Book online in a minute."
 >
   <PageHeader
     compact
-    title="Book a tour"
-    lead="Tours of our Harris Park childcare centre take about 30 minutes. Bring your child if you like."
+    title="Book a childcare tour in Harris Park"
+    current="Book a tour"
+    lead="Tours run Tuesday and Thursday, 10am to 2pm, and take about 30 minutes. Bring your child if you like. [Confirm the tour length.]"
     crumbs={[{ label: 'Enrolment', href: '/fees' }]}
     action={null}
   />
 
   <div class="rv-page-split rv-page-split--band-first">
     <div class="hs-ground rv-page-split__copy" data-theme="crayon">
-      <h2 class="hs-title">What you'll see</h2>
+      <h2 class="hs-title">What you'll see on your tour</h2>
       <ul class="rv-list">
-        <li>Every room, the playground and the kitchen</li>
-        <li>The director and educators who would care for your child</li>
-        <li>Plenty of time to ask questions about fees, days and places</li>
+        <li>All three rooms (babies, toddlers and preschool) and the educators who would care for your child</li>
+        <li>Our vegetable garden and outdoor play areas</li>
+        <li>Our kitchen, and lunch being served</li>
+        <li>Time to ask about fees and the Child Care Subsidy and settling in</li>
       </ul>
-      <p>
-        <b>Find us:</b> {site.address}.
-        <a href={site.mapUrl}>Get directions</a>
-      </p>
-      <p><b>Parking:</b> free street parking on Weston Street.</p>
+      <p><b>Address:</b> <Todo text={site.address} /> · <a href={site.mapUrl}>Get directions</a></p>
+      <p><b>Parking:</b> <mark class="rv-todo">[parking note]</mark></p>
     </div>
     <div class="hs-band hs-band--sky rv-page-split__band" data-theme="kraft">
       <div class="hs-formsheet rv-booking" data-theme="crayon">
-        <h2>Choose a time</h2>
+        <h2>Pick a time</h2>
         <p><mark class="rv-todo">[The Cal.com booking calendar goes here.]</mark></p>
-        <p>Can't find a time? Call <a href={site.phoneHref}>{site.phone}</a> and we'll find one that suits you.</p>
+        <p>Can't see the calendar? Call <a href={site.phoneHref}><Todo text={site.phone} /></a> or email <a href={`mailto:${site.email}`}>{site.email}</a> and we'll book you in.</p>
       </div>
     </div>
   </div>

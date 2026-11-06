@@ -1,0 +1,28 @@
+---
+// The room leader or teacher, hung beside their introduction.
+import Photo from './Photo.astro';
+import Todo from './Todo.astro';
+
+interface Props {
+  title: string;
+  qualification: string;
+  quote: string;
+  photo: string;
+}
+
+const { title, qualification, quote, photo } = Astro.props;
+---
+
+<section class="hs-ground rv-section" data-theme="crayon">
+  <div class="rv-wrap rv-split rv-leader">
+    <ul class="hs-line rv-line-single">
+      <li><Photo label={photo} crayon="orange" /></li>
+    </ul>
+    <div class="rv-stack">
+      <h2><Todo text={title} /></h2>
+      <p><Todo text={qualification} /></p>
+      <blockquote class="rv-quote">"<Todo text={quote} />"</blockquote>
+      <p><a href="/our-team">Meet the whole team</a>.</p>
+    </div>
+  </div>
+</section>

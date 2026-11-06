@@ -1,51 +1,126 @@
 [
   {
-    "topic": "Enrolment",
+    "topic": "Enrolment and vacancies",
     "slug": "enrolment",
     "items": [
-      { "q": "What ages do you care for?", "a": "Children from 6 months to 6 years, across our Babies room, Toddlers room and Preschool.", "link": { "label": "See our rooms", "href": "/rooms" } },
-      { "q": "How do I enrol my child?", "a": "Book a tour, join the waitlist, and we will contact you when a place comes up. We then send your enrolment pack and arrange orientation visits.", "link": { "label": "See how enrolment works", "href": "/enrol" } },
-      { "q": "Can I visit before I decide?", "a": "Yes, and we recommend it. Tours take about 30 minutes, and you are welcome to bring your child.", "link": { "label": "Book a tour", "href": "/book-a-tour" } }
+      {
+        "q": "What ages does your childcare centre take?",
+        "a": "Children from 6 weeks to 6 years, in three rooms: babies (6 weeks to 2), toddlers (2 to 3) and preschool (3 to 6)."
+      },
+      {
+        "q": "Do you have childcare vacancies in Harris Park?",
+        "a": "Yes. We currently have places in every room on every day. {Join our waitlist}(/enrol) or {book a tour}(/book-a-tour) to secure a spot. [Keep up to date.]"
+      },
+      {
+        "q": "What's the minimum number of days?",
+        "a": "Two days a week."
+      },
+      {
+        "q": "How do I enrol?",
+        "a": "Book a tour, then fill in our waitlist form. We'll call you to confirm days and a start date."
+      }
     ]
   },
   {
-    "topic": "Fees",
+    "topic": "Fees and the Child Care Subsidy",
     "slug": "fees",
     "items": [
-      { "q": "Can I get the Child Care Subsidy?", "a": "Yes. We are an approved provider, so eligible families pay only the gap between the daily fee and the subsidy.", "link": { "label": "See fees and the subsidy", "href": "/fees" } },
-      { "q": "What is included in the daily fee?", "a": "[Breakfast,] lunch and snacks cooked on site, [nappies and wipes], [sunscreen and hats], and [incursions and excursions].", "link": { "label": "See what is included", "href": "/fees" } }
+      {
+        "q": "How much does childcare cost at Rainbow Village?",
+        "a": "$135 a day for babies, $130 for toddlers and $135 for preschool, before the Child Care Subsidy. {See all fees}(/fees)."
+      },
+      {
+        "q": "What's included in the daily fee?",
+        "a": "Three meals cooked on site, nappies and wipes, full cream milk, sunscreen and incursions."
+      },
+      {
+        "q": "Can I get the Child Care Subsidy?",
+        "a": "Yes, Rainbow Village is approved for the Child Care Subsidy. Apply through myGov, then give us your CRNs. [Confirm the wording.]"
+      },
+      {
+        "q": "Do you offer Start Strong fee relief?",
+        "a": "Yes. We receive NSW Start Strong funding, which gives extra fee relief for eligible children aged 3 and over."
+      },
+      {
+        "q": "Is there a bond or enrolment fee?",
+        "a": "There's a one-week bond (refunded with one month's notice) and a $50 non-refundable admin fee."
+      }
     ]
   },
   {
-    "topic": "Days and hours",
-    "slug": "days-and-hours",
+    "topic": "Opening hours and tours",
+    "slug": "hours",
     "items": [
-      { "q": "What are your hours?", "a": "Monday to Friday, 7am to 6pm. We are [closed on public holidays and for a short break over Christmas]." }
+      {
+        "q": "What are your opening hours?",
+        "a": "Monday to Friday, [opening hours]."
+      },
+      {
+        "q": "When are you closed?",
+        "a": "Weekends and all NSW public holidays."
+      },
+      {
+        "q": "When can I tour the centre?",
+        "a": "Tuesday and Thursday, 10am to 2pm. {Book a tour}(/book-a-tour)."
+      },
+      {
+        "q": "Where are you?",
+        "a": "[Street address], Harris Park, close to Parramatta, Rosehill and Granville. {Get directions}(/contact)."
+      }
     ]
   },
   {
-    "topic": "Food",
+    "topic": "Meals and dietary needs",
     "slug": "food",
     "items": [
-      { "q": "Are meals included?", "a": "Yes. Our cook prepares [breakfast,] lunch and snacks fresh on site every day.", "link": { "label": "See this week's menu", "href": "/weekly-menu" } },
-      { "q": "Can you manage allergies and dietary needs?", "a": "Yes. We cater for allergies, intolerances and [halal, vegetarian and other] dietary needs. Tell us at enrolment and we will build a plan with you.", "link": { "label": "How we feed your child", "href": "/weekly-menu" } }
+      {
+        "q": "Do you provide meals?",
+        "a": "Yes. Three meals a day are cooked fresh in our own kitchen, following the NSW Munch & Move guidelines. {About our meals}(/meals)."
+      },
+      {
+        "q": "Is your childcare food halal?",
+        "a": "Yes. Our meals are halal and we don't serve beef or pork. Vegetarian meals are available too. [Confirm the halal wording.]"
+      },
+      {
+        "q": "Are you a nut-free centre?",
+        "a": "We're a nut-aware centre and don't serve nuts in our meals. Tell us about any allergy and we'll plan with you."
+      }
     ]
   },
   {
-    "topic": "Health",
-    "slug": "health",
+    "topic": "Educators, learning and care",
+    "slug": "learning",
     "items": [
-      { "q": "How do you keep children safe?", "a": "All educators hold Working With Children Checks and first aid training, entry is [secure / signed in and out], and we are rated Meeting the National Quality Standard.", "link": { "label": "Meet our team", "href": "/our-team" } },
-      { "q": "When should I keep my child home?", "a": "Please keep your child home if they have a fever, vomiting or diarrhoea, and [wait 24 hours after symptoms stop]. Call us by [8am] to let us know.", "link": { "label": "See parent information", "href": "/for-parents" } }
+      {
+        "q": "What are your educator ratios?",
+        "a": "1 educator to 4 babies, 1 to 5 toddlers and 1 to 10 preschoolers."
+      },
+      {
+        "q": "Is there a qualified early childhood teacher?",
+        "a": "Yes. Our preschool program is led by a degree-qualified early childhood teacher with almost 20 years' experience."
+      },
+      {
+        "q": "Do your educators speak Urdu, Hindi or Punjabi?",
+        "a": "Yes. Between them, our educators speak English, Urdu, Punjabi, Hindi, Nepali and Telugu. {Meet our team}(/our-team)."
+      },
+      {
+        "q": "How will I know how my child's day went?",
+        "a": "You'll get photos and updates through the OWNA app."
+      }
     ]
   },
   {
     "topic": "Settling in",
-    "slug": "settling-in",
+    "slug": "settling",
     "items": [
-      { "q": "How do you help new children settle in?", "a": "Short orientation visits before your child starts, and we follow their routines from home." },
-      { "q": "What should my child bring?", "a": "A spare change of clothes and a hat. Label everything with your child's name.", "link": { "label": "See the full list", "href": "/for-parents#pack" } },
-      { "q": "How will I know how my child's day went?", "a": "Through photos and updates in [parent app], and a chat with your child's educator at pick-up." }
+      {
+        "q": "How do you help children settle into childcare?",
+        "a": "We go at your child's pace. We plan the first days with you, start with shorter days if that helps, and never force a child to join in before they're ready. {Read more}(/for-parents#settling)."
+      },
+      {
+        "q": "Can I visit during the day?",
+        "a": "Yes. We have an open-door policy, so you're welcome any time."
+      }
     ]
   }
 ]

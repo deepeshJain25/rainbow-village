@@ -9,38 +9,34 @@ const filters = [
   { id: 'rooms', label: 'Rooms' },
   { id: 'garden', label: 'Garden' },
   { id: 'food', label: 'Food' },
-  { id: 'art', label: 'Art' },
+  { id: 'art', label: 'Art and play' },
 ];
 
-// Up to 25 photos and artworks at launch.
+// Example captions, to match the final photos.
 const photos = [
-  { cat: 'rooms', label: 'Photo: reading corner in the Toddlers room', crayon: 'purple' },
-  { cat: 'garden', label: 'Photo: the playground', crayon: 'blue' },
-  { cat: 'food', label: 'Photo: lunch being cooked in our kitchen', crayon: 'red' },
-  { cat: 'art', label: "Photo: children's paintings", crayon: 'orange' },
-  { cat: 'rooms', label: 'Photo: the Babies room', crayon: 'purple' },
-  { cat: 'garden', label: 'Photo: hands at work in the garden', crayon: 'blue' },
-  { cat: 'art', label: 'Photo: a child-made collage', crayon: 'red' },
-  { cat: 'food', label: 'Photo: a plate of morning tea', crayon: 'orange' },
-  { cat: 'rooms', label: 'Photo: the Preschool room', crayon: 'purple' },
-  { cat: 'garden', label: 'Photo: outdoor play equipment', crayon: 'blue' },
-  { cat: 'art', label: 'Photo: drawings on the wall', crayon: 'red' },
-  { cat: 'food', label: 'Photo: the kitchen', crayon: 'orange' },
+  { cat: 'rooms', caption: 'The babies room, set up for tummy time and gentle play', crayon: 'purple' },
+  { cat: 'art', caption: 'Toddlers building, stacking and exploring', crayon: 'blue' },
+  { cat: 'garden', caption: 'Our vegetable garden, planted and cared for by the children', crayon: 'red' },
+  { cat: 'food', caption: 'Lunch, cooked fresh in our kitchen', crayon: 'orange' },
+  { cat: 'art', caption: 'Paintings and drawings from the preschool room', crayon: 'purple' },
+  { cat: 'art', caption: 'Counting and singing in different languages at group time', crayon: 'blue' },
 ] as const;
 ---
 
 <Layout
-  title="Gallery | Inside Rainbow Village Childcare Harris Park"
-  description="Take a look inside Rainbow Village: our rooms, playground, kitchen and everyday moments, in real photos from our Harris Park childcare centre."
+  title="Photos of Rainbow Village Childcare Centre, Harris Park"
+  description="See inside our Harris Park childcare centre: the babies, toddlers and preschool rooms, our vegetable garden and our kitchen. Real photos."
 >
   <PageHeader
-    title="A look inside"
-    lead="Real photos of our Harris Park childcare centre: the rooms, the playground, the kitchen and the art children make here."
+    title="Inside our Harris Park childcare centre"
+    current="Gallery"
+    lead="Our rooms, our garden and our kitchen. Every photo here was taken at Rainbow Village."
     crumbs={[{ label: 'About', href: '/about' }]}
   />
 
   <section class="hs-ground hs-paper-doodles rv-section rv-section--flush" data-theme="crayon">
     <div class="rv-wrap rv-gallery">
+      <p class="rv-gallery__intro">Rainbow Village is a small child care centre with three rooms: babies, toddlers and preschool. Each is set up so children can choose what to play with and explore at their own pace. Outside, children dig, plant and pick vegetables in our garden. Inside, our kitchen cooks three home-style meals every day.</p>
       {filters.map((filter, index) => (
         <input class="rv-filter" type="radio" name="gallery-filter" id={`g-${filter.id}`} checked={index === 0} aria-label={`Show ${filter.label}`} />
       ))}
@@ -49,12 +45,11 @@ const photos = [
       </div>
       <div class="rv-wall">
         {photos.map((photo) => (
-          <div data-cat={photo.cat}><Photo label={photo.label} crayon={photo.crayon} /></div>
+          <div data-cat={photo.cat}><Photo caption={photo.caption} crayon={photo.crayon} /></div>
         ))}
       </div>
-      <p>We publish photos of children only with written parental consent, and remove them on request.</p>
     </div>
   </section>
 
-  <Closing title="Like what you see?" text="Photos only show so much. Come and see the rooms for yourself." band="orange" />
+  <Closing title="It looks even better in person" band="orange" />
 </Layout>

@@ -5,84 +5,89 @@ import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
 
 const quickLinks = [
-  { label: 'Parent app', href: '#app' },
-  { label: 'Weekly menu', href: '/weekly-menu' },
-  { label: 'Term dates', href: '#dates' },
-  { label: 'Policies', href: '#policies' },
+  { label: 'OWNA app', href: '#app' },
   { label: 'What to pack', href: '#pack' },
-  { label: 'Fees', href: '/fees' },
+  { label: 'Settling in', href: '#settling' },
+  { label: 'Fees and subsidy', href: '/fees' },
+  { label: 'Policies', href: '#policies' },
+  { label: 'FAQs', href: '/faqs' },
 ];
 
-const policies = [
-  { topic: 'Health and safety', files: ['[Sun safety policy (PDF, size)]', '[Illness and medication policy (PDF, size)]'] },
-  { topic: 'Food', files: ['[Nutrition and allergy policy (PDF, size)]'] },
-  { topic: 'Families', files: ['[Parent handbook (PDF, size)]', '[Fees and payment policy (PDF, size)]'] },
+const pack = [
+  'Spare clothes',
+  'A hat',
+  'A water bottle',
+  'A comforter for rest, if used',
+  'Bottles and formula for babies [confirm]',
+  "Everything labelled with your child's name.",
 ];
 ---
 
 <Layout
-  title="Parent Information | Rainbow Village Childcare Harris Park"
-  description="Everything current Rainbow Village families need: parent app sign-in, key dates, what to pack, sick-child guidelines and centre policies."
+  title="Settling Into Childcare | Parent Information, Rainbow Village"
+  description="How we help your child settle into childcare, what to pack for daycare, the OWNA app, drop-off times and policies. Rainbow Village, Harris Park."
 >
   <PageHeader
-    title="For parents"
-    lead="Everything you need, day to day, as a Rainbow Village family in Harris Park."
+    title="Information for parents"
+    current="For parents"
+    lead="Everything you need, day to day: settling in, what to pack, the OWNA app and our policies."
     crumbs={[{ label: 'Parents', href: '/for-parents' }]}
     action={null}
   />
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
-    <div class="rv-wrap rv-stack-lg" id="app">
-      <div><span class="hs-btn" aria-disabled="true">Open parent app</span></div>
-      <p><Todo text="See photos and updates from your child's day in [parent app]. [Sign in, iPhone and Android links go here.]" /></p>
+    <div class="rv-wrap">
       <ul class="rv-tapes">
         {quickLinks.map((link) => <li><a class="hs-tape" href={link.href}>{link.label}</a></li>)}
       </ul>
     </div>
   </section>
 
-  <section class="hs-sheet" data-theme="crayon">
+  <section class="hs-sheet" data-theme="crayon" id="settling">
     <div class="rv-wrap rv-sheet-body">
-      <h2>Your first week</h2>
-      <p><b>Orientation.</b> Short visits before your child starts, so the room and the educators feel familiar.</p>
-      <p><b>Drop-off and pick-up.</b> <Todo text="We are open 7am to 6pm. [Sign-in steps and any cut-off times from the centre.]" /></p>
-      <p id="pack"><b>What to pack on day one.</b> <Todo text="A spare change of clothes, a hat, [sheet and comforter for rest time] and [bottles and formula for babies], all labelled with your child's name." /></p>
-      <p><b>Parent app.</b> <Todo text="We will set you up on [parent app] before your first day." /></p>
+      <h2>Settling into childcare, at your child's pace</h2>
+      <p>Every child settles differently, so we never rush it. Before your child starts, we talk with you about their routines, likes and worries. Then we plan their first days together.</p>
+      <p>Some children start with shorter days. Some like a parent to stay for a while. We let children watch from the edge until they're ready, with an educator close by. Our open-door policy means you're welcome to visit any time.</p>
+    </div>
+  </section>
+
+  <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
+    <div class="rv-wrap rv-panel rv-copy-panel">
+      <p class="rv-story">One little one spent their first days standing by the door, upset when their parents left. We started with shorter days and never pushed them to join in; an educator simply sat beside them. Within a couple of weeks, they were running into the room each morning, and asking to come on weekends.</p>
     </div>
   </section>
 
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-stack-lg">
       <div class="rv-copy">
-        <h2 class="hs-title">If your child is unwell</h2>
-        <p><Todo text="Please keep your child home if they have a fever, vomiting or diarrhoea, and [wait 24 hours after symptoms stop]. Call us by [8am] to let us know." /></p>
+        <h2 class="hs-title">Drop-off, pick-up and opening hours</h2>
+        <p>We're open Monday to Friday, <mark class="rv-todo">[opening hours]</mark>. We're closed on weekends and NSW public holidays. Please sign your child in and out on OWNA each day. <mark class="rv-todo">[Confirm the sign-in process.]</mark></p>
       </div>
-      <div class="rv-copy" id="dates">
-        <h2 class="hs-title">Key dates</h2>
-        <p><Todo text="[Upcoming closure dates, such as the Christmas closure.]" /></p>
+      <div class="rv-copy" id="pack">
+        <h2 class="hs-title">What to pack for daycare</h2>
+        <ul class="rv-list">{pack.map((item) => <li><Todo text={item} /></li>)}</ul>
+        <p><b>We provide:</b> three meals cooked on site, nappies and wipes, full cream milk and sunscreen.</p>
+        <p>Room-by-room lists: <a href="/rooms/babies#pack">babies</a> · <a href="/rooms/toddlers#pack">toddlers</a> · <a href="/rooms/preschool#pack">preschool</a></p>
       </div>
       <div class="rv-copy" id="policies">
-        <h2 class="hs-title">Policies</h2>
-        {policies.map((group) => (
-          <div class="rv-stack">
-            <h3>{group.topic}</h3>
-            <ul class="rv-list">{group.files.map((file) => <li><Todo text={file} /></li>)}</ul>
-          </div>
-        ))}
-        <p><a href="/faqs">Read our FAQs</a></p>
+        <h2 class="hs-title">Our policies</h2>
+        <p><mark class="rv-todo">[List the PDFs the client sends, with file sizes: for example Sun safety, Sick children and medication, Nutrition and allergies, Child safe, Privacy.]</mark></p>
       </div>
     </div>
   </section>
 
-  <section class="hs-band hs-band--yellow" data-theme="kraft">
-    <div class="hs-band__inner rv-closing">
+  <section class="hs-band hs-band--yellow" data-theme="kraft" id="app">
+    <div class="hs-band__inner rv-stack-lg">
       <div class="rv-stack">
-        <h2 class="hs-title">Stay in touch</h2>
-        <p><Todo text="Daily updates come through [parent app]. For anything about your child, talk to their room leader. For fees or enrolment, ask for [the director]." /></p>
+        <h2 class="hs-title">Stay in touch with the OWNA app</h2>
+        <p>You'll get daily photos, notes and updates on the OWNA app, so you can share in your child's day even when you can't be there.</p>
       </div>
       <div class="rv-closing__actions">
-        <span>Call <a href={site.phoneHref}>{site.phone}</a></span>
+        <span class="hs-btn" aria-disabled="true">Get OWNA on the App Store</span>
+        <span class="hs-btn" aria-disabled="true">Get OWNA on Google Play</span>
       </div>
+      <p><mark class="rv-todo">[The two buttons link to OWNA's store pages once the links are confirmed.]</mark></p>
+      <p>For anything else, talk to Nighat or our team at drop-off, call <a href={site.phoneHref}><Todo text={site.phone} /></a>, or email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
     </div>
   </section>
 </Layout>

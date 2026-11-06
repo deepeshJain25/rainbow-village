@@ -3,7 +3,7 @@
 interface Props {
   title: string;
   ages: string;
-  text: string;
+  text?: string;
   href: string;
   crayon: 'purple' | 'yellow' | 'orange';
 }
@@ -15,5 +15,5 @@ const { title, ages, text, href, crayon } = Astro.props;
   <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
   <p class="hs-painting__title">{title}</p>
   <span class={`hs-tape hs-tape--${crayon}`}><span class="hs-tape__dab"></span>{ages}</span>
-  <p class="hs-painting__caption">{text}</p>
+  {text && <p class="hs-painting__caption">{text}</p>}
 </a>

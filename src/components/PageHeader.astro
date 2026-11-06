@@ -8,10 +8,12 @@ interface Props {
   crumbs?: { label: string; href?: string }[];
   action?: { label: string; href: string } | null;
   compact?: boolean;
+  // The breadcrumb label for this page, when the h1 is longer than its name.
+  current?: string;
 }
 
-const { title, lead, crumbs = [], action = { label: 'Book a tour', href: '/book-a-tour' }, compact = false } = Astro.props;
-const trail = [{ label: 'Home', href: '/' }, ...crumbs, { label: title }];
+const { title, lead, crumbs = [], action = { label: 'Book a tour', href: '/book-a-tour' }, compact = false, current } = Astro.props;
+const trail = [{ label: 'Home', href: '/' }, ...crumbs, { label: current ?? title }];
 ---
 
 <div class:list={['hs-ground', 'rv-page-head', { 'rv-page-head--compact': compact }]} data-theme="crayon">

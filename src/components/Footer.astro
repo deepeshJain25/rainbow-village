@@ -1,6 +1,7 @@
 ---
 import site from '../content/site.json';
 import CrayonWord from './CrayonWord.astro';
+import Todo from './Todo.astro';
 
 const year = new Date().getFullYear();
 // These two pages already have the action on screen.
@@ -12,10 +13,10 @@ const showBar = !['/book-a-tour', '/contact'].includes(Astro.url.pathname.replac
     <div class="rv-footer__col">
       <CrayonWord />
       <p class="rv-footer__heading">Visit</p>
-      <p>{site.address}</p>
-      <p>{site.hours}</p>
-      <p><a href={site.phoneHref}>{site.phone}</a></p>
-      <p><mark class="rv-todo">[email]</mark></p>
+      <p><Todo text={site.address} /></p>
+      <p><Todo text={site.hours} /></p>
+      <p><a href={site.phoneHref}><Todo text={site.phone} /></a></p>
+      <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
       <p><a href={site.mapUrl}>Get directions</a></p>
     </div>
     <div>
@@ -26,14 +27,14 @@ const showBar = !['/book-a-tour', '/contact'].includes(Astro.url.pathname.replac
     </div>
     <div class="rv-footer__col">
       <p class="rv-footer__heading">Families</p>
-      <p><a href={site.reviewsUrl}>{site.rating}</a></p>
+      <p><a href={site.reviewsUrl}><Todo text={site.rating} /></a></p>
       <p><mark class="rv-todo">[Parent app for iPhone]</mark></p>
       <p><mark class="rv-todo">[Parent app for Android]</mark></p>
-      <p><mark class="rv-todo">[Child Care Subsidy approved: wording from the centre]</mark></p>
+      <p><mark class="rv-todo">[Confirm the CCS-approved wording.]</mark></p>
     </div>
   </div>
   <p class="rv-wrap rv-footer__legal">
-    © {year} {site.legalName} · <mark class="rv-todo">[ABN]</mark> · <a href="/privacy-policy">Privacy policy</a>
+    © {year} {site.legalName} · ABN {site.abn} · <a href="/privacy-policy">Privacy policy</a>
   </p>
 </footer>
 

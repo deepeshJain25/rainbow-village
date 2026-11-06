@@ -1,0 +1,31 @@
+---
+// A day on the ruled lines. Times stay as [time] until the centre confirms them.
+import Todo from './Todo.astro';
+
+interface Props {
+  title: string;
+  lead?: string;
+  items?: string[];
+  note?: string;
+}
+
+const { title, lead, items = [], note } = Astro.props;
+---
+
+<section class="hs-sheet" data-theme="crayon">
+  <div class="rv-wrap rv-sheet-body">
+    <h2>{title}</h2>
+    {lead && <p><Todo text={lead} /></p>}
+    {items.length > 0 && (
+      <dl class="rv-day">
+        {items.map((activity) => (
+          <div>
+            <dt><mark class="rv-todo">[time]</mark></dt>
+            <dd>{activity}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
+    {note && <p><Todo text={note} /></p>}
+  </div>
+</section>

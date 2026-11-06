@@ -543,6 +543,13 @@ main { overflow-x: clip; }
   transform: rotate(var(--swing, 0deg)); transition: none;
 }
 
+/* hero: the h1 names the service, and the display line under it carries the headline */
+.hs .rv-hero-eyebrow { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 28px; line-height: 32px; color: inherit; }
+/* copy pieces from the SEO copy */
+.rv-fees-teaser { padding-block: var(--space-8) var(--space-16); }
+.rv-story { margin: 0; font-family: var(--font-display); font-size: 24px; line-height: 32px; }
+.rv-business { padding-block: var(--space-8); font-size: 15px; line-height: 24px; color: var(--ink-soft); }
+
 /* a single painting hung on its own line */
 .hs .rv-line-single > li { flex: 1 1 auto; }
 .rv-poster { margin: 0; }

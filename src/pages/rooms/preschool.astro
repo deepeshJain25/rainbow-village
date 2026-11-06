@@ -1,53 +1,84 @@
 ---
+import PackList from '../../components/PackList.astro';
+import RoomLeader from '../../components/RoomLeader.astro';
 import RoomPage from '../../components/RoomPage.astro';
-import Todo from '../../components/Todo.astro';
+import Timetable from '../../components/Timetable.astro';
 import rooms from '../../content/rooms.json';
 
 const room = rooms[2];
-const day = [
-  { time: '7am', activity: 'Arrival and free play' },
-  { time: '9am', activity: 'Group time: letters, sounds and counting' },
-  { time: '9:30am', activity: 'Morning tea' },
-  { time: '10am', activity: 'Outdoor play' },
-  { time: '11am', activity: 'Projects your child chooses' },
-  { time: '12pm', activity: 'Lunch' },
-  { time: '1pm', activity: 'Rest or quiet time' },
-  { time: '2:30pm', activity: 'Art, music and science play' },
-  { time: 'By 6pm', activity: 'Pick-up' },
-];
 ---
 
 <RoomPage
   room={room}
   seo={{
-    title: 'Preschool Program Harris Park | School Readiness | Rainbow Village',
-    description: 'A preschool program in long day care hours for 3 to 6 year olds in Harris Park. Building confidence, early literacy and numeracy for big school.',
+    title: 'Preschool Harris Park | School Readiness Program, 3 to 6',
+    description: "Preschool in Harris Park led by a degree-qualified teacher with almost 20 years' experience. School readiness and NSW Start Strong fee relief.",
   }}
   heading="Preschool in Harris Park"
-  lead="Our preschool program gives your child the confidence, independence and early skills to start school happy and ready, all within long day care hours."
-  glance={{ ratio: '[1 educator to 10 children]', places: '[X] places', leader: '[Name]' }}
-  photos={['Photo: the Preschool room', 'Photo: a project or writing corner', 'Photo: the garden preschoolers use']}
-  dayNote="The program runs inside long day care hours, so it works around your job."
-  day={day}
-  learnHeading="Ready for big school, ready for anything"
-  learnLead="Learning through play, with more challenge as your child grows."
-  learn={[
-    { title: 'Early literacy and numeracy.', text: 'Letters, sounds, counting and problem-solving, taught through play and projects your child chooses.' },
-    { title: 'Confidence and independence.', text: 'Managing belongings, following routines, speaking up in a group and making friends: the skills teachers say matter most.' },
-    { title: 'Curiosity.', text: 'Questions, experiments and long projects teach children how to find things out for themselves.' },
+  lead="Our preschool program gets children aged 3 to 6 ready for big school. It's led by a degree-qualified early childhood teacher with almost 20 years' experience."
+  glance={[
+    { text: 'Ages 3 to 6', bold: true },
+    { text: '20 places', bold: true },
+    { text: '1 educator to 10 children', bold: true },
+    { text: 'Degree-qualified early childhood teacher', bold: true },
+    { text: 'NSW Start Strong funded', bold: true },
+    { text: '$135 a day before subsidy', bold: true, link: { label: 'see fees', href: '/fees' } },
   ]}
-  leader={{ name: '[Name]', qualification: '[qualification]', quote: '[One line in their own words about getting children ready for school.]' }}
-  packLead="Label everything with your child's name."
-  pack={['A spare change of clothes', 'A hat', '[Sheet and comforter for rest time]']}
-  next={{ label: 'Back to all our rooms', href: '/rooms' }}
-  closing={{ title: 'See the Preschool in person', band: 'green' }}
+  photos={['The preschool room at Rainbow Village', 'Our vegetable garden', 'Art on the wall']}
+  closing={{ title: 'See our preschool in person', band: 'green' }}
 >
-  <section slot="after-learning" class="hs-sheet" data-theme="crayon">
-    <div class="rv-wrap rv-sheet-body">
-      <h2>Ready for big school</h2>
-      <p><b>Transition to school.</b> <Todo text="[Program led by a degree-qualified early childhood teacher] with a school-readiness focus in the final year, and [visits to local schools]." /></p>
-      <p><b>Preschool fee relief.</b> <Todo text="[If eligible: NSW Start Strong funding can reduce your preschool fees. Ask us how much you could save.]" /></p>
-      <p><a href="/fees">See fees and the Child Care Subsidy</a></p>
+  <Timetable
+    title="A day in our preschool room"
+    items={[
+      'Arrive and choose an activity',
+      'Morning group: news, stories and early literacy',
+      'Morning tea',
+      'Projects, maths games and outdoor play',
+      'Lunch',
+      'Rest or quiet activities',
+      'Afternoon tea',
+      'Garden, play and home time',
+    ]}
+  />
+
+  <section class="hs-band hs-band--orange" data-theme="kraft">
+    <div class="hs-band__inner rv-stack-lg">
+      <h2 class="hs-title">A preschool program built on curiosity</h2>
+      <div class="rv-text-grid">
+        <p>Our preschoolers learn through play, projects and real experiences. They plant and care for vegetables in our garden, and they learn about recycling and caring for the environment through Parramatta Council incursions.</p>
+        <p>They count and sing in their home languages and in Dharug, the local Aboriginal language. They learn how families from many cultures celebrate.</p>
+        <p>Early literacy and numeracy are part of every day. They're woven into stories, games and conversations, not drilled.</p>
+      </div>
     </div>
   </section>
+
+  <section class="hs-sheet" data-theme="crayon">
+    <div class="rv-wrap rv-sheet-body">
+      <h2>School readiness: ready for big school</h2>
+      <p>School readiness is about much more than letters and numbers. We give equal weight to independence, communication and getting along with others.</p>
+      <p>Children learn to manage their own belongings, ask for help, say how they feel and sort out disagreements with friends. We also have links with nearby primary schools to help make the move a smooth one.</p>
+      <p>Our goal is simple: children who leave Rainbow Village confident in themselves, comfortable with others and excited about learning.</p>
+    </div>
+  </section>
+
+  <RoomLeader
+    title="Meet [name], our early childhood teacher"
+    qualification="Degree-qualified, with almost 20 years in early childhood education."
+    quote="[A sentence in their own words about preschool.]"
+    photo="Photo: our early childhood teacher"
+  />
+
+  <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
+    <div class="rv-wrap rv-copy">
+      <h2 class="hs-title">NSW Start Strong preschool fee relief</h2>
+      <p>We receive NSW Start Strong funding, which lowers fees for eligible children aged 3 and over, on top of the Child Care Subsidy. We apply it to your fees for you. <a href="/fees">See fees and subsidy</a>.</p>
+    </div>
+  </section>
+
+  <PackList
+    title="What to pack for preschool"
+    items={['A bag your child can carry and open themselves', 'Spare clothes', 'A hat', 'A water bottle', 'Everything labelled']}
+    provide="three home-style meals, full cream milk and sunscreen."
+    links="{← Toddlers room}(/rooms/toddlers) · Questions? {Read our FAQs}(/faqs)"
+  />
 </RoomPage>

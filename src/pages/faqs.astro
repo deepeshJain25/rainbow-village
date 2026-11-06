@@ -1,5 +1,4 @@
 ---
-import Closing from '../components/Closing.astro';
 import Icon from '../components/Icon.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Todo from '../components/Todo.astro';
@@ -7,25 +6,30 @@ import faqs from '../content/faqs.json';
 import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
 
+// Answers keep their link text but lose the link markup and the to-confirm brackets.
+const plain = (text: string) => text.replace(/\{([^}]+)\}\([^)]+\)/g, '$1').replace(/\s*\[[^\]]*\]/g, '').trim();
+
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: faqs.flatMap((group) => group.items).map((item) => ({
+  // An answer still missing a fact (a bracket before its end) stays out until the centre confirms it.
+  mainEntity: faqs.flatMap((group) => group.items).filter((item) => !/\[[^\]]*\](?!\s*$)/.test(item.a)).map((item) => ({
     '@type': 'Question',
     name: item.q,
-    acceptedAnswer: { '@type': 'Answer', text: item.a.replace(/[\[\]]/g, '') },
+    acceptedAnswer: { '@type': 'Answer', text: plain(item.a) },
   })),
 };
 ---
 
 <Layout
-  title="Childcare FAQs | Rainbow Village Harris Park"
-  description="Answers to the questions parents ask most: ages, hours, fees, meals, nappies, settling in and safety at Rainbow Village Childcare."
+  title="Childcare FAQs Harris Park | Fees, Meals, Ages | Rainbow Village"
+  description="Answers about our Harris Park childcare centre: ages, fees and CCS, halal and nut-aware meals, hours, languages and settling in."
   schema={schema}
 >
   <PageHeader
-    title="Questions parents ask us"
-    lead="Straight answers about childcare at Rainbow Village in Harris Park, from ages and fees to meals and settling in."
+    title="Childcare questions parents ask us"
+    current="FAQs"
+    lead={`Answers about Rainbow Village Childcare in Harris Park. Can't see your question? Call ${site.phone} or ask on your tour.`}
     crumbs={[{ label: 'Parents', href: '/for-parents' }]}
   />
 
@@ -42,17 +46,11 @@ const schema = {
               <summary>{item.q}<Icon name="chevron-down" /></summary>
               <div class="rv-details__body">
                 <p><Todo text={item.a} /></p>
-                {item.link && <p><a href={item.link.href}>{item.link.label}</a></p>}
               </div>
             </details>
           ))}
         </div>
       ))}
-      <div class="rv-panel rv-copy-panel">
-        <p>Didn't find it? Call <a href={site.phoneHref}>{site.phone}</a> or ask on your tour.</p>
-      </div>
     </div>
   </section>
-
-  <Closing title="See the answers in person" text="Tours take about 30 minutes." band="orange" />
 </Layout>
