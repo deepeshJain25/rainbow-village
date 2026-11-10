@@ -53,7 +53,7 @@
     "items": [
       {
         "q": "What are your opening hours?",
-        "a": "Monday to Friday, [opening hours]."
+        "a": "Monday to Friday, 7am to 6pm."
       },
       {
         "q": "When are you closed?",
@@ -65,7 +65,7 @@
       },
       {
         "q": "Where are you?",
-        "a": "[Street address], Harris Park, close to Parramatta, Rosehill and Granville. {Get directions}(/contact)."
+        "a": "42 Weston St, Harris Park, close to Parramatta, Rosehill and Granville. {Get directions}(/contact)."
       }
     ]
   },
