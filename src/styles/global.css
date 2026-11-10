@@ -417,12 +417,8 @@ textarea.hs-field__input {
 .hs-hero__line { padding-top: var(--space-8); }
 .hs-hero__land { position: absolute; left: 0; right: 0; bottom: 0; height: 260px; pointer-events: none; }
 .hs-hero__land i { position: absolute; display: block; border-radius: var(--radius-round); -webkit-mask-image: var(--hs-wax); mask-image: var(--hs-wax); }
-.hs-hero__land i:nth-child(1) {
-  right: 4%; bottom: -230px; width: 460px; height: 460px;
-  background: radial-gradient(circle, transparent 0 46%, var(--crayon-purple) 46% 53%, var(--crayon-blue) 53% 60%, var(--crayon-green) 60% 67%, var(--crayon-yellow) 67% 74%, var(--crayon-orange) 74% 81%, var(--crayon-red) 81% 88%, transparent 88%);
-}
-.hs-hero__land i:nth-child(2) { left: -12%; bottom: -150px; width: 72%; height: 260px; background: var(--crayon-green); }
-.hs-hero__land i:nth-child(3) { right: -14%; bottom: -170px; width: 66%; height: 260px; background: var(--crayon-grass); }
+.hs-hero__land i:nth-child(1) { left: -12%; bottom: -150px; width: 72%; height: 260px; background: var(--crayon-green); }
+.hs-hero__land i:nth-child(2) { right: -14%; bottom: -170px; width: 66%; height: 260px; background: var(--crayon-grass); }
 
 /* hero ground and text follow its material through hero-ground / hero-ink
    (sky band in Crayon and Cut paper, the bare board in Chalkboard) */
@@ -441,7 +437,6 @@ textarea.hs-field__input {
   .hs-hero { padding-bottom: 160px; }
   .hs-hero__grid { grid-template-columns: 1fr; gap: var(--space-8); }
   .hs-hero__title { font-size: 52px; line-height: 56px; }
-  .hs-hero__land i:nth-child(1) { width: 300px; height: 300px; bottom: -150px; }
   .hs-sheet { padding-left: calc(var(--space-8) + var(--space-4)); }
   .hs-sheet::before { left: var(--space-6); }
   .hs-sheet__note { display: none; }
@@ -451,6 +446,12 @@ textarea.hs-field__input {
 
 @media (prefers-reduced-motion: reduce) {
   .hs-btn, .hs-painting, .rv-details summary .rv-icon { transition: none; }
+  /* the seasons swap with a fade: nothing spins and nothing falls */
+  .rv-season__rainbow, .rv-season__wheel { transition: none; }
+  .rv-season__piece, .rv-season__piece.is-current { transition-property: opacity; }
+  .rv-season__rays { animation: none; }
+  .rv-weather { display: none; }
+  .rv-flip__inner { transition: none; }
 }
 
 /* ==========================================================================
@@ -522,10 +523,70 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 .hs-hero { --hero-ground: var(--crayon-green); }
 /* the hills and the rainbow stripe sit on the same green, so they take a lighter and a deeper shade of it */
 .hs-hero__land { --crayon-green: #8fe070; --crayon-grass: #3fa62b; }
+
+/* hero: a season wheel. src/scripts/seasons.ts moves data-season along and counts --turn; the rainbow spins once
+   and the weather wheel turns a quarter for every turn. Each season takes its sky, ink and hills from the crayons. */
+.hs-hero { --turn: 0; --rainbow-green: #8fe070; transition: background-color 1s ease, color 1s ease; }
+.hs-hero h1, .hs .hs-hero a:not([class]) { transition: color 1s ease; }
+.hs-hero__land { z-index: 3; }
+.hs-hero__land i { transition: background-color 1s ease; }
+.hs-hero[data-season="autumn"] { --hero-ground: #f6b04a; --hero-ink: #5c2410; }
+.hs-hero[data-season="autumn"] .hs-hero__land { --crayon-green: var(--crayon-yellow); --crayon-grass: #e0782f; }
+.hs-hero[data-season="winter"] { --hero-ground: #8cc0ee; --hero-ink: #1b3360; }
+.hs-hero[data-season="winter"] .hs-hero__land { --crayon-green: #fbfcfa; --crayon-grass: #d8e6f3; }
+.hs-hero[data-season="spring"] { --hero-ground: #c7b0e8; --hero-ink: #3d2363; }
+.hs-hero[data-season="spring"] .hs-hero__land { --crayon-green: #a8e88a; --crayon-grass: #58c23c; }
+
+.rv-season {
+  --size: 460px; --orbit: 300px; --piece: 140px; --turning: 1.4s cubic-bezier(.45, .05, .3, 1);
+  position: absolute; z-index: 2; right: 4%; bottom: calc(var(--size) / -2); width: var(--size); height: var(--size); pointer-events: none;
+}
+.rv-season__rainbow {
+  position: absolute; inset: 0; padding: 0; border: 0; background: none; pointer-events: none;
+  transform: rotate(calc(var(--turn) * 360deg)); transition: transform var(--turning);
+}
+.rv-season__rainbow svg { display: block; width: 100%; height: 100%; -webkit-mask-image: var(--hs-wax); mask-image: var(--hs-wax); }
+/* only the painted bands take a click, not the empty box round them */
+.rv-season__rainbow path { pointer-events: visibleStroke; cursor: pointer; }
+.rv-season__rainbow:focus-visible { outline: none; }
+.rv-season__rainbow:focus-visible svg { filter: drop-shadow(0 0 3px var(--hero-ink)) drop-shadow(0 0 3px var(--hero-ink)); }
+.rv-season__wheel { position: absolute; inset: 0; transform: rotate(calc(var(--turn) * 90deg)); transition: transform var(--turning); }
+/* out to its place on the wheel, then turned back so it stays upright however far the wheel has gone */
+.rv-season__piece {
+  position: absolute; left: 50%; top: 50%; width: var(--piece); height: var(--piece);
+  margin: calc(var(--piece) / -2) 0 0 calc(var(--piece) / -2);
+  transform: rotate(var(--angle)) translateY(calc(var(--orbit) * -1)) rotate(calc(var(--angle) * -1 - var(--turn) * 90deg));
+  opacity: 0; transition: transform var(--turning), opacity .6s ease;
+}
+.rv-season__piece.is-current { opacity: 1; pointer-events: auto; cursor: pointer; transition: transform var(--turning), opacity .6s ease .7s; }
+.rv-season__piece svg { display: block; width: 100%; height: 100%; }
+.rv-season__rays { transform-origin: 70px 70px; animation: rv-turn 24s linear infinite; }
+@keyframes rv-turn { to { transform: rotate(360deg); } }
+
+/* falling weather sits behind the words and the hills, and only moves in its own season */
+.rv-weather { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.rv-weather__layer { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
+.hs-hero[data-season="autumn"] [data-for="autumn"], .hs-hero[data-season="winter"] [data-for="winter"], .hs-hero[data-season="spring"] [data-for="spring"] { opacity: 1; }
+.rv-weather i { position: absolute; top: -40px; left: var(--x); display: block; animation: rv-flutter calc(var(--speed) * 8s) linear var(--delay) infinite paused; }
+.hs-hero[data-season="autumn"] [data-for="autumn"] i, .hs-hero[data-season="winter"] [data-for="winter"] i, .hs-hero[data-season="spring"] [data-for="spring"] i { animation-play-state: running; }
+.rv-weather__layer--rain i { width: 3px; height: 18px; border-radius: 2px; background: var(--crayon-blue); opacity: .6; animation-name: rv-fall; animation-duration: calc(var(--speed) * .9s); }
+.rv-weather__layer--leaf i { width: 14px; height: 14px; border-radius: 0 80%; background: var(--crayon-red); animation-duration: calc(var(--speed) * 7s); }
+.rv-weather__layer--leaf i:nth-child(odd) { background: #e0782f; }
+.rv-weather__layer--snow i { width: 8px; height: 8px; border-radius: 50%; background: var(--art-paper); animation-duration: calc(var(--speed) * 9s); }
+.rv-weather__layer--snow i:nth-child(3n) { width: 12px; height: 12px; }
+.rv-weather__layer--petal i { width: 11px; height: 7px; border-radius: 50%; background: #f7a1b5; }
+@keyframes rv-fall { to { transform: translate(-40px, 1100px); } }
+@keyframes rv-flutter {
+  25% { transform: translate(30px, 275px) rotate(90deg); }
+  50% { transform: translate(-20px, 550px) rotate(180deg); }
+  75% { transform: translate(30px, 825px) rotate(270deg); }
+  100% { transform: translate(0, 1100px) rotate(360deg); }
+}
 .rv-hero-title { font-size: min(76px, calc(8vw - 10px)); line-height: 1.05; }
 .rv-hero-title span { display: block; white-space: nowrap; }
 .rv-trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); font-size: 15px; line-height: 24px; font-weight: 700; }
-.rv-trust li { display: grid; gap: var(--space-1); align-content: start; justify-items: start; }
+/* each fact reads as one sentence beside its icon, so the placeholders flow inline instead of stacking */
+.rv-trust li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-2); align-items: start; }
 .rv-star svg { fill: currentColor; }
 /* room names stay on the paintings as the hero's columns narrow */
 .rv-hero-paintings .hs-painting { padding-inline: var(--space-2); }
@@ -569,11 +630,26 @@ main { overflow-x: clip; }
 }
 .hs-painting.rv-taped::after { display: none; }
 
-/* a day here: every row sits on one ruled line */
-.rv-day { margin: 0; }
-.rv-day > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-4); line-height: 32px; }
-.rv-day dt { font-weight: 700; }
-.rv-day dd { margin: 0; }
+/* a day here: one picture card for each part of the day, in a row you scroll sideways, joined by a dotted path */
+.rv-day {
+  display: flex; gap: var(--space-8); margin: 0; padding: var(--space-4) var(--space-2) var(--space-6); list-style: none;
+  overflow-x: auto; scroll-snap-type: x proximity; scroll-padding-inline: var(--space-2);
+}
+.rv-day:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 4px; }
+.rv-day li {
+  position: relative; flex: 0 0 176px; box-sizing: border-box; scroll-snap-align: start;
+  display: grid; gap: var(--space-2); align-content: start; justify-items: start; padding: var(--space-4);
+  background: var(--paper-card); border: 2px solid var(--edge); border-radius: var(--radius-stamp); box-shadow: var(--shadow-stamp);
+  line-height: 24px;
+}
+.rv-day li:nth-child(odd) { transform: rotate(-1deg); }
+.rv-day li:nth-child(even) { transform: rotate(1deg); }
+.rv-day li:not(:last-child)::after {
+  content: ""; position: absolute; top: 48px; left: 100%; width: calc(var(--space-8) + 2px); border-top: 3px dashed var(--rule-strong);
+}
+.rv-day__icon { width: 64px; height: 64px; }
+.rv-day__time { font-weight: 700; }
+
 .hs .rv-day .hs-sheet__note { text-decoration: none; }
 
 /* reviews: one at a time, word for word */
@@ -585,6 +661,78 @@ main { overflow-x: clip; }
 .rv-review blockquote { margin: 0; font-family: var(--font-display); font-size: 38px; line-height: 48px; }
 .rv-review figcaption { font-size: 15px; line-height: 24px; }
 .rv-slider__controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); }
+
+/* rooms: a box of building blocks. src/scripts/blocks.ts adds .is-live and moves each block with the physics */
+.rv-blocks { --floor: 28px; --wood: #d39a62; --wood-dark: #8f5c33; display: grid; gap: var(--space-6); }
+.rv-blocks__area {
+  position: relative; display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-4);
+  padding: var(--space-4) var(--space-4) calc(var(--floor) + var(--space-4));
+}
+.rv-blocks__area::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor); box-sizing: border-box;
+  background: var(--wood); border-top: 3px solid var(--art-ink); border-radius: 0 0 8px 8px;
+}
+.rv-blocks.is-live .rv-blocks__area { display: block; height: 520px; padding: 0; overflow: hidden; }
+.rv-blocks__tools { display: none; flex-wrap: wrap; gap: var(--space-4); }
+.rv-blocks.is-live .rv-blocks__tools { display: flex; }
+.rv-blocks__btn { min-height: 48px; font-size: 20px; padding-block: 8px; }
+
+.rv-block {
+  box-sizing: border-box; color: var(--art-ink); background: var(--block, var(--art-paper));
+  border: 3px solid var(--art-ink); border-radius: 6px; box-shadow: inset -6px -6px 0 rgb(0 0 0 / .14);
+}
+.rv-blocks.is-live .rv-block { position: absolute; top: 0; left: 0; z-index: 1; will-change: transform; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+.rv-blocks.is-live .rv-block.is-held { cursor: grabbing; }
+.rv-block--red    { --block: var(--crayon-red); }
+.rv-block--orange { --block: var(--crayon-orange); }
+.rv-block--yellow { --block: var(--crayon-yellow); }
+.rv-block--green  { --block: var(--crayon-green); }
+.rv-block--sky    { --block: var(--crayon-sky); }
+.rv-block--blue   { --block: var(--crayon-blue); }
+.rv-block--purple { --block: var(--crayon-purple); }
+.rv-block--wood   { --block: var(--wood); }
+.rv-block--paper  { --block: var(--art-paper); }
+.rv-block svg { display: block; width: 100%; height: 100%; }
+
+/* a room block is a white block with a thick band of its room's colour along the top */
+.rv-block--room {
+  width: 250px; display: grid; gap: var(--space-2); justify-items: start; padding: var(--space-4);
+  background: var(--art-paper); border-top: 16px solid var(--block); font-size: 15px; line-height: 22px;
+}
+.rv-block--room p { margin: 0; }
+.rv-block__link { font-weight: 700; color: var(--art-ink); }
+
+.rv-toy--letter { width: 64px; height: 64px; display: grid; place-items: center; font-family: var(--font-display); font-size: 38px; line-height: 1; color: var(--art-paper); }
+.rv-toy--plank { width: 170px; height: 30px; }
+.rv-toy--animal { width: 76px; height: 76px; }
+.rv-toy--tree { width: 66px; height: 100px; }
+.rv-toy--flower { width: 58px; height: 92px; }
+.rv-toy--ball { width: 60px; height: 60px; border-radius: 50%; box-shadow: inset -6px -6px 0 rgb(0 0 0 / .14); }
+/* the roof's outline is drawn in its picture, so the element itself is invisible */
+.rv-toy--roof { width: 100px; height: 70px; background: none; border: 0; border-radius: 0; box-shadow: none; }
+
+/* why families choose us: photos pegged on a line that turn over to show their reason. src/scripts/flip.ts toggles .is-flipped */
+.hs-painting.rv-flip { padding: 0; background: none; box-shadow: none; perspective: 1200px; }
+.hs-painting.rv-flip::before, .hs-painting.rv-flip::after { z-index: 2; }
+.rv-flip__inner { display: grid; transform-style: preserve-3d; transition: transform 600ms cubic-bezier(.3, .7, .3, 1); }
+.rv-flip.is-flipped .rv-flip__inner { transform: rotateY(180deg); }
+/* both sides share one cell, so the card is as tall as its longer side */
+.rv-flip__face {
+  grid-area: 1 / 1; display: grid; align-content: start; gap: var(--space-2); box-sizing: border-box; margin: 0;
+  padding: var(--space-4) var(--space-4) var(--space-6); background: var(--art-paper); color: var(--art-ink);
+  border: 0; border-radius: var(--radius-paper); box-shadow: var(--shadow-hang);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden; cursor: pointer;
+}
+.rv-flip__front { font: inherit; text-align: left; }
+.rv-flip__front > span { display: block; }
+.rv-flip__front .hs-painting__art { height: 160px; margin-bottom: var(--space-2); }
+.rv-flip__front:focus-visible, .rv-flip__back button:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 4px; }
+.rv-flip__back { transform: rotateY(180deg); grid-template-rows: auto 1fr auto; font-size: 15px; line-height: 24px; }
+.rv-flip__back p { margin: 0; }
+.rv-flip__hint {
+  justify-self: start; padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: 15px; line-height: 24px; color: var(--art-ink-soft); text-decoration: underline;
+}
 
 /* see inside */
 .rv-inside { align-items: start; }
@@ -763,6 +911,7 @@ main { overflow-x: clip; }
   .rv-strip-wide { display: none; }
   .rv-strip-phone { display: inline-flex; }
   .rv-hero-actions { display: grid; }
+  .rv-trust { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
   .hs .rv-hero-paintings { overflow: visible; padding-bottom: 0; }
   .hs .rv-hero-paintings > * { flex: 1 1 0; }
   .hs .rv-hero-paintings { gap: var(--space-2); }
@@ -774,7 +923,13 @@ main { overflow-x: clip; }
   .rv-line-stack::before { left: 0; right: 0; }
   .hs .rv-line-stack--straight > * { transform: none; margin-top: 0; }
   .rv-taped .hs-painting__art { height: 200px; }
-  .rv-day > div { grid-template-columns: 112px minmax(0, 1fr); gap: var(--space-2); }
+  .rv-season { --size: 300px; --orbit: 200px; --piece: 96px; }
+  /* room blocks go nearly full width on phones, so their text wraps less and three still fit in a tower */
+  .rv-blocks.is-live .rv-blocks__area { height: 780px; }
+  .rv-block--room { width: min(300px, calc(100% - var(--space-8))); gap: var(--space-1); padding: var(--space-2) var(--space-4); font-size: 14px; line-height: 20px; }
+  .hs .rv-block--room .hs-painting__title { font-size: 22px; line-height: 26px; }
+  .rv-toy--extra { display: none; }
+  .rv-day li { flex-basis: 156px; }
   .rv-review blockquote { font-size: 26px; line-height: 32px; }
   .hs-nav { flex-wrap: nowrap; align-items: center; padding: var(--space-2) var(--space-4) var(--space-4); }
   .rv-nav-book { display: none; }
@@ -798,4 +953,44 @@ main { overflow-x: clip; }
 @media (max-width: 360px) {
   .hs .rv-hero-paintings .hs-painting__title { font-size: 18px; }
   .hs-nav .hs-crayons--sm { font-size: 24px; }
+}
+
+/* crayon frames (kept last, so a card's own border rule can't reset them): cards are outlined in a wobbly, waxy crayon line instead of a drop shadow, drawn in the card's own
+   colour. Yellow would vanish on white paper, so yellow and plain cards take a deeper golden. */
+:root {
+  --frame-blue: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='c' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='2' seed='3' result='w'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='w' scale='3' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='8' result='g'/%3E%3CfeColorMatrix in='g' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url(%23c)' fill='none' stroke='%232f8fd8' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' d='M8 11C40 8 80 11 111 9C113 40 109 80 111 111C80 113 40 109 9 111C7 80 11 40 10 5'/%3E%3C/svg%3E");
+  --frame-purple: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='c' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='2' seed='3' result='w'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='w' scale='3' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='8' result='g'/%3E%3CfeColorMatrix in='g' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url(%23c)' fill='none' stroke='%238e67b6' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' d='M8 11C40 8 80 11 111 9C113 40 109 80 111 111C80 113 40 109 9 111C7 80 11 40 10 5'/%3E%3C/svg%3E");
+  --frame-orange: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='c' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='2' seed='3' result='w'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='w' scale='3' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='8' result='g'/%3E%3CfeColorMatrix in='g' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url(%23c)' fill='none' stroke='%23fb6b47' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' d='M8 11C40 8 80 11 111 9C113 40 109 80 111 111C80 113 40 109 9 111C7 80 11 40 10 5'/%3E%3C/svg%3E");
+  --frame-red: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='c' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='2' seed='3' result='w'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='w' scale='3' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='8' result='g'/%3E%3CfeColorMatrix in='g' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url(%23c)' fill='none' stroke='%23e8423f' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' d='M8 11C40 8 80 11 111 9C113 40 109 80 111 111C80 113 40 109 9 111C7 80 11 40 10 5'/%3E%3C/svg%3E");
+  --frame-green: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='c' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='2' seed='3' result='w'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='w' scale='3' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='8' result='g'/%3E%3CfeColorMatrix in='g' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url(%23c)' fill='none' stroke='%2358c23c' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' d='M8 11C40 8 80 11 111 9C113 40 109 80 111 111C80 113 40 109 9 111C7 80 11 40 10 5'/%3E%3C/svg%3E");
+  --frame-golden: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='c' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='2' seed='3' result='w'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='w' scale='3' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='8' result='g'/%3E%3CfeColorMatrix in='g' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url(%23c)' fill='none' stroke='%23f0ab1f' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' d='M8 11C40 8 80 11 111 9C113 40 109 80 111 111C80 113 40 109 9 111C7 80 11 40 10 5'/%3E%3C/svg%3E");
+  --frame-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='c' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='2' seed='3' result='w'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='w' scale='3' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='8' result='g'/%3E%3CfeColorMatrix in='g' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url(%23c)' fill='none' stroke='%23262b47' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' d='M8 11C40 8 80 11 111 9C113 40 109 80 111 111C80 113 40 109 9 111C7 80 11 40 10 5'/%3E%3C/svg%3E");
+  --frame-ink-round: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='c' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='2' seed='3' result='w'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='w' scale='3' xChannelSelector='R' yChannelSelector='G' result='d'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='1' seed='8' result='g'/%3E%3CfeColorMatrix in='g' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.6 1.55' result='m'/%3E%3CfeComposite in='d' in2='m' operator='in'/%3E%3C/filter%3E%3Cpath filter='url(%23c)' fill='none' stroke='%23262b47' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' d='M60 7A53 53 0 1 1 59 7.2M60 7q8 1 14 4'/%3E%3C/svg%3E");
+}
+
+.hs-painting, .rv-day li { --frame: var(--frame-golden); }
+/* a flip card's sides take their colour from the card they belong to */
+.hs-painting, .rv-flip__face, .rv-day li {
+  box-shadow: none; border: 0 solid transparent; border-image: var(--frame) 14 / 14px / 9px stretch;
+}
+/* a flip card's two sides each carry the frame, so the card holding them doesn't */
+.hs-painting.rv-flip { border-image: none; }
+.hs-painting--blue { --frame: var(--frame-blue); }
+.hs-painting--purple { --frame: var(--frame-purple); }
+.hs-painting--orange { --frame: var(--frame-orange); }
+.hs-painting--red { --frame: var(--frame-red); }
+.rv-day li:nth-child(5n+1) { --frame: var(--frame-purple); }
+.rv-day li:nth-child(5n+2) { --frame: var(--frame-orange); }
+.rv-day li:nth-child(5n+3) { --frame: var(--frame-blue); }
+.rv-day li:nth-child(5n+4) { --frame: var(--frame-green); }
+.rv-day li:nth-child(5n) { --frame: var(--frame-red); }
+
+/* toy blocks get the crayon outline too, in dark ink so it shows on every block colour. A room block keeps its
+   coloured band, now painted as the top of its background. */
+.rv-block { border: 0 solid transparent; border-image: var(--frame-ink) 14 / 14px / 10px stretch; }
+.rv-block--room { background: linear-gradient(var(--block) 0 16px, var(--art-paper) 16px); padding-top: calc(var(--space-4) + 16px); box-shadow: none; }
+.rv-toy--ball { border-image: var(--frame-ink-round) 60 / 50% / 4px stretch; }
+.rv-toy--roof { border-image: none; }
+@media (max-width: 860px) {
+  .rv-block--room { padding-top: calc(var(--space-2) + 16px); }
 }

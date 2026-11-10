@@ -11,10 +11,12 @@
   "dependencies": {
     "@astrojs/react": "7.1.2",
     "astro": "7.4.5",
+    "matter-js": "0.20.0",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },
   "devDependencies": {
+    "@types/matter-js": "0.20.2",
     "lucide-static": "0.460.0"
   },
   "engines": {

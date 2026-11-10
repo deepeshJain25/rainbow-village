@@ -1,0 +1,66 @@
+---
+// The rooms as a box of toy building blocks that visitors tip out, drag and stack. src/scripts/blocks.ts runs the
+// physics; without it the room blocks stand in a tidy row with their links, and the toys sit beside them.
+import Toy from './Toy.astro';
+
+interface Room {
+  name: string;
+  short: string;
+  shortAges: string;
+  homeText: string;
+  href: string;
+  crayon: string;
+}
+
+interface Props {
+  rooms: Room[];
+}
+
+const { rooms } = Astro.props;
+
+// shape is the physics outline; extra toys only come out of the box on wider screens
+const toys = [
+  { shape: 'box', kind: 'letter', colour: 'red', letter: 'A' },
+  { shape: 'box', kind: 'letter', colour: 'blue', letter: 'B', extra: true },
+  { shape: 'box', kind: 'letter', colour: 'green', letter: 'C', extra: true },
+  { shape: 'box', kind: 'plank', colour: 'yellow', extra: true },
+  { shape: 'roof', kind: 'roof', picture: 'roof' },
+  { shape: 'ball', kind: 'ball', colour: 'blue', picture: 'ball' },
+  { shape: 'box', kind: 'animal', colour: 'orange', picture: 'cat' },
+  { shape: 'box', kind: 'animal', colour: 'yellow', picture: 'duck' },
+  { shape: 'box', kind: 'animal', colour: 'paper', picture: 'bunny', extra: true },
+  { shape: 'box', kind: 'animal', colour: 'wood', picture: 'bear', extra: true },
+  { shape: 'box', kind: 'tree', colour: 'sky', picture: 'tree' },
+  { shape: 'box', kind: 'flower', colour: 'paper', picture: 'flower', extra: true },
+] as const;
+---
+
+<div class="rv-blocks" data-blocks>
+  <div class="rv-blocks__area" role="group" aria-label="Building blocks. Drag them to build a tower.">
+    {rooms.map((room) => (
+      <article class={`rv-block rv-block--room rv-block--${room.crayon}`} data-block="box" data-room>
+        <h3 class="hs-painting__title">{room.short}</h3>
+        <span class={`hs-tape hs-tape--${room.crayon}`}><span class="hs-tape__dab"></span>{room.shortAges}</span>
+        <p>{room.homeText}</p>
+        <a class="rv-block__link" href={room.href} aria-label={`See the ${room.name}`}>See the room →</a>
+      </article>
+    ))}
+    {toys.map((toy) => (
+      <div
+        class:list={['rv-block', 'rv-toy', `rv-toy--${toy.kind}`, 'colour' in toy && `rv-block--${toy.colour}`, 'extra' in toy && 'rv-toy--extra']}
+        data-block={toy.shape}
+        aria-hidden="true"
+      >
+        {'letter' in toy ? toy.letter : 'picture' in toy && <Toy picture={toy.picture} />}
+      </div>
+    ))}
+  </div>
+  <div class="rv-blocks__tools">
+    <button class="hs-btn rv-blocks__btn" type="button" data-blocks-tidy>Tidy up</button>
+    <button class="hs-btn rv-blocks__btn" type="button" data-blocks-tip>Tip it all out</button>
+  </div>
+</div>
+
+<script>
+  import '../scripts/blocks';
+</script>

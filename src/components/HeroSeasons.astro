@@ -1,0 +1,98 @@
+---
+// The hero's rainbow turns the seasons. It spins on its centre like a wheel, and round it on a bigger, invisible
+// wheel ride the sun, a rain cloud, a snow cloud and a spring sun; the current one rests at the top left of the
+// rainbow. src/scripts/seasons.ts moves the hero's data-season along and turns both wheels.
+
+// the rainbow's bands, inside to outside, as radii in a 460 box centred on 230, 230
+const bands = [
+  { colour: 'var(--crayon-purple)', r: 114 },
+  { colour: 'var(--crayon-blue)', r: 130 },
+  { colour: 'var(--rainbow-green)', r: 146 },
+  { colour: 'var(--crayon-yellow)', r: 162 },
+  { colour: 'var(--crayon-orange)', r: 178 },
+  { colour: 'var(--crayon-red)', r: 194 },
+];
+
+// each piece sits a quarter turn further back round the wheel, so one quarter turn forward brings on the next season
+const pieces = ['summer', 'autumn', 'winter', 'spring'].map((season, index) => ({ season, angle: -45 - index * 90 }));
+
+const cloud = 'M34 84H112A20 20 0 0 0 114 44A30 30 0 0 0 58 34A22 22 0 0 0 22 54A15 15 0 0 0 34 84Z';
+
+// falling weather, spread across the sky; positions are fixed so every visitor sees the same sky
+const spread = (count: number, seed: number) =>
+  Array.from({ length: count }, (_, i) => ({
+    x: (i * 37 + seed * 11) % 100,
+    delay: ((i * 53 + seed * 7) % 100) / 25,
+    speed: 0.8 + ((i * 29 + seed) % 10) / 10,
+  }));
+const weather = [
+  { kind: 'rain', season: 'autumn', drops: spread(28, 1) },
+  { kind: 'leaf', season: 'autumn', drops: spread(8, 2) },
+  { kind: 'snow', season: 'winter', drops: spread(30, 3) },
+  { kind: 'petal', season: 'spring', drops: spread(12, 4) },
+];
+---
+
+<div class="rv-weather" aria-hidden="true">
+  {weather.map(({ kind, season, drops }) => (
+    <div class={`rv-weather__layer rv-weather__layer--${kind}`} data-for={season}>
+      {drops.map(({ x, delay, speed }) => (
+        <i style={`--x: ${x}%; --delay: -${delay}s; --speed: ${speed}`}></i>
+      ))}
+    </div>
+  ))}
+</div>
+
+<div class="rv-season">
+  <div class="rv-season__wheel">
+    {pieces.map(({ season, angle }) => (
+      <span class:list={['rv-season__piece', { 'is-current': season === 'summer' }]} style={`--angle: ${angle}deg`} data-piece={season} aria-hidden="true">
+        {season === 'summer' && (
+          <svg viewBox="0 0 140 140">
+            <g class="rv-season__rays" stroke="var(--art-ink)" stroke-width="3" stroke-linejoin="round" fill="var(--crayon-yellow)">
+              {[0, 45, 90, 135, 180, 225, 270, 315].map((turn) => <path d="M64 22 70 6 76 22Z" transform={`rotate(${turn} 70 70)`} />)}
+            </g>
+            <circle cx="70" cy="70" r="36" fill="var(--crayon-yellow)" stroke="var(--art-ink)" stroke-width="3" />
+            <circle cx="58" cy="64" r="4" fill="var(--art-ink)" /><circle cx="82" cy="64" r="4" fill="var(--art-ink)" />
+            <path d="M56 78q14 12 28 0" fill="none" stroke="var(--art-ink)" stroke-width="3" stroke-linecap="round" />
+          </svg>
+        )}
+        {season === 'autumn' && (
+          <svg viewBox="0 0 140 100">
+            <path d={cloud} fill="#9fb3c8" stroke="var(--art-ink)" stroke-width="3" stroke-linejoin="round" />
+            <path d="M52 62q8 6 16 0M76 62q8 6 16 0" fill="none" stroke="var(--art-ink)" stroke-width="3" stroke-linecap="round" />
+          </svg>
+        )}
+        {season === 'winter' && (
+          <svg viewBox="0 0 140 100">
+            <path d={cloud} fill="var(--art-paper)" stroke="var(--art-ink)" stroke-width="3" stroke-linejoin="round" />
+            <circle cx="60" cy="60" r="3.5" fill="var(--art-ink)" /><circle cx="84" cy="60" r="3.5" fill="var(--art-ink)" />
+            <path d="M66 70q6 4 12 0" fill="none" stroke="var(--art-ink)" stroke-width="3" stroke-linecap="round" />
+            <ellipse cx="50" cy="68" rx="5" ry="3" fill="#f7a1b5" /><ellipse cx="94" cy="68" rx="5" ry="3" fill="#f7a1b5" />
+          </svg>
+        )}
+        {season === 'spring' && (
+          <svg viewBox="0 0 140 120">
+            <g stroke="var(--art-ink)" stroke-width="3" stroke-linejoin="round" fill="var(--crayon-yellow)">
+              {[0, 45, 90, 270, 315].map((turn) => <path d="M80 16 86 2 92 16Z" transform={`rotate(${turn} 86 46)`} />)}
+              <circle cx="86" cy="46" r="26" />
+            </g>
+            <path d={cloud} transform="translate(-10 22)" fill="var(--art-paper)" stroke="var(--art-ink)" stroke-width="3" stroke-linejoin="round" />
+          </svg>
+        )}
+      </span>
+    ))}
+  </div>
+  <button class="rv-season__rainbow" type="button" aria-label="Change the season" data-season-next>
+    <svg viewBox="0 0 460 460" aria-hidden="true">
+      {bands.map(({ colour, r }) => (
+        <path d={`M${230 - r} 230A${r} ${r} 0 0 1 ${230 + r} 230`} fill="none" stroke={colour} stroke-width="16.5" />
+      ))}
+    </svg>
+  </button>
+  <p class="rv-visually-hidden" aria-live="polite" data-season-said></p>
+</div>
+
+<script>
+  import '../scripts/seasons';
+</script>
