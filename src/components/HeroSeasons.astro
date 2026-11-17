@@ -83,6 +83,11 @@ const weather = [
       </span>
     ))}
   </div>
+  <!-- a nudge beside the resting piece, so people know the sun does something; it goes after the first turn -->
+  <span class="rv-season__hint" aria-hidden="true">
+    <svg viewBox="0 0 48 32"><path d="M44 6C30 4 14 10 8 24M8 24l-2-10M8 24l9-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    Click on me!
+  </span>
   <button class="rv-season__rainbow" type="button" aria-label="Change the season" data-season-next>
     <svg viewBox="0 0 460 460" aria-hidden="true">
       {bands.map(({ colour, r }) => (

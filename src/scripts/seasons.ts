@@ -19,6 +19,7 @@ for (const hero of document.querySelectorAll<HTMLElement>('[data-season]')) {
     turns += 1;
     const season = SEASONS[turns % SEASONS.length];
     hero.dataset.season = season;
+    hero.dataset.seasonTurned = '';
     hero.style.setProperty('--turn', String(turns));
     for (const piece of pieces) piece.classList.toggle('is-current', piece.dataset.piece === season);
     if (said) said.textContent = NAMES[season];

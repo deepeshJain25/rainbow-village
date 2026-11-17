@@ -561,6 +561,19 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
 .rv-season__piece.is-current { opacity: 1; pointer-events: auto; cursor: pointer; transition: transform var(--turning), opacity .6s ease .7s; }
 .rv-season__piece svg { display: block; width: 100%; height: 100%; }
 .rv-season__rays { transform-origin: 70px 70px; animation: rv-turn 24s linear infinite; }
+/* "Click on me!" sits up and to the right of the piece at rest, its arrow curling back down to it */
+.rv-season__hint {
+  --rest: calc(var(--size) / 2 - var(--orbit) * .7071);
+  position: absolute; left: calc(var(--rest) + var(--piece) * .42); top: calc(var(--rest) - var(--piece) * .62);
+  display: flex; align-items: flex-end; gap: 2px; white-space: nowrap;
+  font-family: var(--font-display); font-size: 26px; line-height: 1; color: var(--hero-ink);
+  transform: rotate(-6deg); transform-origin: left bottom;
+  animation: rv-nudge 2.4s ease-in-out infinite; transition: opacity .4s ease, color 1s ease;
+}
+.rv-season__hint svg { width: 40px; height: 27px; flex: none; margin-bottom: -14px; }
+.hs-hero[data-season-turned] .rv-season__hint { opacity: 0; animation: none; }
+@keyframes rv-nudge { 50% { transform: rotate(-6deg) translateY(-5px); } }
+@media (prefers-reduced-motion: reduce) { .rv-season__hint { animation: none; } }
 @keyframes rv-turn { to { transform: rotate(360deg); } }
 
 /* falling weather sits behind the words and the hills, and only moves in its own season */
@@ -924,6 +937,8 @@ main { overflow-x: clip; }
   .hs .rv-line-stack--straight > * { transform: none; margin-top: 0; }
   .rv-taped .hs-painting__art { height: 200px; }
   .rv-season { --size: 300px; --orbit: 200px; --piece: 96px; }
+  /* the room paintings hang just above the sun on phones, so the nudge sits level with the sun instead */
+  .rv-season__hint { top: calc(var(--rest) - 4px); left: calc(var(--rest) + var(--piece) * .5); font-size: 22px; }
   /* room blocks go nearly full width on phones, so their text wraps less and three still fit in a tower */
   .rv-blocks.is-live .rv-blocks__area { height: 780px; }
   .rv-block--room { width: min(300px, calc(100% - var(--space-8))); gap: var(--space-1); padding: var(--space-2) var(--space-4); font-size: 14px; line-height: 20px; }
