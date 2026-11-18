@@ -1,9 +1,17 @@
 ---
+import Field from '../components/Field.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Todo from '../components/Todo.astro';
 import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
+
+// tours start on the half hour from 10am, with the last one starting at 1:30pm so it ends by 2pm
+const times = ['10:00am', '10:30am', '11:00am', '11:30am', '12:00pm', '12:30pm', '1:00pm', '1:30pm'];
 ---
+
+<script>
+  import '../scripts/forms';
+</script>
 
 <Layout
   title="Book a Childcare Tour in Harris Park | Rainbow Village"
@@ -31,11 +39,43 @@ import Layout from '../layouts/Layout.astro';
       <p><b>Parking:</b> <mark class="rv-todo">[parking note]</mark></p>
     </div>
     <div class="hs-band hs-band--sky rv-page-split__band" data-theme="kraft">
-      <div class="hs-formsheet rv-booking" data-theme="crayon">
-        <h2>Pick a time</h2>
-        <p><mark class="rv-todo">[The Cal.com booking calendar goes here.]</mark></p>
-        <p>Can't see the calendar? Call <a href={site.phoneHref}><Todo text={site.phone} /></a> or email <a href={`mailto:${site.email}`}>{site.email}</a> and we'll book you in.</p>
-      </div>
+      <!-- Requests go to the centre's inbox through Web3Forms (site.formKey); src/scripts/forms.ts sends them. -->
+      <form
+        class="hs-formsheet rv-form rv-form--compact"
+        data-theme="crayon"
+        method="post"
+        action="https://api.web3forms.com/submit"
+        data-form
+        data-subject="Tour request from the website"
+        data-success="Thanks! We've got your tour request and will call or email you to confirm a time."
+      >
+        <h2 class="rv-form__full">Request a tour</h2>
+        <input type="hidden" name="access_key" value={site.formKey} />
+        <input class="rv-visually-hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div class="rv-form__full"><Field label="Your name" name="name" autocomplete="name" /></div>
+        <Field label="Phone" name="phone" type="tel" autocomplete="tel" />
+        <Field label="Email" name="email" type="email" autocomplete="email" />
+        <div class="rv-form__full"><Field label="Child's date of birth" name="dob" type="date" /></div>
+        <div class="hs-field" data-tour-day>
+          <label class="hs-field__label" for="field-date">Tour date</label>
+          <input class="hs-field__input" id="field-date" name="date" type="date" required aria-describedby="date-help" />
+        </div>
+        <div class="hs-field">
+          <label class="hs-field__label" for="field-time">Time</label>
+          <select class="hs-field__input" id="field-time" name="time" required>
+            <option value="">Choose a time</option>
+            {times.map((time) => <option>{time}</option>)}
+          </select>
+        </div>
+        <p class="rv-form-note rv-form__full" id="date-help">Tours are on Tuesdays and Thursdays, 10am to 2pm.</p>
+        <div class="rv-form__full"><Field label="Anything you'd like us to know" name="message" optional rows={3} /></div>
+        <button class="hs-btn hs-btn--orange rv-form__full" type="submit">Request a tour</button>
+        <p class="rv-form-note rv-form__full" data-form-status role="status" aria-live="polite"></p>
+        <p class="rv-form-note rv-form__full">
+          We'll confirm your time by phone or email. Prefer to talk? Call <a href={site.phoneHref}><Todo text={site.phone} /></a> or email <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+        {!site.formKey && <p class="rv-form-note rv-form__full"><mark class="rv-todo">[This form starts sending once the centre's Web3Forms access key is added.]</mark></p>}
+      </form>
     </div>
   </div>
 </Layout>

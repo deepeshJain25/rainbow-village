@@ -806,6 +806,10 @@ main { overflow-x: clip; }
 .rv-days label { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; }
 .rv-days input { width: 24px; height: 24px; margin: 0; accent-color: var(--orange-ink); }
 .rv-form-note { font-size: 15px; line-height: 24px; color: var(--ink-soft); }
+.rv-form-note:empty { display: none; }
+.hs .rv-form [data-form-status] { font-size: 17px; font-weight: 700; color: var(--ink); }
+.hs .rv-form [data-form-status].rv-form-error { color: var(--red-ink); }
+select.hs-field__input { cursor: pointer; }
 
 /* tables */
 .rv-table { width: 100%; border-collapse: collapse; }
