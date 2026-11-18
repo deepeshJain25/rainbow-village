@@ -7,6 +7,8 @@ import Layout from '../layouts/Layout.astro';
 
 // tours start on the half hour from 10am, with the last one starting at 1:30pm so it ends by 2pm
 const times = ['10:00am', '10:30am', '11:00am', '11:30am', '12:00pm', '12:30pm', '1:00pm', '1:30pm'];
+// the next Tuesday and Thursday after today; src/scripts/forms.ts fills in their dates in the visitor's browser
+const tourDays = [{ name: 'Tuesday', weekday: 2 }, { name: 'Thursday', weekday: 4 }];
 ---
 
 <script>
@@ -56,18 +58,28 @@ const times = ['10:00am', '10:30am', '11:00am', '11:30am', '12:00pm', '12:30pm',
         <Field label="Phone" name="phone" type="tel" autocomplete="tel" />
         <Field label="Email" name="email" type="email" autocomplete="email" />
         <div class="rv-form__full"><Field label="Child's date of birth" name="dob" type="date" /></div>
-        <div class="hs-field" data-tour-day>
-          <label class="hs-field__label" for="field-date">Tour date</label>
-          <input class="hs-field__input" id="field-date" name="date" type="date" required aria-describedby="date-help" />
-        </div>
-        <div class="hs-field">
-          <label class="hs-field__label" for="field-time">Time</label>
-          <select class="hs-field__input" id="field-time" name="time" required>
-            <option value="">Choose a time</option>
-            {times.map((time) => <option>{time}</option>)}
-          </select>
-        </div>
-        <p class="rv-form-note rv-form__full" id="date-help">Tours are on Tuesdays and Thursdays, 10am to 2pm.</p>
+        <fieldset class="rv-form__full">
+          <legend>Tour day</legend>
+          <div class="rv-choices">
+            {tourDays.map((day, index) => (
+              <label class="rv-choice" data-tour-day={day.weekday}>
+                <input type="radio" name="date" value={`Next ${day.name}`} required={index === 0} />
+                <span><b>{day.name}</b> <span data-tour-date>next week</span></span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+        <fieldset class="rv-form__full">
+          <legend>Time</legend>
+          <div class="rv-choices rv-choices--times">
+            {times.map((time, index) => (
+              <label class="rv-choice">
+                <input type="radio" name="time" value={time} required={index === 0} />
+                <span>{time}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
         <div class="rv-form__full"><Field label="Anything you'd like us to know" name="message" optional rows={3} /></div>
         <button class="hs-btn hs-btn--orange rv-form__full" type="submit">Request a tour</button>
         <p class="rv-form-note rv-form__full" data-form-status role="status" aria-live="polite"></p>

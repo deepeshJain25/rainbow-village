@@ -809,7 +809,25 @@ main { overflow-x: clip; }
 .rv-form-note:empty { display: none; }
 .hs .rv-form [data-form-status] { font-size: 17px; font-weight: 700; color: var(--ink); }
 .hs .rv-form [data-form-status].rv-form-error { color: var(--red-ink); }
-select.hs-field__input { cursor: pointer; }
+/* tour day and time: radio buttons drawn as small stamped buttons; the picked one turns yellow */
+.rv-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
+/* four times to a row where they fit, three on narrow phones */
+.rv-choices--times { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); }
+.rv-choice { position: relative; display: block; cursor: pointer; }
+.rv-choice input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.rv-choice > span {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 var(--space-1);
+  min-height: 48px; padding: var(--space-1) var(--space-2); box-sizing: border-box; text-align: center;
+  font-size: 17px; line-height: 22px; color: var(--ink);
+  background: var(--paper-card); border: 2px solid var(--edge); border-radius: var(--radius-stamp);
+  box-shadow: 2px 2px 0 var(--edge); transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+.rv-choice b { font-family: var(--font-display); font-size: 20px; font-weight: 400; }
+/* a day button stacks its weekday over its date, so picking it never re-wraps the text */
+.rv-choice[data-tour-day] > span { flex-direction: column; flex-wrap: nowrap; min-height: 60px; }
+.rv-choice:hover > span { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--edge); }
+.rv-choice input:checked + span { background: var(--crayon-yellow); color: var(--band-ink); transform: translate(2px, 2px); box-shadow: none; }
+.rv-choice input:focus-visible + span { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
 
 /* tables */
 .rv-table { width: 100%; border-collapse: collapse; }

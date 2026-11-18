@@ -1,25 +1,28 @@
 // Sends a [data-form] form to Web3Forms, which emails it to the centre, and shows the result in the form's
 // [data-form-status] line. Without JavaScript the form still posts to Web3Forms and lands on its thank-you page.
-// The tour date only accepts a Tuesday or Thursday from today on.
-const TOUR_DAYS = [2, 4];
+// Each [data-tour-day] button shows and sends the next date that falls on its weekday, counting from tomorrow.
 
-const localToday = () => {
-  const now = new Date();
-  return new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+// the first date after today that falls on the given weekday (0 is Sunday)
+const nextWeekday = (weekday: number) => {
+  const date = new Date();
+  date.setDate(date.getDate() + (((weekday - date.getDay() + 6) % 7) + 1));
+  return date;
 };
 
 for (const form of document.querySelectorAll<HTMLFormElement>('form[data-form]')) {
   const status = form.querySelector<HTMLElement>('[data-form-status]');
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-  const date = form.querySelector<HTMLInputElement>('[data-tour-day] input');
 
-  if (date) {
-    date.min = localToday();
-    date.addEventListener('input', () => {
-      const day = date.value ? new Date(`${date.value}T12:00`).getDay() : null;
-      date.setCustomValidity(day === null || TOUR_DAYS.includes(day) ? '' : 'Please choose a Tuesday or Thursday.');
-    });
-  }
+  // dated, then put in date order, so the sooner tour always comes first
+  const tourDays = [...form.querySelectorAll<HTMLElement>('[data-tour-day]')].map((choice) => {
+    const date = nextWeekday(Number(choice.dataset.tourDay));
+    const label = choice.querySelector('[data-tour-date]');
+    const input = choice.querySelector('input');
+    if (label) label.textContent = date.toLocaleDateString('en-AU', { day: 'numeric', month: 'long' });
+    if (input) input.value = date.toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    return { choice, date };
+  });
+  tourDays.sort((a, b) => a.date.getTime() - b.date.getTime()).forEach(({ choice }) => choice.parentElement?.append(choice));
 
   const say = (text: string, failed = false) => {
     if (!status) return;
