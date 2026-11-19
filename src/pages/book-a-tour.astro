@@ -54,12 +54,12 @@ const tourDays = [{ name: 'Tuesday', weekday: 2 }, { name: 'Thursday', weekday: 
         <h2 class="rv-form__full">Request a tour</h2>
         <input type="hidden" name="access_key" value={site.formKey} />
         <input class="rv-visually-hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <div class="rv-form__full"><Field label="Your name" name="name" autocomplete="name" /></div>
-        <Field label="Phone" name="phone" type="tel" autocomplete="tel" />
-        <Field label="Email" name="email" type="email" autocomplete="email" />
-        <div class="rv-form__full"><Field label="Child's date of birth" name="dob" type="date" /></div>
+        <div class="rv-form__full"><Field label="Your name" name="name" autocomplete="name" mark="*" /></div>
+        <Field label="Phone" name="phone" type="tel" autocomplete="tel" mark="**" contact />
+        <Field label="Email" name="email" type="email" autocomplete="email" mark="**" contact />
+        <div class="rv-form__full"><Field label="Child's date of birth" name="dob" type="date" optional /></div>
         <fieldset class="rv-form__full">
-          <legend>Tour day</legend>
+          <legend>Tour day<span class="rv-mark" aria-hidden="true"> *</span></legend>
           <div class="rv-choices">
             {tourDays.map((day, index) => (
               <label class="rv-choice" data-tour-day={day.weekday}>
@@ -70,7 +70,7 @@ const tourDays = [{ name: 'Tuesday', weekday: 2 }, { name: 'Thursday', weekday: 
           </div>
         </fieldset>
         <fieldset class="rv-form__full">
-          <legend>Time</legend>
+          <legend>Time<span class="rv-mark" aria-hidden="true"> *</span></legend>
           <div class="rv-choices rv-choices--times">
             {times.map((time, index) => (
               <label class="rv-choice">
@@ -82,6 +82,7 @@ const tourDays = [{ name: 'Tuesday', weekday: 2 }, { name: 'Thursday', weekday: 
         </fieldset>
         <div class="rv-form__full"><Field label="Anything you'd like us to know" name="message" optional rows={3} /></div>
         <button class="hs-btn hs-btn--orange rv-form__full" type="submit">Request a tour</button>
+        <p class="rv-form-note rv-form__full" id="contact-help"><span class="rv-mark" aria-hidden="true">*</span> Required. <span class="rv-mark" aria-hidden="true">**</span> One of phone or email is needed so we can contact you. You can give both.</p>
         <p class="rv-form-note rv-form__full" data-form-status role="status" aria-live="polite"></p>
         <p class="rv-form-note rv-form__full">
           We'll confirm your time by phone or email. Prefer to talk? Call <a href={site.phoneHref}><Todo text={site.phone} /></a> or email <a href={`mailto:${site.email}`}>{site.email}</a>.

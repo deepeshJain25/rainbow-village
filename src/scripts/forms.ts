@@ -24,6 +24,17 @@ for (const form of document.querySelectorAll<HTMLFormElement>('form[data-form]')
   });
   tourDays.sort((a, b) => a.date.getTime() - b.date.getTime()).forEach(({ choice }) => choice.parentElement?.append(choice));
 
+  // phone and email: neither is required alone, but at least one is; the browser flags the first if both are empty
+  const contacts = [...form.querySelectorAll<HTMLInputElement>('[data-contact]')];
+  const checkContacts = () => {
+    const given = contacts.some((input) => input.value.trim() !== '');
+    contacts.forEach((input, index) => input.setCustomValidity(given || index > 0 ? '' : 'Please give a phone number or an email so we can contact you.'));
+  };
+  if (contacts.length) {
+    checkContacts();
+    for (const input of contacts) input.addEventListener('input', checkContacts);
+  }
+
   const say = (text: string, failed = false) => {
     if (!status) return;
     status.textContent = text;
@@ -54,6 +65,7 @@ for (const form of document.querySelectorAll<HTMLFormElement>('form[data-form]')
       const result = await response.json().catch(() => ({}));
       if (!response.ok || result.success === false) throw new Error(result.message ?? response.statusText);
       form.reset();
+      checkContacts();
       say(form.dataset.success ?? 'Thanks, we got your message.');
     } catch {
       say("Sorry, that didn't send. Please try again, or call or email us instead.", true);

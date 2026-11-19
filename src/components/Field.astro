@@ -1,5 +1,6 @@
 ---
-// One labelled form field. Forms post nowhere until the enquiry API route is added.
+// One labelled form field. `mark` adds a * (required) or ** (one of a group, such as phone or email) after the
+// label. A `contact` field is not required on its own: src/scripts/forms.ts asks for at least one of them.
 interface Props {
   label: string;
   name: string;
@@ -7,17 +8,20 @@ interface Props {
   autocomplete?: string;
   optional?: boolean;
   rows?: number;
+  mark?: '*' | '**';
+  contact?: boolean;
 }
 
-const { label, name, type = 'text', autocomplete, optional = false, rows } = Astro.props;
+const { label, name, type = 'text', autocomplete, optional = false, rows, mark, contact = false } = Astro.props;
 const id = `field-${name}`;
+const required = !optional && !contact;
 ---
 
 <div class="hs-field">
   <label class="hs-field__label" for={id}>
-    {label}{optional && <span class="hs-field__opt"> (optional)</span>}
+    {label}{mark && <span class="rv-mark" aria-hidden="true"> {mark}</span>}{optional && <span class="hs-field__opt"> (optional)</span>}
   </label>
   {rows
-    ? <textarea class="hs-field__input" id={id} name={name} rows={rows} required={!optional}></textarea>
-    : <input class="hs-field__input" id={id} name={name} type={type} autocomplete={autocomplete} required={!optional} />}
+    ? <textarea class="hs-field__input" id={id} name={name} rows={rows} required={required}></textarea>
+    : <input class="hs-field__input" id={id} name={name} type={type} autocomplete={autocomplete} required={required} data-contact={contact ? '' : undefined} aria-describedby={contact ? 'contact-help' : undefined} />}
 </div>
