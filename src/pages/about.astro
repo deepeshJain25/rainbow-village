@@ -1,4 +1,5 @@
 ---
+import BrandText from '../components/BrandText.astro';
 import Closing from '../components/Closing.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Photo from '../components/Photo.astro';
@@ -34,13 +35,13 @@ const beliefs = [
 ---
 
 <Layout
-  title="About Us | Family-Run Childcare in Harris Park Since 2007"
-  description="Rainbow Village has cared for Harris Park families since 2007. A small, family-run child care centre with an open door and educators who stay."
+  title="About Us | Family-Run Childcare in Rosehill Since 2007"
+  description="Rainbow Village has cared for Rosehill families since 2007. A cozy, family-run child care centre with an open door and educators who stay."
 >
   <PageHeader
     title="About Rainbow Village Childcare Centre"
     current="About us"
-    lead="A small, family-run childcare centre in Harris Park, caring for local children and families since 2007."
+    lead="A cozy, family-run childcare centre in Rosehill, caring for local children and families since 2007."
   />
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
@@ -48,7 +49,7 @@ const beliefs = [
       <div class="rv-copy">
         <h2 class="hs-title">Our story: family-run childcare since 2007</h2>
         <p>Rainbow Village opened in 2007 with a simple aim: quality early childhood education and care for families in our local community. We wanted a centre where children feel safe, loved and supported, and where families feel welcomed and valued.</p>
-        <p>From the start, we set out to create more than a childcare centre. We wanted a place that feels like a second home. Nearly two decades on, that's what Harris Park and Parramatta families still tell us they find here.</p>
+        <p>From the start, we set out to create more than a childcare centre. We wanted a place that feels like a second home. Nearly two decades on, that's what Rosehill and Parramatta families still tell us they find here.</p>
         <p>Our owner and director, Nighat Saeed, or her daughter is at the centre every day. They greet families in the morning, know every child, and are always there to talk. Families know there is always someone they can speak to.</p>
       </div>
       <Photo caption="Our garden, where the children grow vegetables" crayon="blue" taped />
@@ -57,7 +58,7 @@ const beliefs = [
 
   <section class="hs-sheet" data-theme="crayon">
     <div class="rv-wrap rv-sheet-body">
-      <h2>How we care for children at Rainbow Village</h2>
+      <h2><BrandText text="How we care for children at Rainbow Village" /></h2>
       {beliefs.map((belief) => <p><b>{belief.title}</b> <Todo text={belief.text} /></p>)}
       <p>Our program follows Australia's Early Years Learning Framework.</p>
     </div>
@@ -66,17 +67,17 @@ const beliefs = [
   <section class="hs-ground hs-paper-doodles rv-section rv-chalk" data-theme="chalkboard">
     <div class="rv-wrap rv-split">
       <div class="rv-stack">
-        <h2 class="hs-title">See a day at Rainbow Village</h2>
+        <h2 class="hs-title"><BrandText text="See a day at Rainbow Village" /></h2>
       </div>
       <ul class="hs-line rv-line-single">
-        <li><Photo caption="90 seconds inside our Harris Park rooms and garden" /></li>
+        <li><Photo caption="90 seconds inside our Rosehill rooms and garden" /></li>
       </ul>
     </div>
   </section>
 
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-copy">
-      <h2 class="hs-title">Rainbow Village at a glance</h2>
+      <h2 class="hs-title"><BrandText text="Rainbow Village at a glance" /></h2>
       <p>
         <b>Open since 2007.</b> <b>40 places</b> across three rooms for children from <b>6 weeks to 6 years</b>. Open
         <b>Monday to Friday, 7am to 6pm</b>, and closed on weekends and NSW public holidays.

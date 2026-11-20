@@ -1,4 +1,5 @@
 ---
+import BrandText from '../components/BrandText.astro';
 import Closing from '../components/Closing.astro';
 import PageHeader from '../components/PageHeader.astro';
 import RoomCard from '../components/RoomCard.astro';
@@ -15,8 +16,8 @@ const suburbs = [
     text: 'Harris Park station is one stop from Parramatta on the T1 and T2 lines, and [distance] from our door. By car, we\'re [drive time] from Parramatta CBD via [main road]. Many families who work in Parramatta drop off on the way.',
   },
   {
-    name: 'Childcare near Rosehill',
-    text: 'From Rosehill, we\'re about [drive time] by car via [route, for example James Ruse Drive]. [Add a local landmark families will know.]',
+    name: 'Childcare near Harris Park',
+    text: 'From Harris Park, we\'re about [drive time] by car via [route, for example James Ruse Drive]. [Add a local landmark families will know.]',
   },
   {
     name: 'Childcare near Granville',
@@ -25,7 +26,7 @@ const suburbs = [
 ];
 
 const reasons = [
-  { title: 'Small and family-run.', text: "40 places, and an owner who greets you every morning. We're not a large chain. {Our story}(/about)." },
+  { title: 'Cozy and family-run.', text: "40 places, and an owner who greets you every morning. We're not a large chain. {Our story}(/about)." },
   { title: 'Food that suits local families.', text: 'Halal and vegetarian meals, cooked fresh on site, with no beef or pork.' },
   { title: 'Educators who speak your language.', text: 'English, Urdu, Punjabi, Hindi, Nepali and Telugu.' },
   { title: 'Part of the community since 2007.', text: "Parramatta Council incursions, links with local primary schools, and around 25 families who've returned with younger children." },
@@ -33,14 +34,14 @@ const reasons = [
 ---
 
 <Layout
-  title="Childcare near Parramatta, Rosehill & Granville | Harris Park"
-  description="Family-run childcare in Harris Park, one train stop from Parramatta and Granville. Small groups, halal meals, vacancies on all days."
+  title="Childcare near Parramatta, Harris Park & Granville | Rosehill"
+  description="Family-run childcare in Rosehill, one train stop from Parramatta and Granville. Cozy groups, halal meals, vacancies on all days."
   schema={childCare}
 >
   <PageHeader
-    title="Childcare near Parramatta, Rosehill and Granville"
+    title="Childcare near Parramatta, Harris Park and Granville"
     current="Childcare near Parramatta"
-    lead="Rainbow Village is a family-run childcare centre in Harris Park, right between Parramatta, Rosehill and Granville. It's an easy drop-off on the way to work or the train. [Add real travel times.]"
+    lead="Rainbow Village is a family-run childcare centre in Rosehill, right between Parramatta, Harris Park and Granville. It's an easy drop-off on the way to work or the train. [Add real travel times.]"
   />
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
@@ -62,7 +63,7 @@ const reasons = [
 
   <section class="hs-sheet" data-theme="crayon">
     <div class="rv-wrap rv-sheet-body">
-      <h2>Why Parramatta families choose Rainbow Village</h2>
+      <h2><BrandText text="Why Parramatta families choose Rainbow Village" /></h2>
       {reasons.map((reason) => <p><b>{reason.title}</b> <Todo text={reason.text} /></p>)}
     </div>
   </section>
@@ -98,5 +99,5 @@ const reasons = [
     </div>
   </section>
 
-  <Closing title="Visit our Harris Park centre" band="green" secondary={{ label: 'Get directions', href: site.mapUrl }} />
+  <Closing title="Visit our Rosehill centre" band="green" secondary={{ label: 'Get directions', href: site.mapUrl }} />
 </Layout>

@@ -251,6 +251,20 @@
 .hs-crayons--sm { font-size: 40px; line-height: 40px; }
 .hs-crayons--sm > span:nth-child(even) { transform: rotate(var(--tilt-letter)) translateY(-4px); }
 
+/* "Rainbow Village" inside a heading, lettered like the logo: same crayon colours in the same order, a gentle tilt */
+.rv-brand { white-space: nowrap; }
+.rv-brand__letters { -webkit-mask-image: var(--hs-wax); mask-image: var(--hs-wax); }
+.rv-brand__letters > span { display: inline-block; }
+.rv-brand__letters > span:nth-child(odd) { transform: rotate(calc(var(--tilt-letter) * -1)); }
+.rv-brand__letters > span:nth-child(even) { transform: rotate(var(--tilt-letter)) translateY(-.06em); }
+.rv-brand__letters > span:nth-child(7n+1) { color: var(--crayon-red); }
+.rv-brand__letters > span:nth-child(7n+2) { color: var(--crayon-orange); }
+.rv-brand__letters > span:nth-child(7n+3) { color: var(--crayon-yellow); }
+.rv-brand__letters > span:nth-child(7n+4) { color: var(--crayon-green); }
+.rv-brand__letters > span:nth-child(7n+5) { color: var(--crayon-blue); }
+.rv-brand__letters > span:nth-child(7n+6) { color: var(--crayon-purple); }
+.rv-brand__letters > span:nth-child(7n)   { color: var(--crayon-sky); }
+
 /* ---------- ColourBand: a full-width crayon section with pinking-shear edges ---------- */
 .hs-band {
   --band: var(--crayon-green);
@@ -498,6 +512,10 @@ body { margin: 0; }
 .rv-menu__close { display: none; }
 .rv-menu[open] .rv-menu__open { display: none; }
 .rv-menu[open] .rv-menu__close { display: inline; }
+/* the menu button is the three-line icon (an X while open), square like the other stamped buttons */
+.rv-menu__toggle { width: 56px; padding: 0; }
+.rv-menu__toggle .rv-menu__open, .rv-menu[open] .rv-menu__toggle .rv-menu__close { display: inline-flex; }
+.rv-menu__toggle .rv-icon svg { width: 28px; height: 28px; stroke-width: 2.5; }
 .rv-menu[open] > summary { position: fixed; top: var(--space-2); right: var(--space-4); z-index: 7; }
 body:has(.rv-menu[open]) { overflow: hidden; }
 body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
@@ -596,7 +614,9 @@ body:has(.rv-menu[open]) .rv-mobile-bar { display: none; }
   100% { transform: translate(0, 1100px) rotate(360deg); }
 }
 .rv-hero-title { font-size: min(76px, calc(8vw - 10px)); line-height: 1.05; }
-.rv-hero-title span { display: block; white-space: nowrap; }
+.rv-hero-title > span { display: block; white-space: nowrap; }
+/* on the green hero the crayon letters get the ink stamp shadow, so the green and yellow ones still read */
+.rv-hero-title .rv-brand__letters > span { text-shadow: .05em .05em 0 var(--hero-ink); }
 .rv-trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); font-size: 15px; line-height: 24px; font-weight: 700; }
 /* each fact reads as one sentence beside its icon, so the placeholders flow inline instead of stacking */
 .rv-trust li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-2); align-items: start; }

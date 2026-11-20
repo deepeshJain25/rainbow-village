@@ -1,4 +1,5 @@
 ---
+import BrandText from '../components/BrandText.astro';
 import PaintingArt from '../components/PaintingArt.astro';
 import BlockPlay from '../components/BlockPlay.astro';
 import Closing from '../components/Closing.astro';
@@ -21,7 +22,7 @@ const reasons = [
     text: 'Nighat or her daughter greets you every morning, so someone here always knows your child by name. {Read our story}(/about).',
   },
   {
-    title: 'Small groups, familiar faces.',
+    title: 'Cozy groups, familiar faces.',
     photo: 'toddlers-activity-tables',
     crayon: 'purple',
     text: 'Just 40 places across three rooms, with the same educators every day. Ratios are 1 to 4 babies, 1 to 5 toddlers and 1 to 10 preschoolers.',
@@ -60,8 +61,8 @@ const educators = [
 ---
 
 <Layout
-  title="Childcare Harris Park | Rainbow Village Childcare Centre"
-  description="Family-run childcare centre in Harris Park since 2007. Babies from 6 weeks, toddlers and preschool. Halal meals cooked on site. Book a tour."
+  title="Childcare Rosehill | Rainbow Village Childcare Centre"
+  description="Family-run childcare centre in Rosehill since 2007. Babies from 6 weeks, toddlers and preschool. Halal meals cooked on site. Book a tour."
   schema={childCare}
 >
   <!-- Hero: bright green, the page's one big colour moment. The rating is live from the Places API once that is set up. -->
@@ -69,10 +70,10 @@ const educators = [
     <div class="hs-hero__grid">
       <div class="hs-hero__words">
         <div class="rv-stack">
-          <h1 class="rv-hero-eyebrow">Family-run childcare in Harris Park</h1>
-          <p class="hs-hero__title rv-hero-title"><span>A second home</span> <span>for your child</span></p>
+          <h1 class="rv-hero-eyebrow">Family-run childcare in Rosehill</h1>
+          <p class="hs-hero__title rv-hero-title"><span>A second <BrandText text="home" all /></span> <span>for your child</span></p>
         </div>
-        <p class="hs-hero__lead">Rainbow Village is a small, family-run child care centre in Harris Park, caring for children from 6 weeks to 6 years since 2007. You'll find familiar educators, small groups and home-style meals cooked here every day.</p>
+        <p class="hs-hero__lead">Rainbow Village is a cozy, family-run child care centre in Rosehill, caring for children from 6 weeks to 6 years since 2007. You'll find familiar educators, cozy groups and home-style meals cooked here every day.</p>
         <div class="hs-hero__actions rv-hero-actions">
           <a class="hs-btn hs-btn--orange" href="/book-a-tour">Book a tour</a>
           <a class="hs-btn hs-btn--yellow" href={site.phoneHref}>Call <Todo text={site.phone} /></a>
@@ -105,7 +106,7 @@ const educators = [
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-stack-lg">
       <div class="rv-stack">
-        <h2 class="hs-title">Why families choose Rainbow Village Childcare</h2>
+        <h2 class="hs-title"><BrandText text="Why families choose Rainbow Village Childcare" /></h2>
         <p>Rainbow Village isn't just childcare. It's a place where children are known, families feel welcome, and every child gets the time and attention to flourish.</p>
       </div>
       <ul class="hs-line rv-line-stack rv-reasons">
@@ -146,7 +147,7 @@ const educators = [
   <!-- A day here: the timetable as a row of picture cards on the ruled sheet -->
   <section class="hs-sheet" data-theme="crayon">
     <div class="rv-wrap rv-sheet-body">
-      <h2>A day at our Harris Park centre</h2>
+      <h2>A day at our Rosehill centre</h2>
       <p>Every day mixes play, learning, fresh air and good food, at a pace that suits your child.</p>
       <ol class="rv-day" tabindex="0" aria-label="Our day, in order. Scroll sideways to see it all.">
         {day.map((activity) => (
@@ -165,7 +166,7 @@ const educators = [
   <section class="hs-band hs-band--purple" data-theme="kraft">
     <div class="hs-band__inner rv-stack-lg">
       <div class="rv-stack">
-        <h2 class="hs-title">What Harris Park families say</h2>
+        <h2 class="hs-title">What Rosehill families say</h2>
         <p>Featured reviews</p>
       </div>
       <ReviewsSlider client:visible reviews={reviews} />
@@ -177,7 +178,7 @@ const educators = [
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-stack-lg">
       <div class="rv-stack">
-        <h2 class="hs-title">Take a look inside Rainbow Village</h2>
+        <h2 class="hs-title"><BrandText text="Take a look inside Rainbow Village" /></h2>
         <p>Ninety seconds in our rooms and garden, and the people your child will spend their day with.</p>
       </div>
       <div class="rv-split rv-inside">
@@ -185,7 +186,7 @@ const educators = [
           <li>
             <figure class="hs-painting rv-poster">
               <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
-              <figcaption class="hs-painting__caption">A morning at Rainbow Village Childcare, Harris Park</figcaption>
+              <figcaption class="hs-painting__caption">A morning at Rainbow Village Childcare, Rosehill</figcaption>
             </figure>
           </li>
         </ul>
@@ -212,7 +213,7 @@ const educators = [
     <p class="rv-wrap">Daily fees from $130, with three meals, nappies and sunscreen included. We're approved for the Child Care Subsidy. <a href="/fees">See fees and subsidy</a></p>
   </section>
 
-  <Closing title="Visit our Harris Park childcare centre" text="Tours run Tuesday and Thursday, 10am to 2pm. Bring your child if you like." band="green" />
+  <Closing title="Visit our Rosehill childcare centre" text="Tours run Tuesday and Thursday, 10am to 2pm. Bring your child if you like." band="green" />
 </Layout>
 
 <script>

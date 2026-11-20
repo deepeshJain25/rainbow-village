@@ -14,7 +14,7 @@ export const childCare = {
   address: {
     '@type': 'PostalAddress',
     streetAddress: '42 Weston St',
-    addressLocality: 'Harris Park',
+    addressLocality: 'Rosehill',
     addressRegion: 'NSW',
     postalCode: '2150',
     addressCountry: 'AU',

@@ -41,7 +41,10 @@ const isCurrent = (item: { href: string; children?: { href: string }[] }) =>
     <div class="rv-nav-actions">
       <a class="hs-btn hs-btn--orange rv-nav-book" href="/book-a-tour">Book a tour</a>
       <details class="rv-menu">
-        <summary class="hs-btn"><span class="rv-menu__open">Menu</span><span class="rv-menu__close">Close</span></summary>
+        <summary class="hs-btn rv-menu__toggle">
+          <span class="rv-menu__open"><Icon name="menu" /><span class="rv-visually-hidden">Menu</span></span>
+          <span class="rv-menu__close"><Icon name="x" /><span class="rv-visually-hidden">Close menu</span></span>
+        </summary>
         <ul class="rv-menu__panel">
           {site.nav.map((item) => (
             <li>

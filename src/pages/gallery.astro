@@ -35,11 +35,11 @@ const filters = allFilters.filter((filter) => filter.id === 'all' || photos.some
 ---
 
 <Layout
-  title="Photos of Rainbow Village Childcare Centre, Harris Park"
-  description="See inside our Harris Park childcare centre: the babies, toddlers and preschool rooms, our vegetable garden and our kitchen. Real photos."
+  title="Photos of Rainbow Village Childcare Centre, Rosehill"
+  description="See inside our Rosehill childcare centre: the babies, toddlers and preschool rooms, our vegetable garden and our kitchen. Real photos."
 >
   <PageHeader
-    title="Inside our Harris Park childcare centre"
+    title="Inside our Rosehill childcare centre"
     current="Gallery"
     lead="Our rooms, our garden and our kitchen. Every photo here was taken at Rainbow Village."
     crumbs={[{ label: 'About', href: '/about' }]}
@@ -47,7 +47,7 @@ const filters = allFilters.filter((filter) => filter.id === 'all' || photos.some
 
   <section class="hs-ground hs-paper-doodles rv-section rv-section--flush" data-theme="crayon">
     <div class="rv-wrap rv-gallery">
-      <p class="rv-gallery__intro">Rainbow Village is a small child care centre with three rooms: babies, toddlers and preschool. Each is set up so children can choose what to play with and explore at their own pace. Outside, children dig, plant and pick vegetables in our garden. Inside, our kitchen cooks three home-style meals every day.</p>
+      <p class="rv-gallery__intro">Rainbow Village is a cozy child care centre with three rooms: babies, toddlers and preschool. Each is set up so children can choose what to play with and explore at their own pace. Outside, children dig, plant and pick vegetables in our garden. Inside, our kitchen cooks three home-style meals every day.</p>
       {filters.map((filter, index) => (
         <input class="rv-filter" type="radio" name="gallery-filter" id={`g-${filter.id}`} checked={index === 0} aria-label={`Show ${filter.label}`} />
       ))}

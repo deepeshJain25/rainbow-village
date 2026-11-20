@@ -1,0 +1,17 @@
+---
+// A heading's text with every "Rainbow Village" (or the whole `text` when `all` is set) drawn in the logo's crayon
+// letters: the same colours in the same order as the header logo, at the heading's own size. The letters are plain
+// inline spans, so the words still read and index as "Rainbow Village"; the space between words is a no-break space.
+interface Props {
+  text: string;
+  all?: boolean;
+}
+
+const { text, all = false } = Astro.props;
+const parts = all ? ['', text] : text.split(/(Rainbow Village)/);
+---
+
+{parts.map((part, index) =>
+  index % 2 === 1
+    ? <span class="rv-brand rv-brand__letters">{[...part].map((letter) => <span>{letter === ' ' ? ' ' : letter}</span>)}</span>
+    : part)}

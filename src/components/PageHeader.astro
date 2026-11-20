@@ -1,5 +1,6 @@
 ---
 // The opening of every inner page: breadcrumbs, a short h1, one plain lead and, usually, the main action.
+import BrandText from './BrandText.astro';
 import Todo from './Todo.astro';
 
 interface Props {
@@ -26,7 +27,7 @@ const trail = [{ label: 'Home', href: '/' }, ...crumbs, { label: current ?? titl
       </ol>
     </nav>
     <slot name="tape" />
-    <h1>{title}</h1>
+    <h1><BrandText text={title} /></h1>
     <p class="rv-lead"><Todo text={lead} /></p>
     {action && <div><a class="hs-btn hs-btn--orange" href={action.href}>{action.label}</a></div>}
   </div>
