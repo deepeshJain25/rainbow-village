@@ -8,6 +8,7 @@
     "fee": "$135",
     "crayon": "purple",
     "href": "/rooms/babies",
+    "photo": "babies-room",
     "homeText": "Gentle routines that follow your baby's own sleep and feeds, with 1 educator for every 4 babies.",
     "lineText": "8 places · 1 educator to 4 babies"
   },
@@ -20,6 +21,7 @@
     "fee": "$130",
     "crayon": "yellow",
     "href": "/rooms/toddlers",
+    "photo": "toddlers-room",
     "homeText": "Play, new words and growing independence, with 1 educator for every 5 toddlers.",
     "lineText": "12 places · 1 educator to 5 toddlers"
   },
@@ -32,6 +34,7 @@
     "fee": "$135",
     "crayon": "orange",
     "href": "/rooms/preschool",
+    "photo": "preschool-room",
     "homeText": "School readiness led by a degree-qualified early childhood teacher, with NSW Start Strong fee relief.",
     "lineText": "20 places · 1 educator to 10 children, led by an early childhood teacher"
   }

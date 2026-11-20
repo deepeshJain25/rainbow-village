@@ -21,7 +21,7 @@ import Layout from '../../layouts/Layout.astro';
     <ul class="rv-wrap hs-line rv-line-stack">
       {rooms.map((room) => (
         <li>
-          <RoomCard title={room.short} ages={room.shortAges} text={room.lineText} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
+          <RoomCard title={room.short} ages={room.shortAges} text={room.lineText} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} photo={room.photo} />
         </li>
       ))}
     </ul>

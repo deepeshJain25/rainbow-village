@@ -1,0 +1,25 @@
+---
+// The picture area of a painting: the centre's photo when one is given, otherwise the crayon blobs.
+// `sizes` tells the browser how wide the picture shows, so it fetches a small file on small screens.
+import { Image } from 'astro:assets';
+import { alts, photos } from '../content/photos';
+
+interface Props {
+  photo?: string;
+  sizes?: string;
+  tag?: 'div' | 'span';
+  eager?: boolean;
+  // inside a link or button that already names what it is, the picture adds nothing for a screen reader
+  decorative?: boolean;
+}
+
+const { photo, sizes = '(max-width: 860px) 90vw, 400px', tag: Tag = 'div', eager = false, decorative = false } = Astro.props;
+const image = photo ? photos[photo] : undefined;
+if (photo && !image) throw new Error(`No photo called "${photo}" in src/assets/photos`);
+---
+
+<Tag class="hs-painting__art" aria-hidden={image ? undefined : 'true'}>
+  {image
+    ? <Image src={image} alt={decorative ? '' : alts[photo!] ?? ''} widths={[320, 480, 720, 960, 1280]} sizes={sizes} loading={eager ? 'eager' : 'lazy'} />
+    : <><i></i><i></i><i></i></>}
+</Tag>

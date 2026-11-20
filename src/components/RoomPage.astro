@@ -14,7 +14,8 @@ interface Props {
   lead: string;
   // Each fact in the at-a-glance row. Bold facts are the headline numbers.
   glance: { text: string; bold?: boolean; link?: { label: string; href: string } }[];
-  photos: string[];
+  // each photo's caption, and the file in src/assets/photos when there is one
+  photos: { caption: string; photo?: string }[];
   closing: { title: string; band: 'green' | 'orange' | 'yellow' };
 }
 
@@ -39,7 +40,7 @@ const { room, seo, heading, lead, glance, photos, closing } = Astro.props;
       </ul>
       <ul class="hs-line rv-line-stack rv-photo-line">
         {photos.map((photo, index) => (
-          <li><Photo caption={photo} crayon={index === 1 ? 'blue' : undefined} /></li>
+          <li><Photo caption={photo.caption} photo={photo.photo} crayon={index === 1 ? 'blue' : undefined} /></li>
         ))}
       </ul>
     </div>

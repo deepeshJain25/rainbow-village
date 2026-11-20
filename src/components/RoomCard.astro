@@ -1,4 +1,6 @@
 ---
+import PaintingArt from './PaintingArt.astro';
+
 // A room as a child's painting pegged to the washing line. The whole painting is the link.
 interface Props {
   title: string;
@@ -6,13 +8,14 @@ interface Props {
   text?: string;
   href: string;
   crayon: 'purple' | 'yellow' | 'orange';
+  photo?: string;
 }
 
-const { title, ages, text, href, crayon } = Astro.props;
+const { title, ages, text, href, crayon, photo } = Astro.props;
 ---
 
 <a class:list={['hs-painting', 'rv-room-card', crayon !== 'yellow' && `hs-painting--${crayon}`]} data-theme="crayon" href={href}>
-  <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
+  <PaintingArt decorative photo={photo} />
   <p class="hs-painting__title">{title}</p>
   <span class={`hs-tape hs-tape--${crayon}`}><span class="hs-tape__dab"></span>{ages}</span>
   {text && <p class="hs-painting__caption">{text}</p>}

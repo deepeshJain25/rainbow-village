@@ -23,7 +23,11 @@ const room = rooms[1];
     { text: '$130 a day before subsidy', bold: true, link: { label: 'see fees', href: '/fees' } },
     { text: 'Room leader: [name]' },
   ]}
-  photos={['The toddlers room at Rainbow Village', 'Building and stacking', 'Digging in the garden']}
+  photos={[
+    { caption: 'The toddlers room at Rainbow Village', photo: 'toddlers-room' },
+    { caption: 'Building and stacking', photo: 'toddlers-building-blocks' },
+    { caption: 'Digging in the garden', photo: 'outdoor-sandpit' },
+  ]}
   closing={{ title: 'See our toddlers room in person', band: 'orange' }}
 >
   <Timetable

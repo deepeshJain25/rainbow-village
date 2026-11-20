@@ -893,6 +893,9 @@ main { overflow-x: clip; }
 .rv-wall > :nth-child(2n) .hs-painting__art { height: 240px; }
 .rv-wall > :nth-child(5n) .hs-painting__art { height: 180px; }
 .rv-wall .hs-painting::before, .rv-wall .hs-painting::after { display: none; }
+/* a real photo in the gallery shows whole, at its own shape, instead of cropped to a set height */
+.rv-wall > * .hs-painting__art:has(img) { height: auto; }
+.rv-wall .hs-painting__art img { position: static; display: block; height: auto; }
 
 /* map placeholder */
 .rv-map { display: grid; place-items: center; min-height: 240px; padding: var(--space-8); background: var(--sky-soft); text-align: center; }

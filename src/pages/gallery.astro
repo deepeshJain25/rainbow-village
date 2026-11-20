@@ -4,23 +4,34 @@ import PageHeader from '../components/PageHeader.astro';
 import Photo from '../components/Photo.astro';
 import Layout from '../layouts/Layout.astro';
 
-const filters = [
+// Photos not used elsewhere on the site, by filter. A filter only shows once it has photos (no food photos yet).
+const photos = [
+  { cat: 'rooms', photo: 'toddlers-our-family-wall', caption: 'The "Our Family" wall in the toddlers room', crayon: 'purple' },
+  { cat: 'garden', photo: 'outdoor-playhouse-slide', caption: 'Slides and a playhouse in our outdoor play area', crayon: 'blue' },
+  { cat: 'art', photo: 'toddlers-tea-party', caption: 'A tea party set for pretend play', crayon: 'red' },
+  { cat: 'rooms', photo: 'babies-cots', caption: 'Cots by the window in the babies sleep room', crayon: 'orange' },
+  { cat: 'art', photo: 'toddlers-art-door', caption: "Children's tree paintings by the toddlers room door", crayon: 'purple' },
+  { cat: 'garden', photo: 'outdoor-climbing-frame', caption: 'Climbing frames and balance beams outside', crayon: 'blue' },
+  { cat: 'rooms', photo: 'toddlers-soft-toys', caption: 'Soft toys lined up under the toddlers room windows', crayon: 'red' },
+  { cat: 'art', photo: 'babies-puppets', caption: 'Puppets and books on the soft mat in the babies room', crayon: 'orange' },
+  { cat: 'rooms', photo: 'preschool-tables', caption: 'A preschool table set for the day', crayon: 'purple' },
+  { cat: 'garden', photo: 'outdoor-cubby', caption: 'A cubby house in the outdoor play area', crayon: 'blue' },
+  { cat: 'art', photo: 'babies-play-kitchen', caption: 'A play kitchen and washing machine in the babies room', crayon: 'red' },
+  { cat: 'rooms', photo: 'toddlers-sunflower-corner', caption: 'Toys and a big sunflower by the toddlers room window', crayon: 'orange' },
+  { cat: 'art', photo: 'rainbow-wall', caption: 'Our rainbow wall', crayon: 'purple' },
+  { cat: 'rooms', photo: 'toddlers-tv-corner', caption: 'Toy shelves in the toddlers room', crayon: 'blue' },
+  { cat: 'art', photo: 'babies-rug', caption: 'A bird and crocodile rug in the babies room', crayon: 'red' },
+  { cat: 'rooms', photo: 'entrance-street-library', caption: 'Our little street library at the front gate', crayon: 'orange' },
+] as const;
+
+const allFilters = [
   { id: 'all', label: 'All' },
   { id: 'rooms', label: 'Rooms' },
-  { id: 'garden', label: 'Garden' },
+  { id: 'garden', label: 'Outdoor play' },
   { id: 'food', label: 'Food' },
   { id: 'art', label: 'Art and play' },
 ];
-
-// Example captions, to match the final photos.
-const photos = [
-  { cat: 'rooms', caption: 'The babies room, set up for tummy time and gentle play', crayon: 'purple' },
-  { cat: 'art', caption: 'Toddlers building, stacking and exploring', crayon: 'blue' },
-  { cat: 'garden', caption: 'Our vegetable garden, planted and cared for by the children', crayon: 'red' },
-  { cat: 'food', caption: 'Lunch, cooked fresh in our kitchen', crayon: 'orange' },
-  { cat: 'art', caption: 'Paintings and drawings from the preschool room', crayon: 'purple' },
-  { cat: 'art', caption: 'Counting and singing in different languages at group time', crayon: 'blue' },
-] as const;
+const filters = allFilters.filter((filter) => filter.id === 'all' || photos.some((photo) => photo.cat === filter.id));
 ---
 
 <Layout
@@ -45,7 +56,7 @@ const photos = [
       </div>
       <div class="rv-wall">
         {photos.map((photo) => (
-          <div data-cat={photo.cat}><Photo caption={photo.caption} crayon={photo.crayon} /></div>
+          <div data-cat={photo.cat}><Photo caption={photo.caption} photo={photo.photo} crayon={photo.crayon} sizes="(max-width: 860px) 90vw, 360px" /></div>
         ))}
       </div>
     </div>

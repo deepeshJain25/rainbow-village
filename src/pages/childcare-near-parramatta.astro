@@ -72,7 +72,7 @@ const reasons = [
       <ul class="hs-line rv-line-stack">
         {rooms.map((room) => (
           <li>
-            <RoomCard title={room.short} ages={room.shortAges} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} />
+            <RoomCard title={room.short} ages={room.shortAges} href={room.href} crayon={room.crayon as 'purple' | 'yellow' | 'orange'} photo={room.photo} />
           </li>
         ))}
       </ul>

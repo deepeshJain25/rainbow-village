@@ -1,4 +1,5 @@
 ---
+import PaintingArt from '../components/PaintingArt.astro';
 import BlockPlay from '../components/BlockPlay.astro';
 import Closing from '../components/Closing.astro';
 import DayIcon from '../components/DayIcon.astro';
@@ -15,21 +16,25 @@ import Layout from '../layouts/Layout.astro';
 const reasons = [
   {
     title: 'Family-run, every day.',
+    photo: 'entrance-sign',
     crayon: 'blue',
     text: 'Nighat or her daughter greets you every morning, so someone here always knows your child by name. {Read our story}(/about).',
   },
   {
     title: 'Small groups, familiar faces.',
+    photo: 'toddlers-activity-tables',
     crayon: 'purple',
     text: 'Just 40 places across three rooms, with the same educators every day. Ratios are 1 to 4 babies, 1 to 5 toddlers and 1 to 10 preschoolers.',
   },
   {
     title: 'Families come back.',
+    photo: 'toddlers-book-corner',
     crayon: 'orange',
     text: 'About 25 families have returned with a second or third child, and some of our educators have stayed more than 10 years.',
   },
   {
     title: 'Your culture belongs here.',
+    photo: 'toddlers-art-wall',
     crayon: 'red',
     text: 'Our educators speak English, Urdu, Punjabi, Hindi, Nepali and Telugu. Children sing in their home languages and in Dharug. {Meet our team}(/our-team).',
   },
@@ -83,7 +88,7 @@ const educators = [
           {rooms.map((room) => (
             <li>
               <a class:list={['hs-painting', room.crayon !== 'yellow' && `hs-painting--${room.crayon}`]} data-theme="crayon" href={room.href}>
-                <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
+                <PaintingArt decorative photo={room.photo} sizes="(max-width: 860px) 30vw, 180px" eager />
                 <p class="hs-painting__title">{room.short}</p>
                 <p class="hs-painting__caption">{room.shortAges}</p>
               </a>
@@ -109,7 +114,7 @@ const educators = [
             <div class={`hs-painting hs-painting--${reason.crayon} rv-flip`} data-theme="crayon" data-flip>
               <div class="rv-flip__inner">
                 <button class="rv-flip__face rv-flip__front" type="button">
-                  <span class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <PaintingArt decorative photo={reason.photo} tag="span" sizes="(max-width: 860px) 90vw, 280px" />
                   <span class="hs-painting__title">{reason.title.replace(/\.$/, '')}</span>
                   <span class="rv-flip__hint">Read more</span>
                 </button>

@@ -24,7 +24,11 @@ const room = rooms[2];
     { text: 'NSW Start Strong funded', bold: true },
     { text: '$135 a day before subsidy', bold: true, link: { label: 'see fees', href: '/fees' } },
   ]}
-  photos={['The preschool room at Rainbow Village', 'Our vegetable garden', 'Art on the wall']}
+  photos={[
+    { caption: 'The preschool room at Rainbow Village', photo: 'preschool-room' },
+    { caption: 'Our vegetable garden' },
+    { caption: 'Art on the wall', photo: 'art-work-wall' },
+  ]}
   closing={{ title: 'See our preschool in person', band: 'green' }}
 >
   <Timetable
