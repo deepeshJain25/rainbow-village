@@ -1,5 +1,6 @@
 // Paintings on a washing line sway like they're in the wind as a cursor or finger passes: moving
 // right pushes them right, moving left pushes them left, and they settle on their own.
+// A painting marked data-still (the video) stays put, so it doesn't swing while someone is watching it.
 const STIFFNESS = 28;
 const DAMPING = 1.6;
 const PUSH = 0.9;
@@ -41,7 +42,7 @@ if (canSwing) {
   };
 
   for (const line of document.querySelectorAll<HTMLElement>('.hs-line')) {
-    const paintings: Painting[] = [...line.querySelectorAll<HTMLElement>('.hs-painting')].map((element) => ({
+    const paintings: Painting[] = [...line.querySelectorAll<HTMLElement>('.hs-painting:not([data-still])')].map((element) => ({
       element,
       angle: 0,
       speed: 0,

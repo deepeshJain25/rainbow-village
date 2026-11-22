@@ -1,0 +1,35 @@
+---
+// The walk-through video, hung as a painting. The file is portrait (shot on a phone), so on a phone it plays
+// full screen when tapped, and on a wider screen it plays in place, sized to fit the window's height.
+// The video and its poster live in Cloudflare R2, not in this repo (site.json `video`); until they're set,
+// the crayon placeholder shows instead.
+import site from '../content/site.json';
+
+interface Props {
+  caption: string;
+}
+
+const { caption } = Astro.props;
+const { src, poster } = site.video;
+---
+
+<figure class="hs-painting rv-poster rv-tour-video" data-still>
+  {src
+    ? (
+      <div class="hs-painting__art rv-tour-video__frame">
+        <video data-tour-video controls playsinline preload="none" poster={poster} width="1080" height="1920" controlslist="nodownload">
+          <source src={src} type="video/mp4" />
+        </video>
+        <button type="button" class="hs-btn hs-btn--yellow rv-tour-video__play" data-tour-play>
+          <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg>
+          <span>Play video</span>
+        </button>
+      </div>
+    )
+    : <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>}
+  <figcaption class="hs-painting__caption">{caption}</figcaption>
+</figure>
+
+<script>
+  import '../scripts/tour-video';
+</script>

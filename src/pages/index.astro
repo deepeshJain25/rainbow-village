@@ -8,6 +8,7 @@ import HeroSeasons from '../components/HeroSeasons.astro';
 import Icon from '../components/Icon.astro';
 import ReviewsSlider from '../components/ReviewsSlider.tsx';
 import Todo from '../components/Todo.astro';
+import TourVideo from '../components/TourVideo.astro';
 import reviews from '../content/reviews.json';
 import rooms from '../content/rooms.json';
 import { childCare } from '../content/schema';
@@ -179,15 +180,12 @@ const educators = [
     <div class="rv-wrap rv-stack-lg">
       <div class="rv-stack">
         <h2 class="hs-title"><BrandText text="Take a look inside Rainbow Village" /></h2>
-        <p>Ninety seconds in our rooms and garden, and the people your child will spend their day with.</p>
+        <p>Two minutes in our rooms, and the people your child will spend their day with.</p>
       </div>
       <div class="rv-split rv-inside">
         <ul class="hs-line rv-line-single">
           <li>
-            <figure class="hs-painting rv-poster">
-              <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>
-              <figcaption class="hs-painting__caption">A morning at Rainbow Village Childcare, Rosehill</figcaption>
-            </figure>
+            <TourVideo caption="A morning at Rainbow Village Childcare, Rosehill" />
           </li>
         </ul>
         <div class="rv-stack-lg">

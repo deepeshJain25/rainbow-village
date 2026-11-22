@@ -484,7 +484,7 @@ body { margin: 0; }
 
 .rv-icon { display: inline-flex; flex: none; }
 .rv-icon svg { display: block; width: 24px; height: 24px; }
-.rv-with-icon { display: inline-flex; align-items: center; gap: var(--space-2); }
+.rv-with-icon { display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; }
 .hs-strip .rv-icon svg { width: 16px; height: 16px; }
 
 /* a fact the director still has to confirm: never goes live */
@@ -648,6 +648,21 @@ main { overflow-x: clip; }
 .hs .rv-line-single > li { flex: 1 1 auto; }
 .rv-poster { margin: 0; }
 .rv-poster .hs-painting__art { height: 260px; }
+/* the walk-through video is portrait: the painting shrinks to the video's width, and the video is never
+   taller than three quarters of the window, so it fits on a laptop screen with its caption */
+.rv-tour-video:has(video) { width: fit-content; margin-inline: auto; }
+/* the video card hangs straight and doesn't swing (swing.ts skips data-still) */
+.hs .hs-line > li:has(.rv-tour-video) { transform: none; }
+.rv-tour-video .rv-tour-video__frame { height: auto; width: min(380px, calc(75svh * 9 / 16)); aspect-ratio: 9 / 16; background: var(--art-ink); }
+.rv-tour-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* full screen: the whole portrait video, with black bars either side on a wide screen
+   (two rules, because a browser drops a whole rule if it doesn't know one of its selectors) */
+.rv-tour-video video:fullscreen { object-fit: contain; background: #000; }
+.rv-tour-video video:-webkit-full-screen { object-fit: contain; background: #000; }
+.rv-tour-video__play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-2deg); display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; }
+.rv-tour-video__play:hover { transform: translate(calc(-50% + 1px), calc(-50% + 1px)) rotate(-2deg); }
+.rv-tour-video__play:active { transform: translate(calc(-50% + 3px), calc(-50% + 3px)) rotate(-2deg); }
+.rv-tour-video__play[hidden] { display: none; }
 
 /* a line of paintings that stacks on phones, where a sideways scroll would hide them */
 .rv-room-card { display: grid; gap: var(--space-2); justify-items: start; }
@@ -998,6 +1013,9 @@ main { overflow-x: clip; }
   .hs-line { scrollbar-width: none; }
   .hs .rv-line-single { overflow: visible; }
   .rv-line-single::before { left: 0; right: 0; }
+  /* on a phone the video takes the full width; tapping play opens it full screen */
+  .rv-tour-video:has(video) { width: auto; }
+  .rv-tour-video .rv-tour-video__frame { width: 100%; }
   .rv-footer { padding: var(--space-16) var(--space-4) calc(var(--space-8) + 88px); }
   .rv-mobile-bar {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;

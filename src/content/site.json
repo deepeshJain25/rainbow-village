@@ -9,6 +9,7 @@
   "phoneHref": "tel:+61296374433",
   "email": "rainbowvillage.childcare@gmail.com",
   "formKey": "3c5562db-e6b9-46dc-8d0c-bbf65f937dc3",
+  "video": { "src": "https://pub-e38ac75facec4b828654efb7aa0af3ca.r2.dev/rainbow-village-tour.mp4", "poster": "https://pub-e38ac75facec4b828654efb7aa0af3ca.r2.dev/rainbow-village-tour-poster.jpg" },
   "hours": "Monday to Friday, 7am to 6pm",
   "shortHours": "Mon to Fri, 7am to 6pm",
   "phoneHours": "Open 7am to 6pm",
