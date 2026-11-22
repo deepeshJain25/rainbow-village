@@ -34,8 +34,18 @@ export const alts: Record<string, string> = {
   'outdoor-climbing-frame': 'A climbing frame and balance beams in the outdoor play area',
   'outdoor-playhouse-slide': 'A playhouse with two slides in the outdoor play area',
   'outdoor-cubby': 'A blue cubby house in the outdoor play area',
+  'nighat-saeed': 'Nighat Saeed, our owner and director, smiling in the preschool room',
+  'nighat-and-team': 'Nighat Saeed and Zunaira sitting at a small table in the preschool room',
+  'zunaira': 'Zunaira, our educational leader, smiling in the preschool room',
   'entrance-street-library': 'The little street library and Rainbow Village sign at the front gate',
   'entrance-sign': 'The Rainbow Village sign at the front gate',
   'rainbow-wall': 'A rainbow-striped wall above a table with small blue chairs',
   'art-work-wall': 'A wall of children’s art work',
+};
+
+// where to keep in view when a photo is cropped to fit its frame (CSS object-position); centre if not listed
+export const focus: Record<string, string> = {
+  'nighat-saeed': '50% 25%',
+  'nighat-and-team': '50% 55%',
+  'zunaira': '50% 25%',
 };

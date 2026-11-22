@@ -1,5 +1,6 @@
 ---
 import Closing from '../components/Closing.astro';
+import PaintingArt from '../components/PaintingArt.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Todo from '../components/Todo.astro';
 import Layout from '../layouts/Layout.astro';
@@ -11,6 +12,8 @@ interface Member {
   qualification: string;
   bio: string;
   quote?: string;
+  // A photo in src/assets/photos, once the person has one and is happy to appear.
+  photo?: string;
   // Set for anyone who prefers no photo: their initials appear in crayon letters instead.
   initials?: string;
 }
@@ -39,7 +42,7 @@ const leaders = Object.values(import.meta.glob<Member>('../content/team/*.json',
             <figure class="hs-painting rv-photo" data-theme="crayon">
               {member.initials
                 ? <div class="rv-initials">{member.initials}</div>
-                : <div class="hs-painting__art" aria-hidden="true"><i></i><i></i><i></i></div>}
+                : <PaintingArt photo={member.photo} sizes="(max-width: 860px) 90vw, 340px" />}
               <figcaption>
                 <span class="hs-tape"><Todo text={member.name} /></span>
                 <p class="hs-painting__caption"><b>{member.role}</b></p>

@@ -784,7 +784,7 @@ main { overflow-x: clip; }
 
 /* see inside */
 .rv-inside { align-items: start; }
-.rv-portraits .hs-painting__art { height: 96px; }
+.rv-portraits .hs-painting__art { height: 150px; }
 .rv-portraits .hs-painting { padding: var(--space-2) var(--space-2) var(--space-4); }
 .rv-portraits .hs-tape { padding-inline: var(--space-2); }
 
@@ -899,6 +899,7 @@ main { overflow-x: clip; }
 /* our team */
 .rv-team { flex-wrap: wrap; row-gap: var(--space-16); }
 .rv-team > * { flex: 1 1 240px; }
+.rv-team .hs-painting__art { height: 300px; }
 .rv-initials { display: grid; place-items: center; height: 140px; font-family: var(--font-display); font-size: 52px; line-height: 56px; margin-bottom: var(--space-4); }
 .hs-painting .rv-team-quote { font-size: 15px; line-height: 24px; color: var(--art-ink); margin-top: var(--space-2); }
 
