@@ -653,7 +653,12 @@ main { overflow-x: clip; }
 .rv-tour-video:has(video) { width: fit-content; margin-inline: auto; }
 /* the video card hangs straight and doesn't swing (swing.ts skips data-still) */
 .hs .hs-line > li:has(.rv-tour-video) { transform: none; }
-.rv-tour-video .rv-tour-video__frame { height: auto; width: min(380px, calc(75svh * 9 / 16)); aspect-ratio: 9 / 16; background: var(--art-ink); }
+.rv-tour-video { --video-width: min(380px, calc(75svh * 9 / 16)); }
+.rv-tour-video .rv-tour-video__frame { height: auto; width: var(--video-width); aspect-ratio: 9 / 16; background: var(--art-ink); }
+/* in the hero the video hangs where the room paintings were, a little smaller so the words stay the star;
+   the hero runs taller so the rainbow and sun sit below the card instead of over it */
+.hs-hero:has(.rv-hero-video) { padding-bottom: 350px; }
+.rv-hero-video .rv-tour-video { --video-width: min(300px, calc(60svh * 9 / 16)); }
 .rv-tour-video video { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* full screen: the whole portrait video, with black bars either side on a wide screen
    (two rules, because a browser drops a whole rule if it doesn't know one of its selectors) */
@@ -784,6 +789,7 @@ main { overflow-x: clip; }
 
 /* see inside */
 .rv-inside { align-items: start; }
+.rv-portraits { max-width: 760px; }
 .rv-portraits .hs-painting__art { height: 150px; }
 .rv-portraits .hs-painting { padding: var(--space-2) var(--space-2) var(--space-4); }
 .rv-portraits .hs-tape { padding-inline: var(--space-2); }
@@ -1017,6 +1023,10 @@ main { overflow-x: clip; }
   /* on a phone the video takes the full width; tapping play opens it full screen */
   .rv-tour-video:has(video) { width: auto; }
   .rv-tour-video .rv-tour-video__frame { width: 100%; }
+  /* in the hero on a phone the card stays a hanging picture, not a wall: tapping play goes full screen anyway */
+  .hs .rv-hero-video .rv-tour-video:has(video) { width: fit-content; }
+  .hs .rv-hero-video .rv-tour-video .rv-tour-video__frame { width: min(250px, calc(100vw - 112px)); }
+  .hs-hero:has(.rv-hero-video) { padding-bottom: 200px; }
   .rv-footer { padding: var(--space-16) var(--space-4) calc(var(--space-8) + 88px); }
   .rv-mobile-bar {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 5;

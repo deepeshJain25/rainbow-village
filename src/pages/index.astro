@@ -86,16 +86,10 @@ const educators: { role: string; crayon: string; name?: string; photo?: string }
         </ul>
       </div>
       <div class="hs-hero__line">
-        <ul class="hs-line rv-hero-paintings">
-          {rooms.map((room) => (
-            <li>
-              <a class:list={['hs-painting', room.crayon !== 'yellow' && `hs-painting--${room.crayon}`]} data-theme="crayon" href={room.href}>
-                <PaintingArt decorative photo={room.photo} sizes="(max-width: 860px) 30vw, 180px" eager />
-                <p class="hs-painting__title">{room.short}</p>
-                <p class="hs-painting__caption">{room.shortAges}</p>
-              </a>
-            </li>
-          ))}
+        <ul class="hs-line rv-line-single rv-hero-video">
+          <li>
+            <TourVideo caption="Take a look inside Rainbow Village" />
+          </li>
         </ul>
       </div>
     </div>
@@ -175,34 +169,24 @@ const educators: { role: string; crayon: string; name?: string; photo?: string }
     </div>
   </section>
 
-  <!-- See inside: the video, then the people. Portraits fall back to initials if a staff member prefers. -->
+  <!-- The people: portraits fall back to initials if a staff member prefers. The walk-through video is in the hero. -->
   <section class="hs-ground rv-section" data-theme="crayon">
     <div class="rv-wrap rv-stack-lg">
       <div class="rv-stack">
-        <h2 class="hs-title"><BrandText text="Take a look inside Rainbow Village" /></h2>
-        <p>Two minutes in our rooms, and the people your child will spend their day with.</p>
+        <h2 class="hs-title"><BrandText text="Meet the educators at Rainbow Village" /></h2>
+        <p>Qualified, caring and here for the long term: the people your child will spend their day with. <a href="/our-team">Meet our team</a></p>
       </div>
-      <div class="rv-split rv-inside">
-        <ul class="hs-line rv-line-single">
+      <ul class="hs-line rv-line-stack rv-line-stack--straight rv-portraits">
+        {educators.map((educator) => (
           <li>
-            <TourVideo caption="A morning at Rainbow Village Childcare, Rosehill" />
+            <a class={`hs-painting hs-painting--${educator.crayon}`} href="/our-team" aria-label={`Meet our team: ${educator.role}`}>
+              <PaintingArt decorative photo={educator.photo} sizes="(max-width: 860px) 90vw, 240px" />
+              <span class="hs-tape">{educator.name ?? <mark class="rv-todo">[Name]</mark>}</span>
+              <p class="hs-painting__caption">{educator.role}</p>
+            </a>
           </li>
-        </ul>
-        <div class="rv-stack-lg">
-          <p>Meet our educators: qualified, caring and here for the long term. <a href="/our-team">Meet our team</a></p>
-          <ul class="hs-line rv-line-stack rv-line-stack--straight rv-portraits">
-            {educators.map((educator) => (
-              <li>
-                <a class={`hs-painting hs-painting--${educator.crayon}`} href="/our-team" aria-label={`Meet our team: ${educator.role}`}>
-                  <PaintingArt decorative photo={educator.photo} sizes="(max-width: 860px) 90vw, 240px" />
-                  <span class="hs-tape">{educator.name ?? <mark class="rv-todo">[Name]</mark>}</span>
-                  <p class="hs-painting__caption">{educator.role}</p>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+        ))}
+      </ul>
     </div>
   </section>
 
