@@ -1,5 +1,5 @@
 ---
-// A day on the ruled lines. Times stay as [time] until the centre confirms them.
+// A day on the ruled lines: the parts of the day, in order.
 import Todo from './Todo.astro';
 
 interface Props {
@@ -17,14 +17,9 @@ const { title, lead, items = [], note } = Astro.props;
     <h2>{title}</h2>
     {lead && <p><Todo text={lead} /></p>}
     {items.length > 0 && (
-      <dl class="rv-day">
-        {items.map((activity) => (
-          <div>
-            <dt><mark class="rv-todo">[time]</mark></dt>
-            <dd>{activity}</dd>
-          </div>
-        ))}
-      </dl>
+      <ol class="rv-list rv-list--numbered">
+        {items.map((activity) => <li>{activity}</li>)}
+      </ol>
     )}
     {note && <p><Todo text={note} /></p>}
   </div>

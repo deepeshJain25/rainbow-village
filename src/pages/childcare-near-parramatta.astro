@@ -13,15 +13,15 @@ import Layout from '../layouts/Layout.astro';
 const suburbs = [
   {
     name: 'Childcare near Parramatta',
-    text: 'Harris Park station is one stop from Parramatta on the T1 and T2 lines, and [distance] from our door. By car, we\'re [drive time] from Parramatta CBD via [main road]. Many families who work in Parramatta drop off on the way.',
+    text: 'Harris Park station is one stop from Parramatta on the T1 and T2 lines. Many families who work in Parramatta drop off on the way.',
   },
   {
     name: 'Childcare near Harris Park',
-    text: 'From Harris Park, we\'re about [drive time] by car via [route, for example James Ruse Drive]. [Add a local landmark families will know.]',
+    text: 'Harris Park is right next door to Rosehill, so drop-off is quick whether you walk, drive or catch the train.',
   },
   {
     name: 'Childcare near Granville',
-    text: 'Granville is one stop away on the other side of Harris Park station. By car, it\'s about [drive time] via [route].',
+    text: 'Granville is one stop away on the other side of Harris Park station.',
   },
 ];
 
@@ -41,11 +41,11 @@ const reasons = [
   <PageHeader
     title="Childcare near Parramatta, Harris Park and Granville"
     current="Childcare near Parramatta"
-    lead="Rainbow Village is a family-run childcare centre in Rosehill, right between Parramatta, Harris Park and Granville. It's an easy drop-off on the way to work or the train. [Add real travel times.]"
+    lead="Rainbow Village is a family-run childcare centre in Rosehill, right between Parramatta, Harris Park and Granville. It's an easy drop-off on the way to work or the train."
   />
 
   <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
-    <div class="rv-wrap rv-split rv-leader">
+    <div class="rv-wrap">
       <div class="rv-copy">
         {suburbs.map((suburb) => (
           <div class="rv-stack">
@@ -53,10 +53,6 @@ const reasons = [
             <p><Todo text={suburb.text} /></p>
           </div>
         ))}
-        <p><b>Parking:</b> <mark class="rv-todo">[parking note]</mark></p>
-      </div>
-      <div class="rv-map" data-theme="crayon">
-        <p><mark class="rv-todo">[Static map image showing the centre and the three suburbs]</mark></p>
       </div>
     </div>
   </section>
@@ -85,7 +81,6 @@ const reasons = [
     <div class="hs-band__inner rv-stack-lg">
       <div class="rv-stack">
         <h2 class="hs-title">Featured reviews</h2>
-        <p><mark class="rv-todo">[Reviews from families in these suburbs, if any mention them.]</mark></p>
       </div>
       <div class="rv-text-grid">
         {reviews.slice(0, 2).map((review) => (

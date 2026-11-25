@@ -9,7 +9,7 @@
       },
       {
         "q": "Do you have childcare vacancies in Rosehill?",
-        "a": "Yes. We currently have places in every room on every day. {Join our waitlist}(/enrol) or {book a tour}(/book-a-tour) to secure a spot. [Keep up to date.]"
+        "a": "Yes. We currently have places in every room on every day. {Join our waitlist}(/enrol) or {book a tour}(/book-a-tour) to secure a spot."
       },
       {
         "q": "What's the minimum number of days?",
@@ -35,7 +35,7 @@
       },
       {
         "q": "Can I get the Child Care Subsidy?",
-        "a": "Yes, Rainbow Village is approved for the Child Care Subsidy. Apply through myGov, then give us your CRNs. [Confirm the wording.]"
+        "a": "Yes, Rainbow Village is approved for the Child Care Subsidy. Apply through myGov, then give us your CRNs."
       },
       {
         "q": "Do you offer Start Strong fee relief?",
@@ -79,7 +79,7 @@
       },
       {
         "q": "Is your childcare food halal?",
-        "a": "Yes. Our meals are halal and we don't serve beef or pork. Vegetarian meals are available too. [Confirm the halal wording.]"
+        "a": "Yes. Our meals are halal and we don't serve beef or pork. Vegetarian meals are available too."
       },
       {
         "q": "Are you a nut-free centre?",

@@ -807,6 +807,7 @@ main { overflow-x: clip; }
 .rv-copy { display: grid; gap: var(--space-6); max-width: 36em; }
 .hs .rv-copy h2, .hs .rv-copy h3 { margin-top: var(--space-4); }
 .rv-list { list-style: disc; margin: 0; padding-left: var(--space-6); display: grid; gap: var(--space-1); }
+.rv-list--numbered { list-style: decimal; }
 .rv-numbered { list-style: decimal; margin: 0; padding-left: var(--space-6); display: grid; gap: var(--space-4); }
 .rv-panel { background: var(--sky-soft); padding: var(--space-8); border-radius: var(--radius-paper); }
 .rv-panel-split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-16); }

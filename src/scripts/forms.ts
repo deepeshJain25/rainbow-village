@@ -45,7 +45,10 @@ for (const form of document.querySelectorAll<HTMLFormElement>('form[data-form]')
     event.preventDefault();
     if (!form.reportValidity()) return;
 
-    const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    // a field with several ticked boxes (the waitlist's preferred days) is sent as one comma-separated list
+    const fields = new FormData(form);
+    const data: Record<string, string> = {};
+    for (const name of new Set(fields.keys())) data[name] = fields.getAll(name).map(String).join(', ');
     if (!data.access_key) {
       say("Sorry, this form isn't switched on yet. Please call or email us instead.", true);
       return;

@@ -9,7 +9,6 @@ const quickLinks = [
   { label: 'What to pack', href: '#pack' },
   { label: 'Settling in', href: '#settling' },
   { label: 'Fees and subsidy', href: '/fees' },
-  { label: 'Policies', href: '#policies' },
   { label: 'FAQs', href: '/faqs' },
 ];
 
@@ -18,7 +17,7 @@ const pack = [
   'A hat',
   'A water bottle',
   'A comforter for rest, if used',
-  'Bottles and formula for babies [confirm]',
+  'Bottles and formula for babies',
   "Everything labelled with your child's name.",
 ];
 ---
@@ -61,17 +60,13 @@ const pack = [
     <div class="rv-wrap rv-stack-lg">
       <div class="rv-copy">
         <h2 class="hs-title">Drop-off, pick-up and opening hours</h2>
-        <p>We're open Monday to Friday, 7am to 6pm. We're closed on weekends and NSW public holidays. Please sign your child in and out on OWNA each day. <mark class="rv-todo">[Confirm the sign-in process.]</mark></p>
+        <p>We're open Monday to Friday, 7am to 6pm. We're closed on weekends and NSW public holidays. Please sign your child in and out on OWNA each day.</p>
       </div>
       <div class="rv-copy" id="pack">
         <h2 class="hs-title">What to pack for daycare</h2>
         <ul class="rv-list">{pack.map((item) => <li><Todo text={item} /></li>)}</ul>
         <p><b>We provide:</b> three meals cooked on site, nappies and wipes, full cream milk and sunscreen.</p>
         <p>Room-by-room lists: <a href="/rooms/babies#pack">babies</a> · <a href="/rooms/toddlers#pack">toddlers</a> · <a href="/rooms/preschool#pack">preschool</a></p>
-      </div>
-      <div class="rv-copy" id="policies">
-        <h2 class="hs-title">Our policies</h2>
-        <p><mark class="rv-todo">[List the PDFs the client sends, with file sizes: for example Sun safety, Sick children and medication, Nutrition and allergies, Child safe, Privacy.]</mark></p>
       </div>
     </div>
   </section>
@@ -82,11 +77,7 @@ const pack = [
         <h2 class="hs-title">Stay in touch with the OWNA app</h2>
         <p>You'll get daily photos, notes and updates on the OWNA app, so you can share in your child's day even when you can't be there.</p>
       </div>
-      <div class="rv-closing__actions">
-        <span class="hs-btn" aria-disabled="true">Get OWNA on the App Store</span>
-        <span class="hs-btn" aria-disabled="true">Get OWNA on Google Play</span>
-      </div>
-      <p><mark class="rv-todo">[The two buttons link to OWNA's store pages once the links are confirmed.]</mark></p>
+      <p>Download OWNA free from the App Store or Google Play, and we'll link it to your child when they start.</p>
       <p>For anything else, talk to Nighat or our team at drop-off, call <a href={site.phoneHref}><Todo text={site.phone} /></a>, or email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
     </div>
   </section>

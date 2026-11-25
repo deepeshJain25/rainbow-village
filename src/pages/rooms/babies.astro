@@ -1,6 +1,5 @@
 ---
 import PackList from '../../components/PackList.astro';
-import RoomLeader from '../../components/RoomLeader.astro';
 import RoomPage from '../../components/RoomPage.astro';
 import Timetable from '../../components/Timetable.astro';
 import Todo from '../../components/Todo.astro';
@@ -9,7 +8,7 @@ import rooms from '../../content/rooms.json';
 const room = rooms[0];
 const routines = [
   { title: 'Sleep.', text: 'Babies sleep when they need to, following the routine you use at home.' },
-  { title: 'Feeding.', text: 'We follow your feeding plan. Nappies, wipes and full cream milk are included in your fee, and once your baby is on solids, meals are cooked fresh in our kitchen. [Confirm whether families supply formula and bottles.]' },
+  { title: 'Feeding.', text: 'We follow your feeding plan. Nappies, wipes and full cream milk are included in your fee, and once your baby is on solids, meals are cooked fresh in our kitchen.' },
   { title: 'Updates.', text: "You'll get photos and notes through the OWNA app, so you know how they slept, ate and played." },
   { title: 'Settling in.', text: "We go at your baby's pace. Start with shorter days if that helps, and visit any time with our open-door policy. {Read about settling in}(/for-parents#settling)." },
 ];
@@ -28,7 +27,6 @@ const routines = [
     { text: '8 places', bold: true },
     { text: '1 educator to 4 babies', bold: true },
     { text: '$135 a day before subsidy', bold: true, link: { label: 'see fees', href: '/fees' } },
-    { text: 'Room leader: [name]' },
   ]}
   photos={[
     { caption: 'The babies room at Rainbow Village', photo: 'babies-room' },
@@ -62,16 +60,9 @@ const routines = [
     </div>
   </section>
 
-  <RoomLeader
-    title="Meet [name], our babies room leader"
-    qualification="[Qualification]"
-    quote="[A sentence in their own words about caring for babies.]"
-    photo="Photo: babies room leader"
-  />
-
   <PackList
     title="What to pack for daycare"
-    items={['Spare clothes (two full sets)', 'Comforter or dummy, if used', 'Bottles and formula or expressed milk [confirm]', 'A hat', "Everything labelled with your baby's name"]}
+    items={['Spare clothes (two full sets)', 'Comforter or dummy, if used', 'Bottles and formula or expressed milk', 'A hat', "Everything labelled with your baby's name"]}
     provide="nappies, wipes, full cream milk, sunscreen and three meals once your baby is on solids."
     links="{Next: Toddlers room, 2 to 3 years →}(/rooms/toddlers) · Questions? {Read our FAQs}(/faqs)"
   />

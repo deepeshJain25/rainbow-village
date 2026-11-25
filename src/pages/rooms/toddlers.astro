@@ -1,6 +1,5 @@
 ---
 import PackList from '../../components/PackList.astro';
-import RoomLeader from '../../components/RoomLeader.astro';
 import RoomPage from '../../components/RoomPage.astro';
 import Timetable from '../../components/Timetable.astro';
 import rooms from '../../content/rooms.json';
@@ -21,7 +20,6 @@ const room = rooms[1];
     { text: '12 places', bold: true },
     { text: '1 educator to 5 toddlers', bold: true },
     { text: '$130 a day before subsidy', bold: true, link: { label: 'see fees', href: '/fees' } },
-    { text: 'Room leader: [name]' },
   ]}
   photos={[
     { caption: 'The toddlers room at Rainbow Village', photo: 'toddlers-room' },
@@ -55,13 +53,6 @@ const room = rooms[1];
       </div>
     </div>
   </section>
-
-  <RoomLeader
-    title="Meet [name], our toddlers room leader"
-    qualification="[Qualification]"
-    quote="[A sentence in their own words.]"
-    photo="Photo: toddlers room leader"
-  />
 
   <PackList
     title="What to pack for your toddler"

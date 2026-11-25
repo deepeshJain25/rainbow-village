@@ -7,6 +7,10 @@ import site from '../content/site.json';
 import Layout from '../layouts/Layout.astro';
 ---
 
+<script>
+  import '../scripts/forms';
+</script>
+
 <Layout
   title="Contact Rainbow Village Childcare Centre | Rosehill NSW"
   description="Call, email or visit Rainbow Village Childcare Centre in Rosehill NSW 2150. Open Monday to Friday. Tours Tuesday and Thursday, 10am to 2pm."
@@ -26,34 +30,31 @@ import Layout from '../layouts/Layout.astro';
       <p><b>Email:</b> <a href={`mailto:${site.email}`}>{site.email}</a></p>
       <p><b>Address:</b> <Todo text={site.address} /> · <a href={site.mapUrl}>Get directions</a></p>
       <p><b>Hours:</b> Monday to Friday, 7am to 6pm. Closed weekends and NSW public holidays.</p>
-      <p>
-        <b>Getting here:</b> <mark class="rv-todo">[Walking time from Harris Park station]</mark> · <mark class="rv-todo">[Parking note]</mark> ·
-        Coming from nearby? <a href="/childcare-near-parramatta">Directions from Parramatta, Harris Park and Granville</a>
-      </p>
+      <p>Coming from nearby? <a href="/childcare-near-parramatta">Directions from Parramatta, Harris Park and Granville</a></p>
     </div>
     <div class="hs-band hs-band--sky rv-page-split__band" data-theme="kraft">
-      <!-- The success message is shown by the enquiry route once it is connected. -->
+      <!-- Messages go to the centre's inbox through Web3Forms (site.formKey); src/scripts/forms.ts sends them. -->
       <form
         class="hs-formsheet rv-form rv-form--compact"
         data-theme="crayon"
         method="post"
-        action="#"
+        action="https://api.web3forms.com/submit"
+        data-form
+        data-subject="Message from the website"
         data-success="Thanks, we've got your message and will reply soon."
       >
         <h2 class="rv-form__full">Send us a message</h2>
+        <input type="hidden" name="access_key" value={site.formKey} />
+        <input class="rv-visually-hidden" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <Field label="Your name" name="name" autocomplete="name" />
         <Field label="Phone" name="phone" type="tel" autocomplete="tel" />
         <div class="rv-form__full"><Field label="Email" name="email" type="email" autocomplete="email" /></div>
         <div class="rv-form__full"><Field label="Message" name="message" rows={3} /></div>
         <button class="hs-btn hs-btn--orange rv-form__full" type="submit">Send message</button>
         <p class="rv-form-note rv-form__full">Prefer to visit? <a href="/book-a-tour">Book a tour</a> on a Tuesday or Thursday.</p>
-        <p class="rv-form-note rv-form__full"><mark class="rv-todo">[This form starts sending once the enquiry system is connected.]</mark></p>
+        <p class="rv-form-note rv-form__full" data-form-status role="status" aria-live="polite"></p>
       </form>
     </div>
-  </div>
-
-  <div class="rv-map" data-theme="crayon">
-    <p><mark class="rv-todo">[Static map image of the centre, linking to Google Maps]</mark></p>
   </div>
 
   <p class="rv-wrap rv-business">{site.legalName} · ABN {site.abn}</p>
