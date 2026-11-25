@@ -818,6 +818,9 @@ main { overflow-x: clip; }
 .rv-leader .hs-painting__art { height: 200px; }
 .hs-line .rv-photo { margin: 0; }
 .rv-photo-line .hs-painting__art { height: 180px; }
+/* a row with just one photo (Meals, until the food photos arrive) hangs it at a portrait size, not stretched across */
+.hs .rv-photo-line > li:only-child { flex: 0 1 320px; margin-inline: auto; }
+.rv-photo-line > li:only-child .hs-painting__art { height: 360px; }
 
 .rv-stack--wide { max-width: none; }
 .rv-copy-panel { padding: var(--space-8); }
