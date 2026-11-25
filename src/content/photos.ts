@@ -37,6 +37,9 @@ export const alts: Record<string, string> = {
   'nighat-saeed': 'Nighat Saeed, our owner and director, smiling in the preschool room',
   'nighat-and-team': 'Nighat Saeed and Zunaira sitting at a small table in the preschool room',
   'zunaira': 'Zunaira, our educational leader, smiling in the preschool room',
+  'alina': 'Alina, our babies room leader, smiling in her Rainbow Village shirt',
+  'mayra': 'Mayra, our toddlers room leader, smiling in her Rainbow Village shirt',
+  'farheena': 'Farheena, our preschool room leader, smiling in her Rainbow Village shirt',
   'entrance-street-library': 'The little street library and Rainbow Village sign at the front gate',
   'entrance-sign': 'The Rainbow Village sign at the front gate',
   'rainbow-wall': 'A rainbow-striped wall above a table with small blue chairs',
@@ -48,4 +51,7 @@ export const focus: Record<string, string> = {
   'nighat-saeed': '50% 25%',
   'nighat-and-team': '50% 55%',
   'zunaira': '50% 25%',
+  'alina': '50% 35%',
+  'mayra': '50% 35%',
+  'farheena': '50% 35%',
 };

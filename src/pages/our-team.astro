@@ -20,6 +20,13 @@ interface Member {
 
 const leaders = Object.values(import.meta.glob<Member>('../content/team/*.json', { eager: true, import: 'default' }))
   .sort((a, b) => a.order - b.order);
+
+// The educator responsible for each room, in room order: babies, toddlers, preschool.
+const roomLeaders = [
+  { name: 'Alina', room: 'Babies room leader', href: '/rooms/babies', photo: 'alina', crayon: 'purple' },
+  { name: 'Mayra', room: 'Toddlers room leader', href: '/rooms/toddlers', photo: 'mayra', crayon: 'orange' },
+  { name: 'Farheena', room: 'Preschool room leader', href: '/rooms/preschool', photo: 'farheena', crayon: 'blue' },
+];
 ---
 
 <Layout
@@ -49,6 +56,25 @@ const leaders = Object.values(import.meta.glob<Member>('../content/team/*.json',
                 <p class="hs-painting__caption"><Todo text={member.qualification} /></p>
                 <p class="rv-team-quote"><Todo text={member.bio} /></p>
                 {member.quote && <p class="rv-team-quote">"<Todo text={member.quote} />"</p>}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="hs-ground rv-section rv-section--flush" data-theme="crayon">
+    <div class="rv-wrap rv-stack-lg">
+      <h2 class="hs-title">Our room leaders</h2>
+      <ul class="hs-line rv-team">
+        {roomLeaders.map((leader) => (
+          <li>
+            <figure class={`hs-painting rv-photo hs-painting--${leader.crayon}`} data-theme="crayon">
+              <PaintingArt photo={leader.photo} sizes="(max-width: 860px) 90vw, 340px" />
+              <figcaption>
+                <span class="hs-tape">{leader.name}</span>
+                <p class="hs-painting__caption"><a href={leader.href}>{leader.room}</a></p>
               </figcaption>
             </figure>
           </li>
