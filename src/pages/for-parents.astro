@@ -9,15 +9,17 @@ const quickLinks = [
   { label: 'What to pack', href: '#pack' },
   { label: 'Settling in', href: '#settling' },
   { label: 'Fees and subsidy', href: '/fees' },
+  { label: 'Policies', href: '#policies' },
   { label: 'FAQs', href: '/faqs' },
 ];
 
 const pack = [
-  'Spare clothes',
-  'A hat',
+  'Spare clothes (at least two sets)',
+  'A bucket hat or sun hat',
   'A water bottle',
+  'A cot-size fitted sheet and a blanket',
   'A comforter for rest, if used',
-  'Bottles and formula for babies',
+  "Formula and bottles, if your baby has formula (we provide cow's milk)",
   "Everything labelled with your child's name.",
 ];
 ---
@@ -60,13 +62,17 @@ const pack = [
     <div class="rv-wrap rv-stack-lg">
       <div class="rv-copy">
         <h2 class="hs-title">Drop-off, pick-up and opening hours</h2>
-        <p>We're open Monday to Friday, 7am to 6pm. We're closed on weekends and NSW public holidays. Please sign your child in and out on OWNA each day.</p>
+        <p>We're open Monday to Friday, 7am to 6pm. We're closed on weekends and NSW public holidays. Each day, please sign your child in and out on the iPad at the centre, using the OWNA app.</p>
       </div>
       <div class="rv-copy" id="pack">
         <h2 class="hs-title">What to pack for daycare</h2>
         <ul class="rv-list">{pack.map((item) => <li><Todo text={item} /></li>)}</ul>
-        <p><b>We provide:</b> three meals cooked on site, nappies and wipes, full cream milk and sunscreen.</p>
+        <p><b>We provide:</b> three meals cooked on site, nappies and wipes, full cream cow's milk and sunscreen.</p>
         <p>Room-by-room lists: <a href="/rooms/babies#pack">babies</a> · <a href="/rooms/toddlers#pack">toddlers</a> · <a href="/rooms/preschool#pack">preschool</a></p>
+      </div>
+      <div class="rv-copy" id="policies">
+        <h2 class="hs-title">Our policies</h2>
+        <p>All our policies are available in the OWNA app. Please speak to our staff and they'll show you how to find them.</p>
       </div>
     </div>
   </section>
